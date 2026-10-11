@@ -101,7 +101,7 @@
     .hero-grid { display: block; width: 100%; }
     .hero-copy { max-width: 640px; position: relative; z-index: 2; pointer-events: none; }
     .hero-copy a, .hero-copy .btn { pointer-events: auto; }
-    #orbs { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; filter: blur(1.5px); touch-action: pan-y; }
+    #orbs { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; filter: blur(5px); touch-action: pan-y; }
     .hero { cursor: crosshair; }
     .hero a { cursor: pointer; }
     .orb-hint { position: absolute; right: 24px; bottom: 84px; z-index: 2; font-family: var(--mono); font-size: .75rem; color: var(--muted);
@@ -610,7 +610,7 @@
     }, { threshold: 0.12 });
     document.querySelectorAll(".reveal").forEach(r => io.observe(r));
 
-    // ===== Squishy orb playground in the hero =====
+    // ===== Jelly orb playground in the hero =====
     (() => {
       const hero = document.getElementById("hero");
       const canvas = document.getElementById("orbs");
@@ -619,14 +619,18 @@
       let W = 0, H = 0, dpr = 1;
       const orbs = [];
       const MAX = 45;
+      const N = 20;                                   // points around each jelly blob
+      const ANG = Array.from({ length: N }, (_, i) => (i / N) * Math.PI * 2);
+      const COS = ANG.map(Math.cos), SIN = ANG.map(Math.sin);
 
-      // Random dull color: low saturation, mid lightness
-      const dull = () => {
-        const h = Math.floor(Math.random() * 360);
-        const s = 10 + Math.random() * 16;
-        const l = 40 + Math.random() * 16;
-        return [h, s, l];
-      };
+      // Random green or blue, in different shades
+      function color() {
+        const blue = Math.random() < .5;
+        const h = blue ? 195 + Math.random() * 35 : 125 + Math.random() * 35;
+        const s = 35 + Math.random() * 30;
+        const l = 36 + Math.random() * 24;
+        return `hsl(${h.toFixed(0)}, ${s.toFixed(0)}%, ${l.toFixed(0)}%)`;
+      }
 
       function resize() {
         const r = hero.getBoundingClientRect();
@@ -640,34 +644,40 @@
         return {
           x, y, r: r || 22 + Math.random() * 30,
           vx: (Math.random() - .5) * 2, vy: (Math.random() - .5) * 2,
-          c: dull(), sx: 0, sy: 0, born: performance.now()
+          pvx: 0, pvy: 0,
+          off: new Float32Array(N), ov: new Float32Array(N),   // jelly surface offsets + their speeds
+          c: color(), born: performance.now()
         };
       }
 
+      // Push the side of the jelly that faces direction (nx, ny) inward
+      function dent(o, nx, ny, amount) {
+        for (let i = 0; i < N; i++) {
+          const d = COS[i] * nx + SIN[i] * ny;
+          if (d > 0) o.ov[i] -= amount * d * d;
+        }
+      }
+
       // Cursor orb: follows the mouse and pushes others around
-      const cursor = { x: -999, y: -999, px: -999, py: -999, vx: 0, vy: 0, r: 26, c: dull(), alpha: 0, active: false };
+      const cursor = { x: -999, y: -999, px: -999, py: -999, vx: 0, vy: 0, r: 24, c: color(), alpha: 0, active: false };
       let grabbed = null, downAt = null;
 
-      function local(e) {
-        const r = hero.getBoundingClientRect();
-        return { x: e.clientX - r.left, y: e.clientY - r.top };
-      }
+      const local = e => { const r = hero.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
       const isUI = e => e.target.closest("a, button, nav");
 
       hero.addEventListener("pointermove", e => {
         const p = local(e);
-        if (!cursor.active) { cursor.x = cursor.px = p.x; cursor.y = cursor.py = p.y; cursor.c = dull(); }
+        if (!cursor.active) { cursor.x = cursor.px = p.x; cursor.y = cursor.py = p.y; cursor.c = color(); }
         cursor.active = !isUI(e);
         cursor.tx = p.x; cursor.ty = p.y;
       });
       hero.addEventListener("pointerleave", () => { cursor.active = false; grabbed = null; });
-
       hero.addEventListener("pointerdown", e => {
         if (isUI(e)) return;
         const p = local(e);
         downAt = p;
         grabbed = orbs.find(o => Math.hypot(o.x - p.x, o.y - p.y) < o.r);
-        if (grabbed) { e.preventDefault(); }
+        if (grabbed) e.preventDefault();
       });
       window.addEventListener("pointerup", e => {
         if (downAt && !grabbed && !isUI(e)) {
@@ -681,12 +691,7 @@
         grabbed = null; downAt = null;
       });
 
-      function squish(o, nx, ny, amt) {
-        o.sx += nx * amt; o.sy += ny * amt;
-      }
-
       function step() {
-        // cursor easing + velocity
         if (cursor.tx !== undefined) {
           cursor.x += (cursor.tx - cursor.x) * .35;
           cursor.y += (cursor.ty - cursor.y) * .35;
@@ -695,25 +700,24 @@
         cursor.px = cursor.x; cursor.py = cursor.y;
         cursor.alpha += ((cursor.active ? 1 : 0) - cursor.alpha) * .12;
 
+        // move bodies
         for (const o of orbs) {
           if (o === grabbed && cursor.tx !== undefined) {
             o.vx += (cursor.tx - o.x) * .18; o.vy += (cursor.ty - o.y) * .18;
             o.vx *= .62; o.vy *= .62;
           }
-          // gentle wander
-          o.vx += (Math.random() - .5) * .04; o.vy += (Math.random() - .5) * .04;
-          o.vx *= .985; o.vy *= .985;
+          o.vx += (Math.random() - .5) * .015; o.vy += (Math.random() - .5) * .015;
+          o.vx *= .988; o.vy *= .988;
           o.x += o.vx; o.y += o.vy;
 
-          // soft walls anywhere inside the hero
-          const k = .12;
-          if (o.x < o.r)      { o.vx += (o.r - o.x) * k;      squish(o, 1, 0, (o.r - o.x) / o.r * .5); }
-          if (o.x > W - o.r)  { o.vx -= (o.x - (W - o.r)) * k; squish(o, -1, 0, (o.x - (W - o.r)) / o.r * .5); }
-          if (o.y < o.r)      { o.vy += (o.r - o.y) * k;      squish(o, 0, 1, (o.r - o.y) / o.r * .5); }
-          if (o.y > H - o.r)  { o.vy -= (o.y - (H - o.r)) * k; squish(o, 0, -1, (o.y - (H - o.r)) / o.r * .5); }
+          const k = .1;
+          if (o.x < o.r)     { o.vx += (o.r - o.x) * k;        dent(o, -1, 0, (o.r - o.x) * .35); }
+          if (o.x > W - o.r) { o.vx -= (o.x - (W - o.r)) * k;  dent(o, 1, 0, (o.x - (W - o.r)) * .35); }
+          if (o.y < o.r)     { o.vy += (o.r - o.y) * k;        dent(o, 0, -1, (o.r - o.y) * .35); }
+          if (o.y > H - o.r) { o.vy -= (o.y - (H - o.r)) * k;  dent(o, 0, 1, (o.y - (H - o.r)) * .35); }
         }
 
-        // squishy collisions between orbs (spring + damping)
+        // soft collisions between orbs
         for (let i = 0; i < orbs.length; i++) {
           const a = orbs[i];
           for (let j = i + 1; j < orbs.length; j++) {
@@ -723,62 +727,84 @@
             if (d < min) {
               const nx = dx / d, ny = dy / d, over = min - d;
               const ma = a.r * a.r, mb = b.r * b.r, tot = ma + mb;
-              const f = over * .09;
               const rel = (b.vx - a.vx) * nx + (b.vy - a.vy) * ny;
-              const damp = rel < 0 ? rel * .08 : 0;
-              a.vx -= nx * (f - damp) * (mb / tot) * 2; a.vy -= ny * (f - damp) * (mb / tot) * 2;
-              b.vx += nx * (f - damp) * (ma / tot) * 2; b.vy += ny * (f - damp) * (ma / tot) * 2;
-              squish(a, nx, ny, over / a.r * .45);
-              squish(b, -nx, -ny, over / b.r * .45);
+              const f = over * .08 - (rel < 0 ? rel * .05 : 0);
+              a.vx -= nx * f * (mb / tot) * 2; a.vy -= ny * f * (mb / tot) * 2;
+              b.vx += nx * f * (ma / tot) * 2; b.vy += ny * f * (ma / tot) * 2;
+              dent(a, nx, ny, over * .25);
+              dent(b, -nx, -ny, over * .25);
             }
           }
-          // cursor orb pushes (doesn't get pushed back)
           if (cursor.alpha > .3 && a !== grabbed) {
             const dx = a.x - cursor.x, dy = a.y - cursor.y;
             const d = Math.hypot(dx, dy) || .001, min = a.r + cursor.r;
             if (d < min) {
               const nx = dx / d, ny = dy / d, over = min - d;
-              a.vx += nx * over * .14 + cursor.vx * .06;
-              a.vy += ny * over * .14 + cursor.vy * .06;
-              squish(a, -nx, -ny, over / a.r * .5);
+              a.vx += nx * over * .12 + cursor.vx * .05;
+              a.vy += ny * over * .12 + cursor.vy * .05;
+              dent(a, -nx, -ny, over * .3);
             }
           }
         }
+
+        // jelly surface: inertia, springs, ripples, volume
+        for (const o of orbs) {
+          const ax = o.vx - o.pvx, ay = o.vy - o.pvy;      // how hard the body just accelerated
+          o.pvx = o.vx; o.pvy = o.vy;
+          const lim = o.r * .45;
+          let mean = 0;
+          for (let i = 0; i < N; i++) {
+            // surface lags behind the body, so the leading side squashes and the trailing side bulges
+            o.ov[i] -= (COS[i] * ax + SIN[i] * ay) * 1.6;
+            const prev = o.off[(i + N - 1) % N], next = o.off[(i + 1) % N];
+            o.ov[i] += -o.off[i] * .04 + (prev + next - 2 * o.off[i]) * .2;
+            o.ov[i] *= .955;                                   // low damping = lots of wobble
+          }
+          for (let i = 0; i < N; i++) {
+            o.off[i] += o.ov[i];
+            if (o.off[i] > lim) o.off[i] = lim;
+            if (o.off[i] < -lim) o.off[i] = -lim;
+            mean += o.off[i];
+          }
+          mean /= N;
+          for (let i = 0; i < N; i++) o.off[i] -= mean * .6;   // keep roughly the same size, so dents bulge elsewhere
+        }
       }
 
-      function drawOrb(x, y, r, c, sx, sy, vx, vy, alpha) {
-        // squash along the push direction, stretch along velocity
-        const amt = Math.min(Math.hypot(sx, sy), .38);
-        const ang = Math.atan2(sy, sx);
-        const sp = Math.min(Math.hypot(vx, vy) * .012, .18);
-        ctx.save();
-        ctx.globalAlpha = alpha;
-        ctx.translate(x, y);
-        ctx.rotate(ang);
-        ctx.scale(1 - amt + sp * .3, 1 + amt * .55);
-        const g = ctx.createRadialGradient(-r * .25, -r * .25, r * .1, 0, 0, r * 1.25);
-        const [h, s, l] = c;
-        g.addColorStop(0, `hsla(${h}, ${s + 4}%, ${l + 10}%, .95)`);
-        g.addColorStop(.55, `hsla(${h}, ${s}%, ${l}%, .85)`);
-        g.addColorStop(1, `hsla(${h}, ${s}%, ${l - 10}%, 0)`);
-        ctx.fillStyle = g;
-        ctx.beginPath(); ctx.arc(0, 0, r * 1.25, 0, Math.PI * 2); ctx.fill();
-        ctx.restore();
+      // Smooth closed blob through the surface points
+      function blobPath(x, y, r, off, scale) {
+        const px = [], py = [];
+        for (let i = 0; i < N; i++) {
+          const rr = (r + (off ? off[i] : 0)) * scale;
+          px.push(x + COS[i] * rr); py.push(y + SIN[i] * rr);
+        }
+        ctx.beginPath();
+        ctx.moveTo((px[N - 1] + px[0]) / 2, (py[N - 1] + py[0]) / 2);
+        for (let i = 0; i < N; i++) {
+          const n = (i + 1) % N;
+          ctx.quadraticCurveTo(px[i], py[i], (px[i] + px[n]) / 2, (py[i] + py[n]) / 2);
+        }
+        ctx.closePath();
       }
 
       function draw(now) {
         ctx.clearRect(0, 0, W, H);
         for (const o of orbs) {
-          const grow = Math.max(0, Math.min((now - o.born) / 260, 1));   // pop-in
-          const r = o.r * (1 - Math.pow(1 - grow, 3));
-          drawOrb(o.x, o.y, r, o.c, o.sx, o.sy, o.vx, o.vy, 1);
-          o.sx *= .82; o.sy *= .82;                              // spring back to round
+          const g = Math.max(0, Math.min((now - o.born) / 260, 1));
+          const scale = 1 - Math.pow(1 - g, 3);                  // pop-in
+          if (scale <= 0) continue;
+          ctx.fillStyle = o.c;
+          ctx.globalAlpha = .9;
+          blobPath(o.x, o.y, o.r, o.off, scale);
+          ctx.fill();
         }
         if (cursor.alpha > .02) {
-          ctx.save(); ctx.filter = "blur(6px)";
-          drawOrb(cursor.x, cursor.y, cursor.r, cursor.c, 0, 0, cursor.vx, cursor.vy, cursor.alpha * .9);
-          ctx.restore();
+          ctx.globalAlpha = cursor.alpha * .55;
+          ctx.fillStyle = cursor.c;
+          blobPath(cursor.x, cursor.y, cursor.r, null, 1);
+          ctx.fill();
         }
+        ctx.globalAlpha = 1;
       }
 
       function loop(now) { step(); draw(now); requestAnimationFrame(loop); }
@@ -786,10 +812,7 @@
       if (hint && matchMedia("(pointer: coarse)").matches) hint.textContent = "Tap to drop an orb · drag to fling it";
       resize();
       window.addEventListener("resize", resize);
-      // a few orbs to start, kept to the right side so the text stays readable
-      for (let i = 0; i < 7; i++) {
-        orbs.push(makeOrb(W * (.55 + Math.random() * .4), H * (.2 + Math.random() * .6)));
-      }
+      for (let i = 0; i < 7; i++) orbs.push(makeOrb(W * (.55 + Math.random() * .4), H * (.2 + Math.random() * .6)));
       requestAnimationFrame(loop);
     })();
 
