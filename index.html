@@ -592,6 +592,15 @@
       <h2>Let's <span class="accent">connect.</span></h2>
       <p class="lead">I'm always interested in engineering opportunities, learning experiences, and collaborating on new projects.</p>
       <div class="links">
+        <!-- Email and phone are assembled by script so spam bots can't scrape them from the page source -->
+        <a class="link-row" id="email-link" href="#contact">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5A1.5 1.5 0 0 1 3.5 4h17A1.5 1.5 0 0 1 22 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18.5v-13zm2.2.5L12 11.6 19.8 6H4.2zM20 7.9l-7.4 5.3a1 1 0 0 1-1.2 0L4 7.9V18h16V7.9z"/></svg>
+          <span class="name">Email</span><span class="handle" id="email-text">Tap to email</span>
+        </a>
+        <a class="link-row" id="text-link" href="#contact">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H8.4L4 21.5V18a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v11h2v1.4L7.6 16H20V5H4zm3 4h10v2H7V9z"/></svg>
+          <span class="name">Text</span><span class="handle" id="text-text">Tap to text</span>
+        </a>
         <a class="link-row" href="https://www.linkedin.com/in/ezra-kerney-0b678b38a/" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3V9.75zm7 0h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5c0-1.2-.02-2.73-1.67-2.73-1.67 0-1.93 1.3-1.93 2.64V21h-4V9.75z"/></svg>
           <span class="name">LinkedIn</span><span class="handle">Ezra Kerney</span>
@@ -844,6 +853,16 @@
       window.addEventListener("resize", resize);
       for (let i = 0; i < 7; i++) orbs.push(makeOrb(W * (.55 + Math.random() * .4), H * (.2 + Math.random() * .6)));
       requestAnimationFrame(loop);
+    })();
+
+    // Contact links (built here instead of in the HTML to keep them away from spam scrapers)
+    (() => {
+      const user = ["ezra", "kerney"].join(""), domain = ["gmail", "com"].join(".");
+      const email = user + "@" + domain;
+      const digits = ["223", "272", "9323"];
+      const e = document.getElementById("email-link"), t = document.getElementById("text-link");
+      e.href = "mailto:" + email; document.getElementById("email-text").textContent = email;
+      t.href = "sms:+1" + digits.join(""); document.getElementById("text-text").textContent = "(" + digits[0] + ") " + digits[1] + "-" + digits[2];
     })();
 
     // Nav background + progress bar
