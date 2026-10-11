@@ -74,8 +74,7 @@
     }
     .logo .badge span { transform: rotate(-45deg); }
     .nav-links { display: flex; gap: 26px; list-style: none; }
-    .nav-links a { color: var(--muted); font-size: .88rem; font-weight: 500; font-family: var(--mono); transition: color .2s; }
-    .nav-links a::before { content: attr(data-n) " "; color: var(--green); }
+    .nav-links a { color: var(--muted); font-size: .92rem; font-weight: 500; transition: color .2s; }
     .nav-links a:hover { color: var(--text); }
 
     /* ===== Section headers: numbered, with a rule ===== */
@@ -99,7 +98,14 @@
       clip-path: polygon(0 0, 100% 0, 100% calc(100% - 60px), 0 100%); }
     .hero::before { content: ""; position: absolute; width: 700px; height: 700px; right: -200px; top: -150px; border-radius: 50%;
       background: var(--blue); filter: blur(140px); opacity: .14; z-index: 0; }
-    .hero-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 40px; align-items: center; }
+    .hero-grid { display: block; width: 100%; }
+    .hero-copy { max-width: 640px; position: relative; z-index: 2; pointer-events: none; }
+    .hero-copy a, .hero-copy .btn { pointer-events: auto; }
+    #orbs { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; filter: blur(1.5px); touch-action: pan-y; }
+    .hero { cursor: crosshair; }
+    .hero a { cursor: pointer; }
+    .orb-hint { position: absolute; right: 24px; bottom: 84px; z-index: 2; font-family: var(--mono); font-size: .75rem; color: var(--muted);
+      border: 1px solid var(--line); padding: 6px 12px; background: rgba(6,18,28,.6); pointer-events: none; transition: opacity .6s; }
     .status { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: .82rem; color: var(--muted);
       border-left: 3px solid var(--green); padding: 4px 0 4px 12px; margin-bottom: 26px; }
     .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgba(34,197,94,.7); animation: pulse 2s infinite; }
@@ -107,7 +113,6 @@
     h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.8rem, 7.5vw, 5.4rem); line-height: 1.02; letter-spacing: -0.035em; }
     h1 .outline { color: transparent; -webkit-text-stroke: 1.5px var(--text); }
     .typed-line { font-family: var(--mono); font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--teal); margin-top: 22px; min-height: 1.8em; }
-    .typed-line::before { content: "> "; color: var(--green); }
     .typed-line .cursor { display: inline-block; width: 10px; background: var(--green); animation: blink 1s steps(1) infinite; margin-left: 2px; }
     @keyframes blink { 50% { opacity: 0; } }
     .hero p.lead { margin-top: 16px; }
@@ -117,17 +122,9 @@
     .btn-primary { background: var(--green); color: #04121a;
       clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%); }
     .btn-primary:hover { transform: translateY(-3px); background: #3ddc76; }
-    .btn-ghost { border: 1px solid var(--line-strong); font-family: var(--mono); font-size: .85rem; }
+    .btn-ghost { border: 1px solid var(--line-strong); }
     .btn-ghost:hover { border-color: var(--green); color: var(--green); transform: translateY(-3px); }
 
-    /* Technical gear drawing */
-    .drawing { position: relative; aspect-ratio: 1; max-width: 440px; margin-left: auto; width: 100%; }
-    .drawing svg { width: 100%; height: 100%; overflow: visible; }
-    .gear-spin { transform-origin: 220px 220px; animation: spin 40s linear infinite; }
-    .gear-spin.rev { animation-direction: reverse; animation-duration: 26s; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .drawing text { font-family: var(--mono); font-size: 11px; fill: var(--muted); }
-    .drawing .tag { fill: var(--green); }
 
     /* ===== Marquee ===== */
     .marquee-wrap { overflow: hidden; margin-top: -40px; padding: 20px 0; position: relative; z-index: 3; }
@@ -163,7 +160,7 @@
     .proj:hover { transform: translateY(-6px); }
     .proj-index { display: flex; flex-direction: column; justify-content: space-between; padding: 32px; background: var(--green); color: #04121a; }
     .proj-index .fig { font-family: var(--mono); font-size: .78rem; letter-spacing: .1em; }
-    .proj-index .num { font-family: var(--display); font-weight: 700; font-size: 5.5rem; line-height: .9; }
+    .proj-index .num { font-family: var(--display); font-weight: 700; font-size: 2.2rem; line-height: 1; }
     .proj-body { padding: 38px 44px 38px 40px; }
     .proj-kicker { font-family: var(--mono); font-size: .78rem; color: var(--green); display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
     .proj-body h3 { font-family: var(--display); font-size: 1.9rem; margin-bottom: 10px; letter-spacing: -0.01em; }
@@ -177,8 +174,7 @@
     /* ===== ACTIVITIES: editorial index ===== */
     .act-group { margin-top: 64px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; }
     .group-label { position: sticky; top: 100px; align-self: start; }
-    .group-label .gnum { font-family: var(--display); font-weight: 700; font-size: 4rem; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px var(--blue); }
-    .group-label h3 { font-family: var(--display); font-size: 1.25rem; margin-top: 8px; }
+    .group-label h3 { font-family: var(--display); font-size: 1.25rem; padding-top: 14px; border-top: 3px solid var(--blue); display: inline-block; }
     .group-label p { font-family: var(--mono); font-size: .76rem; color: var(--muted); margin-top: 6px; text-transform: uppercase; letter-spacing: .06em; }
     .rows { border-top: 1px solid var(--line-strong); }
     .row { position: relative; display: grid; grid-template-columns: 54px 1fr; gap: 18px; padding: 24px 0 24px 18px; border-bottom: 1px solid var(--line);
@@ -202,7 +198,7 @@
     .ath { padding: 28px 24px 30px; position: relative; transition: background .25s; }
     .ath + .ath { border-left: 1px solid var(--line); }
     .ath:hover { background: rgba(255,255,255,.025); }
-    .ath .big { font-family: var(--display); font-weight: 700; font-size: 3.6rem; line-height: 1; color: var(--green); letter-spacing: -0.03em; }
+    .ath .big { font-family: var(--display); font-weight: 700; font-size: 3rem; line-height: 1; color: var(--green); letter-spacing: -0.03em; }
     .ath .big small { font-size: 1rem; font-family: var(--mono); font-weight: 500; color: var(--muted); margin-left: 6px; letter-spacing: 0; }
     .ath h4 { font-family: var(--display); font-size: 1.15rem; margin-top: 14px; }
     .ath .when { display: block; margin-top: 2px; }
@@ -242,16 +238,15 @@
       section { padding: 80px 0; }
       .nav-links { gap: 14px; }
       .nav-links li.hide-sm { display: none; }
-      .hero-grid, .about-grid { grid-template-columns: 1fr; }
-      .drawing { max-width: 300px; margin: 10px auto 0; }
+      .about-grid { grid-template-columns: 1fr; }
+      .orb-hint { right: auto; left: 20px; bottom: 70px; }
       .act-group { grid-template-columns: 1fr; gap: 18px; }
       .group-label { position: static; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
-      .group-label .gnum { font-size: 2.6rem; }
       .athletics { grid-template-columns: 1fr; }
       .ath + .ath { border-left: 0; border-top: 1px solid var(--line); }
       .proj { grid-template-columns: 1fr; }
       .proj-index { flex-direction: row; align-items: flex-end; padding: 20px 24px; }
-      .proj-index .num { font-size: 3.4rem; }
+      .proj-index .num { font-size: 1.8rem; }
       .proj-body { padding: 28px 24px; }
       .from-left, .from-right { transform: translateY(40px); }
     }
@@ -283,19 +278,21 @@
     <div class="wrap">
       <a href="#" class="logo"><span class="badge"><span>EK</span></span> <span class="logo-name">Ezra Kerney</span></a>
       <ul class="nav-links">
-        <li><a href="#about" data-n="01">About</a></li>
-        <li class="hide-sm"><a href="#projects" data-n="02">Projects</a></li>
-        <li><a href="#activities" data-n="03">Activities</a></li>
-        <li class="hide-sm"><a href="#experience" data-n="04">Experience</a></li>
-        <li><a href="#contact" data-n="05">Contact</a></li>
+        <li><a href="#about">About</a></li>
+        <li class="hide-sm"><a href="#projects">Projects</a></li>
+        <li><a href="#activities">Activities</a></li>
+        <li class="hide-sm"><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
   </nav>
 
   <!-- ================= HERO ================= -->
-  <header class="hero blueprint">
+  <header class="hero blueprint" id="hero">
+    <canvas id="orbs" aria-hidden="true"></canvas>
+    <div class="orb-hint" aria-hidden="true">Click to drop an orb · drag to fling it</div>
     <div class="wrap hero-grid">
-      <div>
+      <div class="hero-copy">
         <div class="status reveal from-up"><span class="dot"></span> Junior · Gettysburg Area High School</div>
         <h1 class="reveal from-left delay-1">Ezra<br><span class="outline">Kerney</span><span class="accent">.</span></h1>
         <div class="typed-line reveal from-left delay-2"><span id="typed"></span><span class="cursor">&nbsp;</span></div>
@@ -307,46 +304,10 @@
         </p>
         <div class="buttons reveal from-up delay-3">
           <a href="#projects" class="btn btn-primary">See what I've built →</a>
-          <a href="#activities" class="btn btn-ghost">./activities</a>
+          <a href="#activities" class="btn btn-ghost">My activities</a>
         </div>
       </div>
 
-      <!-- Animated technical drawing -->
-      <div class="drawing reveal from-right delay-2" aria-hidden="true">
-        <svg viewBox="0 0 440 440">
-          <!-- crosshair -->
-          <line x1="20" y1="220" x2="420" y2="220" stroke="rgba(255,255,255,.18)" stroke-dasharray="10 4 2 4"/>
-          <line x1="220" y1="20" x2="220" y2="420" stroke="rgba(255,255,255,.18)" stroke-dasharray="10 4 2 4"/>
-          <!-- big gear -->
-          <g class="gear-spin">
-            <circle cx="220" cy="220" r="138" fill="none" stroke="#22c55e" stroke-width="22" stroke-dasharray="21.67 21.67"/>
-            <circle cx="220" cy="220" r="126" fill="#06121c" stroke="#22c55e" stroke-width="2"/>
-            <circle cx="220" cy="220" r="92" fill="none" stroke="rgba(34,197,94,.45)" stroke-width="1.5" stroke-dasharray="4 6"/>
-            <circle cx="220" cy="220" r="34" fill="none" stroke="#22c55e" stroke-width="2"/>
-            <rect x="214" y="180" width="12" height="10" fill="#22c55e"/>
-            <g stroke="#14b8a6" stroke-width="2" fill="none">
-              <circle cx="220" cy="150" r="14"/><circle cx="290" cy="220" r="14"/><circle cx="220" cy="290" r="14"/><circle cx="150" cy="220" r="14"/>
-            </g>
-          </g>
-          <!-- small gear -->
-          <g class="gear-spin rev" style="transform-origin: 376px 80px">
-            <circle cx="376" cy="80" r="44" fill="none" stroke="#3b82f6" stroke-width="12" stroke-dasharray="11.5 11.5"/>
-            <circle cx="376" cy="80" r="37" fill="#06121c" stroke="#3b82f6" stroke-width="1.5"/>
-            <circle cx="376" cy="80" r="10" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
-          </g>
-          <!-- dimension line -->
-          <g stroke="#93a8b6" stroke-width="1">
-            <line x1="71" y1="398" x2="369" y2="398"/>
-            <line x1="71" y1="388" x2="71" y2="408"/><line x1="369" y1="388" x2="369" y2="408"/>
-            <path d="M71 398 l9 -4 v8 z M369 398 l-9 -4 v8 z" fill="#93a8b6"/>
-          </g>
-          <rect x="186" y="390" width="68" height="16" fill="#06121c"/>
-          <text x="220" y="402" text-anchor="middle">Ø 298</text>
-          <text x="20" y="30" class="tag">FIG. 00</text>
-          <text x="20" y="46">DRIVE ASSEMBLY</text>
-          <text x="330" y="150">RATIO 3:1</text>
-        </svg>
-      </div>
     </div>
   </header>
 
@@ -362,7 +323,7 @@
   <section id="about">
     <div class="wrap about-grid">
       <div class="reveal from-left">
-        <div class="sec-head"><b>01</b> About me</div>
+        <div class="sec-head">About me</div>
         <h2>An aspiring engineer who <span class="accent">loves to build.</span></h2>
         <p>
           I'm a 16-year-old junior at <strong>Gettysburg Area High School</strong> with my sights set on
@@ -383,14 +344,14 @@
           perform under pressure.
         </p>
         <div class="stats">
-          <div class="stat"><b>01</b><small>Website launched solo</small></div>
+          <div class="stat"><b>1</b><small>Website launched solo</small></div>
           <div class="stat"><b>11</b><small>Activities &amp; teams</small></div>
-          <div class="stat"><b>02</b><small>Jobs held</small></div>
+          <div class="stat"><b>2</b><small>Jobs held</small></div>
         </div>
       </div>
 
       <div class="spec marks reveal from-right delay-1">
-        <div class="spec-title"><span>Spec sheet</span><span>Rev. 2026</span></div>
+        <div class="spec-title"><span>Quick facts</span></div>
         <div class="fact"><span>Name</span><span>Ezra Kerney</span></div>
         <div class="fact"><span>School</span><span>Gettysburg Area High School</span></div>
         <div class="fact"><span>Grade</span><span>Junior · Age 16</span></div>
@@ -411,15 +372,15 @@
   <section id="projects" class="blueprint">
     <div class="wrap">
       <div class="reveal from-up">
-        <div class="sec-head"><b>02</b> Projects</div>
+        <div class="sec-head">Projects</div>
         <h2>Things I've <span class="accent">built.</span></h2>
         <p class="lead">Projects I've designed and brought to life.</p>
       </div>
 
       <a href="https://gahsgames.com" target="_blank" rel="noopener" class="proj chamfer reveal from-left">
         <div class="proj-index">
-          <span class="fig">FIG. 01 · LIVE</span>
-          <span class="num">01</span>
+          <span class="fig">● Live</span>
+          <span class="num">GAHS<br>games</span>
         </div>
         <div class="proj-body">
           <span class="proj-kicker"><span class="dot"></span> Solo project · Designed &amp; built independently</span>
@@ -447,7 +408,7 @@
   <section id="activities">
     <div class="wrap">
       <div class="reveal from-up">
-        <div class="sec-head"><b>03</b> Activities</div>
+        <div class="sec-head">Activities</div>
         <h2>Beyond the <span class="accent">classroom.</span></h2>
         <p class="lead">Organizations and teams at Gettysburg Area High School where I learn, compete, serve, and collaborate.</p>
       </div>
@@ -455,9 +416,7 @@
       <!-- Group A: STEM -->
       <div class="act-group">
         <div class="group-label reveal from-left">
-          <div class="gnum">A</div>
-          <h3>STEM &amp; Academics</h3>
-          <p>5 entries</p>
+                    <h3>STEM &amp; Academics</h3>
         </div>
         <div class="rows">
           <div class="row feature reveal from-right">
@@ -501,9 +460,7 @@
       <!-- Group B: Speaking, service & culture -->
       <div class="act-group">
         <div class="group-label reveal from-left">
-          <div class="gnum">B</div>
-          <h3>Speaking, Service &amp; Culture</h3>
-          <p>4 entries</p>
+                    <h3>Speaking, Service &amp; Culture</h3>
         </div>
         <div class="rows">
           <div class="row reveal from-right">
@@ -540,13 +497,11 @@
       <!-- Group C: Athletics -->
       <div class="act-group">
         <div class="group-label reveal from-left">
-          <div class="gnum">C</div>
-          <h3>Athletics</h3>
-          <p>3 sports</p>
+                    <h3>Athletics</h3>
         </div>
         <div class="athletics reveal from-up">
           <div class="ath">
-            <div class="big">VAR<small>sity</small></div>
+            <div class="big">Varsity</div>
             <h4>Tennis</h4>
             <span class="when">Gettysburg Area HS</span>
             <p>Competing on the varsity team, building discipline, focus, and resilience through practice, matches, and supporting my teammates.</p>
@@ -573,7 +528,7 @@
   <section id="experience" class="blueprint">
     <div class="wrap">
       <div class="reveal from-up">
-        <div class="sec-head"><b>04</b> Experience</div>
+        <div class="sec-head">Experience</div>
         <h2>Where I've <span class="accent">worked.</span></h2>
         <p class="lead">Roles that built my reliability, communication, and ability to perform in fast-paced environments.</p>
       </div>
@@ -603,7 +558,7 @@
   <!-- ================= CONTACT ================= -->
   <section id="contact">
     <div class="wrap reveal from-up">
-      <div class="sec-head"><b>05</b> Connect</div>
+      <div class="sec-head">Connect</div>
       <h2>Let's <span class="accent">connect.</span></h2>
       <p class="lead">I'm always interested in engineering opportunities, learning experiences, and collaborating on new projects.</p>
       <div class="links">
@@ -654,6 +609,189 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("show"); io.unobserve(e.target); } });
     }, { threshold: 0.12 });
     document.querySelectorAll(".reveal").forEach(r => io.observe(r));
+
+    // ===== Squishy orb playground in the hero =====
+    (() => {
+      const hero = document.getElementById("hero");
+      const canvas = document.getElementById("orbs");
+      const hint = document.querySelector(".orb-hint");
+      const ctx = canvas.getContext("2d");
+      let W = 0, H = 0, dpr = 1;
+      const orbs = [];
+      const MAX = 45;
+
+      // Random dull color: low saturation, mid lightness
+      const dull = () => {
+        const h = Math.floor(Math.random() * 360);
+        const s = 10 + Math.random() * 16;
+        const l = 40 + Math.random() * 16;
+        return [h, s, l];
+      };
+
+      function resize() {
+        const r = hero.getBoundingClientRect();
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        W = r.width; H = r.height;
+        canvas.width = W * dpr; canvas.height = H * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function makeOrb(x, y, r) {
+        return {
+          x, y, r: r || 22 + Math.random() * 30,
+          vx: (Math.random() - .5) * 2, vy: (Math.random() - .5) * 2,
+          c: dull(), sx: 0, sy: 0, born: performance.now()
+        };
+      }
+
+      // Cursor orb: follows the mouse and pushes others around
+      const cursor = { x: -999, y: -999, px: -999, py: -999, vx: 0, vy: 0, r: 26, c: dull(), alpha: 0, active: false };
+      let grabbed = null, downAt = null;
+
+      function local(e) {
+        const r = hero.getBoundingClientRect();
+        return { x: e.clientX - r.left, y: e.clientY - r.top };
+      }
+      const isUI = e => e.target.closest("a, button, nav");
+
+      hero.addEventListener("pointermove", e => {
+        const p = local(e);
+        if (!cursor.active) { cursor.x = cursor.px = p.x; cursor.y = cursor.py = p.y; cursor.c = dull(); }
+        cursor.active = !isUI(e);
+        cursor.tx = p.x; cursor.ty = p.y;
+      });
+      hero.addEventListener("pointerleave", () => { cursor.active = false; grabbed = null; });
+
+      hero.addEventListener("pointerdown", e => {
+        if (isUI(e)) return;
+        const p = local(e);
+        downAt = p;
+        grabbed = orbs.find(o => Math.hypot(o.x - p.x, o.y - p.y) < o.r);
+        if (grabbed) { e.preventDefault(); }
+      });
+      window.addEventListener("pointerup", e => {
+        if (downAt && !grabbed && !isUI(e)) {
+          const p = local(e);
+          if (Math.hypot(p.x - downAt.x, p.y - downAt.y) < 8) {
+            orbs.push(makeOrb(p.x, p.y));
+            if (orbs.length > MAX) orbs.shift();
+            if (hint) hint.style.opacity = 0;
+          }
+        }
+        grabbed = null; downAt = null;
+      });
+
+      function squish(o, nx, ny, amt) {
+        o.sx += nx * amt; o.sy += ny * amt;
+      }
+
+      function step() {
+        // cursor easing + velocity
+        if (cursor.tx !== undefined) {
+          cursor.x += (cursor.tx - cursor.x) * .35;
+          cursor.y += (cursor.ty - cursor.y) * .35;
+        }
+        cursor.vx = cursor.x - cursor.px; cursor.vy = cursor.y - cursor.py;
+        cursor.px = cursor.x; cursor.py = cursor.y;
+        cursor.alpha += ((cursor.active ? 1 : 0) - cursor.alpha) * .12;
+
+        for (const o of orbs) {
+          if (o === grabbed && cursor.tx !== undefined) {
+            o.vx += (cursor.tx - o.x) * .18; o.vy += (cursor.ty - o.y) * .18;
+            o.vx *= .62; o.vy *= .62;
+          }
+          // gentle wander
+          o.vx += (Math.random() - .5) * .04; o.vy += (Math.random() - .5) * .04;
+          o.vx *= .985; o.vy *= .985;
+          o.x += o.vx; o.y += o.vy;
+
+          // soft walls anywhere inside the hero
+          const k = .12;
+          if (o.x < o.r)      { o.vx += (o.r - o.x) * k;      squish(o, 1, 0, (o.r - o.x) / o.r * .5); }
+          if (o.x > W - o.r)  { o.vx -= (o.x - (W - o.r)) * k; squish(o, -1, 0, (o.x - (W - o.r)) / o.r * .5); }
+          if (o.y < o.r)      { o.vy += (o.r - o.y) * k;      squish(o, 0, 1, (o.r - o.y) / o.r * .5); }
+          if (o.y > H - o.r)  { o.vy -= (o.y - (H - o.r)) * k; squish(o, 0, -1, (o.y - (H - o.r)) / o.r * .5); }
+        }
+
+        // squishy collisions between orbs (spring + damping)
+        for (let i = 0; i < orbs.length; i++) {
+          const a = orbs[i];
+          for (let j = i + 1; j < orbs.length; j++) {
+            const b = orbs[j];
+            const dx = b.x - a.x, dy = b.y - a.y;
+            const d = Math.hypot(dx, dy) || .001, min = a.r + b.r;
+            if (d < min) {
+              const nx = dx / d, ny = dy / d, over = min - d;
+              const ma = a.r * a.r, mb = b.r * b.r, tot = ma + mb;
+              const f = over * .09;
+              const rel = (b.vx - a.vx) * nx + (b.vy - a.vy) * ny;
+              const damp = rel < 0 ? rel * .08 : 0;
+              a.vx -= nx * (f - damp) * (mb / tot) * 2; a.vy -= ny * (f - damp) * (mb / tot) * 2;
+              b.vx += nx * (f - damp) * (ma / tot) * 2; b.vy += ny * (f - damp) * (ma / tot) * 2;
+              squish(a, nx, ny, over / a.r * .45);
+              squish(b, -nx, -ny, over / b.r * .45);
+            }
+          }
+          // cursor orb pushes (doesn't get pushed back)
+          if (cursor.alpha > .3 && a !== grabbed) {
+            const dx = a.x - cursor.x, dy = a.y - cursor.y;
+            const d = Math.hypot(dx, dy) || .001, min = a.r + cursor.r;
+            if (d < min) {
+              const nx = dx / d, ny = dy / d, over = min - d;
+              a.vx += nx * over * .14 + cursor.vx * .06;
+              a.vy += ny * over * .14 + cursor.vy * .06;
+              squish(a, -nx, -ny, over / a.r * .5);
+            }
+          }
+        }
+      }
+
+      function drawOrb(x, y, r, c, sx, sy, vx, vy, alpha) {
+        // squash along the push direction, stretch along velocity
+        const amt = Math.min(Math.hypot(sx, sy), .38);
+        const ang = Math.atan2(sy, sx);
+        const sp = Math.min(Math.hypot(vx, vy) * .012, .18);
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.translate(x, y);
+        ctx.rotate(ang);
+        ctx.scale(1 - amt + sp * .3, 1 + amt * .55);
+        const g = ctx.createRadialGradient(-r * .25, -r * .25, r * .1, 0, 0, r * 1.25);
+        const [h, s, l] = c;
+        g.addColorStop(0, `hsla(${h}, ${s + 4}%, ${l + 10}%, .95)`);
+        g.addColorStop(.55, `hsla(${h}, ${s}%, ${l}%, .85)`);
+        g.addColorStop(1, `hsla(${h}, ${s}%, ${l - 10}%, 0)`);
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(0, 0, r * 1.25, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
+      }
+
+      function draw(now) {
+        ctx.clearRect(0, 0, W, H);
+        for (const o of orbs) {
+          const grow = Math.max(0, Math.min((now - o.born) / 260, 1));   // pop-in
+          const r = o.r * (1 - Math.pow(1 - grow, 3));
+          drawOrb(o.x, o.y, r, o.c, o.sx, o.sy, o.vx, o.vy, 1);
+          o.sx *= .82; o.sy *= .82;                              // spring back to round
+        }
+        if (cursor.alpha > .02) {
+          ctx.save(); ctx.filter = "blur(6px)";
+          drawOrb(cursor.x, cursor.y, cursor.r, cursor.c, 0, 0, cursor.vx, cursor.vy, cursor.alpha * .9);
+          ctx.restore();
+        }
+      }
+
+      function loop(now) { step(); draw(now); requestAnimationFrame(loop); }
+
+      if (hint && matchMedia("(pointer: coarse)").matches) hint.textContent = "Tap to drop an orb · drag to fling it";
+      resize();
+      window.addEventListener("resize", resize);
+      // a few orbs to start, kept to the right side so the text stays readable
+      for (let i = 0; i < 7; i++) {
+        orbs.push(makeOrb(W * (.55 + Math.random() * .4), H * (.2 + Math.random() * .6)));
+      }
+      requestAnimationFrame(loop);
+    })();
 
     // Nav background + progress bar
     const nav = document.getElementById("nav"), bar = document.getElementById("progress");
