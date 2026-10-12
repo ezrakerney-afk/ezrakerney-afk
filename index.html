@@ -95,7 +95,8 @@
     .chamfer { clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 28px 100%, 0 calc(100% - 28px)); }
 
     /* ===== Nav ===== */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: background .3s, border-color .3s; border-bottom: 1px solid transparent; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: background .3s, border-color .3s, transform .35s ease; border-bottom: 1px solid transparent; }
+    nav.nav-hidden { transform: translateY(-100%); }
     nav.scrolled { background: rgba(6,18,28,0.88); backdrop-filter: blur(14px); border-color: var(--line); }
     nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
     .logo { font-family: var(--display); font-weight: 700; font-size: 1.15rem; display: flex; align-items: center; gap: 10px; }
@@ -219,7 +220,7 @@
     .act-bg .r2 { width: 46vmin; height: 46vmin; right: 0; top: 50%; transform: translateY(-50%); border-color: rgba(34,197,94,.18); }
     .act-bg .r3 { width: 22vmin; height: 22vmin; right: 12vmin; top: 50%; transform: translateY(-50%); border-style: dashed; }
     .act-stage > .wrap { width: 100%; }
-    .act-head { position: relative; z-index: 2; padding-top: 96px; }
+    .act-head { position: relative; z-index: 2; padding-top: 34px; }
     .act-head h2 { margin-bottom: 0; }
     .act-slides { position: relative; z-index: 2; flex: 1; }
     .act-slide { position: absolute; inset: 0; display: flex; align-items: center; will-change: transform, opacity; opacity: 0; }
@@ -239,7 +240,7 @@
     .act-bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--green); }
     .act-hint { font-family: var(--mono); font-size: .75rem; color: var(--muted); }
     @media (max-width: 860px) {
-      .act-head { padding-top: 84px; }
+      .act-head { padding-top: 26px; }
       .act-bg .r1 { right: -30vmin; } .act-bg .r2 { right: -16vmin; } .act-bg .r3 { display: none; }
       .act-hint { display: none; }
     }
@@ -1212,7 +1213,7 @@
       const hint = track.querySelector(".act-hint");
       const n = slides.length;
       if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      const PER = 0.75;                                       // screens of scrolling per activity
+      const PER = 1;                                          // screens of scrolling per activity
       const pad = n2 => String(n2).padStart(2, "0");
       const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
       function size() { track.style.height = (n * PER + 1) * window.innerHeight + "px"; update(); }
@@ -1224,13 +1225,14 @@
         slides.forEach((el, i) => {
           // d: <0 waiting on the right · 0..1 this activity's turn · >1 gone to the left
           const d = pos - i;
-          const IN = 0.24, OUT = 0.76;           // slide in during first 24% of its turn, out during last 24%
+          const A = 0.18, IN = 0.32, OUT = 0.68;  // incoming starts a bit early and outgoing leaves a bit late, so they cross over
           let x = 0, o = 1;
-          if (d < 0 && i > 0)                  { x = 100; o = 0; }
-          else if (d < IN && i > 0)            { const t = ease(d / IN); x = 100 * (1 - t); o = Math.min(1, t * 1.6); }
-          else if (d > OUT && i < n - 1) {
-            if (d >= 1)                        { x = -100; o = 0; }
-            else                               { const t = ease((d - OUT) / (1 - OUT)); x = -100 * t; o = Math.max(0, 1 - t * 1.6); }
+          if (i > 0 && d < IN) {
+            if (d <= -A)                       { x = 100; o = 0; }
+            else                               { const t = ease((d + A) / (IN + A)); x = 100 * (1 - t); o = t; }
+          } else if (i < n - 1 && d > OUT) {
+            if (d >= 1 + A)                    { x = -100; o = 0; }
+            else                               { const t = ease((d - OUT) / (1 + A - OUT)); x = -100 * t; o = 1 - t; }
           }
           el.style.transform = `translate3d(${x}vw,0,0)`;
           el.style.opacity = o;
@@ -1244,6 +1246,45 @@
       window.addEventListener("scroll", update, { passive: true });
       window.addEventListener("resize", size);
       size();
+
+      // Mouse wheel / trackpad: one activity per scroll gesture, with a smooth animated transition,
+      // so a fast flick doesn't fly past several at once. Touch and scrollbar dragging stay normal.
+      const DURATION = 1250, COOLDOWN = 380;
+      let animating = false, lockUntil = 0, acc = 0;
+      const total = () => track.offsetHeight - window.innerHeight;
+      const top = () => track.getBoundingClientRect().top + window.scrollY;
+      const yFor = i => top() + ((i + 0.5) / n) * total();          // scroll position where activity i is centered
+      const easeIO = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      function tweenTo(y) {
+        const y0 = window.scrollY, dy = y - y0, t0 = performance.now();
+        animating = true;
+        (function frame(now) {
+          const t = Math.min((now - t0) / DURATION, 1);
+          window.scrollTo({ top: y0 + dy * easeIO(t), behavior: "instant" });
+          if (t < 1) requestAnimationFrame(frame);
+          else { animating = false; lockUntil = performance.now() + COOLDOWN; acc = 0; }
+        })(t0);
+      }
+      window.addEventListener("wheel", e => {
+        const r = track.getBoundingClientRect();
+        if (r.top > 1 || r.bottom < window.innerHeight - 1) return;    // only while the section is pinned
+        const dir = Math.sign(e.deltaY);
+        if (!dir) return;
+        const pos = Math.min(Math.max(-r.top / total(), 0), 1) * n;
+        const i = Math.min(n - 1, Math.max(0, Math.floor(pos)));
+        // let the page scroll normally to leave the section from either end
+        if (dir > 0 && i === n - 1 && pos >= n - 0.5 - 0.02) return;
+        if (dir < 0 && i === 0 && pos <= 0.5 + 0.02) return;
+        e.preventDefault();
+        if (animating || performance.now() < lockUntil) return;       // swallow leftover momentum
+        acc += e.deltaY;
+        if (Math.abs(acc) < 30) return;
+        let target;
+        if (dir > 0) target = (i === 0 || pos >= i + 0.45) ? i + 1 : i;
+        else         target = (i === n - 1 || pos <= i + 0.55) ? i - 1 : i;
+        target = Math.min(n - 1, Math.max(0, target));
+        tweenTo(yFor(target));
+      }, { passive: false });
     })();
 
     // ===== Travel map =====
@@ -1298,8 +1339,14 @@
 
     // Nav background + progress bar
     const nav = document.getElementById("nav"), bar = document.getElementById("progress");
+    let lastY = window.scrollY;
     window.addEventListener("scroll", () => {
-      nav.classList.toggle("scrolled", window.scrollY > 40);
+      const y = window.scrollY;
+      nav.classList.toggle("scrolled", y > 40);
+      // hide the menu bar while scrolling down, bring it back when scrolling up
+      if (y > lastY + 4 && y > 120) nav.classList.add("nav-hidden");
+      else if (y < lastY - 4 || y <= 120) nav.classList.remove("nav-hidden");
+      lastY = y;
       const h = document.documentElement.scrollHeight - window.innerHeight;
       bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
     }, { passive: true });
