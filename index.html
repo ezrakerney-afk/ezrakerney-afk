@@ -97,7 +97,7 @@
     /* ===== Nav ===== */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: background .3s, border-color .3s, transform .35s ease; border-bottom: 1px solid transparent; }
     nav.nav-hidden { transform: translateY(-100%); }
-    nav.scrolled { background: rgba(6,18,28,0.88); backdrop-filter: blur(14px); border-color: var(--line); }
+    nav.scrolled { background: rgba(6,18,28,0.6); backdrop-filter: blur(12px); border-color: var(--line); }
     nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
     .logo { font-family: var(--display); font-weight: 700; font-size: 1.15rem; display: flex; align-items: center; gap: 10px; }
     .logo .badge {
@@ -236,8 +236,7 @@
     .act-foot { position: relative; z-index: 2; padding-bottom: 40px; display: flex; align-items: center; gap: 20px; }
     .act-count { font-family: var(--mono); font-size: .85rem; color: var(--muted); min-width: 64px; }
     .act-count b { color: var(--green); font-weight: 500; }
-    .act-bar { flex: 1; height: 2px; background: var(--line); position: relative; overflow: hidden; }
-    .act-bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--green); }
+    .act-spacer { flex: 1; }
     .act-hint { font-family: var(--mono); font-size: .75rem; color: var(--muted); }
     @media (max-width: 860px) {
       .act-head { padding-top: 26px; }
@@ -626,7 +625,7 @@
         </div>
         <div class="act-foot wrap">
           <span class="act-count" id="act-count"><b>01</b> / 12</span>
-          <span class="act-bar"><i id="act-bar"></i></span>
+          <span class="act-spacer"></span>
           <span class="act-hint">Keep scrolling ↓</span>
         </div>
       </div>
@@ -1209,7 +1208,7 @@
     (() => {
       const track = document.getElementById("act-track");
       const slides = [...track.querySelectorAll(".act-slide")];
-      const count = document.getElementById("act-count"), bar = document.getElementById("act-bar");
+      const count = document.getElementById("act-count");
       const hint = track.querySelector(".act-hint");
       const n = slides.length;
       if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -1240,7 +1239,6 @@
         });
         const cur = Math.min(n, Math.floor(pos) + 1);
         count.innerHTML = `<b>${pad(cur)}</b> / ${pad(n)}`;
-        bar.style.width = (prog * 100) + "%";
         hint.style.opacity = prog > .97 ? 0 : 1;
       }
       window.addEventListener("scroll", update, { passive: true });
@@ -1249,7 +1247,7 @@
 
       // Mouse wheel / trackpad: one activity per scroll gesture, with a smooth animated transition,
       // so a fast flick doesn't fly past several at once. Touch and scrollbar dragging stay normal.
-      const DURATION = 1250, COOLDOWN = 380;
+      const DURATION = 1050, COOLDOWN = 340;
       let animating = false, lockUntil = 0, acc = 0;
       const total = () => track.offsetHeight - window.innerHeight;
       const top = () => track.getBoundingClientRect().top + window.scrollY;
