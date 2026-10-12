@@ -253,16 +253,13 @@
     }
 
     /* ===== Scroll-driven Rubik's cube (corner) ===== */
-    .cube-dock { position: fixed; right: 46px; bottom: 26px; z-index: 40; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 22px; }
-    .cube-view { width: 92px; height: 92px; perspective: 520px; }
+    .cube-dock { position: fixed; right: 34px; bottom: 30px; z-index: 40; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+    .cube-view { width: 58px; height: 58px; perspective: 400px; opacity: .85; }
     .cube { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transform: rotateX(-30deg) rotateY(-40deg); }
     .cubie { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; }
     .cubie i { position: absolute; width: var(--s); height: var(--s); left: calc(var(--s) / -2); top: calc(var(--s) / -2);
-      background: #0b1219; border-radius: 3px; backface-visibility: hidden; box-shadow: inset 0 0 0 1.5px #0b1219; }
-    .cube-label { font-family: var(--mono); font-size: .7rem; color: var(--muted); background: rgba(6,18,28,.7); border: 1px solid var(--line);
-      padding: 3px 9px; min-width: 70px; text-align: center; white-space: nowrap; }
-    .cube-label b { color: var(--green); font-weight: 500; }
-    @media (max-width: 860px) { .cube-dock { right: 24px; bottom: 14px; } .cube-view { width: 64px; height: 64px; } .cube-dock { gap: 16px; } .cube-label { font-size: .62rem; } }
+      background: #0b1219; border-radius: 3px; backface-visibility: hidden; box-shadow: inset 0 0 0 1px #0b1219; }
+    @media (max-width: 860px) { .cube-dock { right: 22px; bottom: 20px; } .cube-view { width: 44px; height: 44px; } }
 
     /* ===== TRAVEL ===== */
     #travel { background: var(--bg-2); }
@@ -358,7 +355,6 @@
   <!-- Rubik's cube: scrambled at the top of the page, solved step by step as you scroll -->
   <div class="cube-dock" aria-hidden="true">
     <div class="cube-view"><div class="cube" id="cube"></div></div>
-    <div class="cube-label" id="cube-label">Scrambled</div>
   </div>
 
   <nav id="nav">
@@ -1306,11 +1302,11 @@
 
     // ===== Rubik's cube solved by scrolling =====
     (() => {
-      const cubeEl = document.getElementById("cube"), label = document.getElementById("cube-label");
+      const cubeEl = document.getElementById("cube");
       const S = cubeEl.parentElement.clientWidth / 3.25;            // cubie size in px
       cubeEl.style.setProperty("--s", (S * 0.94) + "px");
       // Math frame: x right, y up, z toward viewer. Faces: U white, D yellow, F green, B blue, R red, L orange.
-      const COLORS = { R: "#c8102e", L: "#ff7a00", U: "#f4f4f4", D: "#ffd500", F: "#009b48", B: "#0046ad" };
+      const COLORS = { R: "#9b4a4f", L: "#b07a4c", U: "#c9cfd3", D: "#bfa95a", F: "#4f8a66", B: "#4a6593" };   // muted tones
       const MOVES = { R: [0, 1], L: [0, -1], U: [1, 1], D: [1, -1], F: [2, 1], B: [2, -1] };
       const rot = (axis, a) => {                                      // rotation matrix about x/y/z
         const c = Math.cos(a), s = Math.sin(a);
@@ -1384,10 +1380,9 @@
         const t = Math.min(Math.max((prog - 0.02) / 0.94, 0), 1) * solution.length;   // small holds at top and bottom
         if (t === last) return; last = t;
         const k = Math.min(Math.floor(t), solution.length), f = t - k;
-        if (k >= solution.length) { render(steps[k]); label.innerHTML = "<b>Solved ✓</b>"; return; }
+        if (k >= solution.length) { render(steps[k]); return; }
         const m = solution[k];
         render(f > 0 ? applyMove(steps[k], m, angleOf(m) * ease(f)) : steps[k]);
-        label.innerHTML = k === 0 && f === 0 ? "Scrambled" : `Move <b>${k + 1}</b>/${solution.length} · <b>${name(m)}</b>`;
       }
       window.addEventListener("scroll", update, { passive: true });
       window.addEventListener("resize", () => { last = -1; update(); });
