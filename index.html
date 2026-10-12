@@ -1262,20 +1262,23 @@
 
       // Mouse wheel / trackpad: one activity per scroll gesture, with a smooth animated transition,
       // so a fast flick doesn't fly past several at once. Touch and scrollbar dragging stay normal.
-      const DURATION = 1050, COOLDOWN = 340;
-      let animating = false, lockUntil = 0, acc = 0;
+      const DURATION = 1000;
+      let animating = false, animStart = 0, curTarget = -1, token = 0, lastWheel = 0, lastAbs = 0, acc = 0;
       const total = () => track.offsetHeight - window.innerHeight;
       const top = () => track.getBoundingClientRect().top + window.scrollY;
       const yFor = i => top() + ((i + 0.5) / n) * total();          // scroll position where activity i is centered
       const easeIO = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-      function tweenTo(y) {
-        const y0 = window.scrollY, dy = y - y0, t0 = performance.now();
-        animating = true;
+      const easeOut = t => 1 - Math.pow(1 - t, 3);
+      function tweenTo(i, retarget) {
+        const y0 = window.scrollY, dy = yFor(i) - y0, t0 = performance.now(), my = ++token;
+        const curve = retarget ? easeOut : easeIO;                   // keep moving smoothly if redirected mid-slide
+        animating = true; animStart = t0; curTarget = i;
         (function frame(now) {
+          if (my !== token) return;
           const t = Math.min((now - t0) / DURATION, 1);
-          window.scrollTo({ top: y0 + dy * easeIO(t), behavior: "instant" });
+          window.scrollTo({ top: y0 + dy * curve(t), behavior: "instant" });
           if (t < 1) requestAnimationFrame(frame);
-          else { animating = false; lockUntil = performance.now() + COOLDOWN; acc = 0; }
+          else { animating = false; acc = 0; }
         })(t0);
       }
       window.addEventListener("wheel", e => {
@@ -1283,20 +1286,33 @@
         if (r.top > 1 || r.bottom < window.innerHeight - 1) return;    // only while the section is pinned
         const dir = Math.sign(e.deltaY);
         if (!dir) return;
+        const now = performance.now(), abs = Math.abs(e.deltaY);
+        // A new scroll gesture = a short pause since the last wheel event, or the scroll speeding up again.
+        // Trackpad "momentum" arrives as a steady stream of shrinking events, which is ignored.
+        const fresh = now - lastWheel > 90 || abs > lastAbs * 1.6 + 4;
+        lastWheel = now; lastAbs = abs;
         const pos = Math.min(Math.max(-r.top / total(), 0), 1) * n;
         const i = Math.min(n - 1, Math.max(0, Math.floor(pos)));
+        const from = animating ? curTarget : i;
         // let the page scroll normally to leave the section from either end
-        if (dir > 0 && i === n - 1 && pos >= n - 0.5 - 0.02) return;
-        if (dir < 0 && i === 0 && pos <= 0.5 + 0.02) return;
+        if (!animating && dir > 0 && i === n - 1 && pos >= n - 0.5 - 0.02) return;
+        if (!animating && dir < 0 && i === 0 && pos <= 0.5 + 0.02) return;
         e.preventDefault();
-        if (animating || performance.now() < lockUntil) return;       // swallow leftover momentum
+        if (animating) {
+          // allow the next move once the current slide is mostly across, if it's a new gesture
+          if (!fresh || now - animStart < DURATION * 0.45) return;
+          const next = Math.min(n - 1, Math.max(0, from + dir));
+          if (next !== curTarget) tweenTo(next, true);
+          return;
+        }
+        if (!fresh && acc === 0) return;                             // tail of momentum from the last move
         acc += e.deltaY;
         if (Math.abs(acc) < 30) return;
+        acc = 0;
         let target;
         if (dir > 0) target = (i === 0 || pos >= i + 0.45) ? i + 1 : i;
         else         target = (i === n - 1 || pos <= i + 0.55) ? i - 1 : i;
-        target = Math.min(n - 1, Math.max(0, target));
-        tweenTo(yFor(target));
+        tweenTo(Math.min(n - 1, Math.max(0, target)), false);
       }, { passive: false });
     })();
 
