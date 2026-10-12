@@ -202,38 +202,54 @@
     .proj-link::after { content: "→"; transition: transform .2s; }
     .proj:hover .proj-link::after { transform: translateX(6px); }
 
-    /* ===== ACTIVITIES: editorial index ===== */
-    .act-group { margin-top: 64px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; }
-    .group-label { position: sticky; top: 100px; align-self: start; }
-    .group-label h3 { font-family: var(--display); font-size: 1.25rem; padding-top: 14px; border-top: 3px solid var(--blue); display: inline-block; }
-    .group-label p { font-family: var(--mono); font-size: .76rem; color: var(--muted); margin-top: 6px; text-transform: uppercase; letter-spacing: .06em; }
-    .rows { border-top: 1px solid var(--line-strong); }
-    .row { position: relative; display: grid; grid-template-columns: 54px 1fr; gap: 18px; padding: 24px 0 24px 18px; border-bottom: 1px solid var(--line);
-      transition: background .25s, padding-left .25s; }
-    .row::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--green); transform: scaleY(0); transform-origin: top; transition: transform .3s; }
-    .row:hover { background: rgba(255,255,255,.025); padding-left: 28px; }
-    .row:hover::before { transform: scaleY(1); }
-    .sym { position: relative; isolation: isolate; width: 48px; height: 48px; display: grid; place-items: center; font-family: var(--display); font-weight: 700; font-size: 1.05rem; color: var(--green);
-      clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%); background: var(--green); }
-    .sym::before { content: ""; position: absolute; inset: 2px; z-index: -1; background: #0a1d1a; clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%); }
-    .row-top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; }
-    .row h4 { font-family: var(--display); font-size: 1.2rem; font-weight: 600; }
-    .when { font-family: var(--mono); font-size: .76rem; color: var(--teal); white-space: nowrap; }
-    .row p { color: var(--muted); font-size: .95rem; margin-top: 6px; max-width: 62ch; }
-    .row.feature h4 { font-size: 1.45rem; }
-    .row.feature .sym { width: 56px; height: 56px; font-size: .95rem; color: #04121a; }
-    .row.feature .sym::before { display: none; }
-
-    /* Athletics: stat columns */
-    .athletics { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); }
-    .ath { padding: 28px 24px 30px; position: relative; transition: background .25s; }
-    .ath + .ath { border-left: 1px solid var(--line); }
-    .ath:hover { background: rgba(255,255,255,.025); }
-    .ath .big { font-family: var(--display); font-weight: 700; font-size: 3rem; line-height: 1; color: var(--green); letter-spacing: -0.03em; }
-    .ath .big small { font-size: 1rem; font-family: var(--mono); font-weight: 500; color: var(--muted); margin-left: 6px; letter-spacing: 0; }
-    .ath h4 { font-family: var(--display); font-size: 1.15rem; margin-top: 14px; }
-    .ath .when { display: block; margin-top: 2px; }
-    .ath p { color: var(--muted); font-size: .92rem; margin-top: 10px; }
+    /* ===== ACTIVITIES: pinned horizontal scroll ===== */
+    #activities { padding: 0; overflow: visible; }
+    .act-track { position: relative; }                 /* height set by script: one screen per activity */
+    .act-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+    .act-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(circle at 82% 30%, rgba(59,130,246,.16), transparent 42%),
+        radial-gradient(circle at 18% 85%, rgba(34,197,94,.12), transparent 40%),
+        linear-gradient(rgba(59,130,246,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,.06) 1px, transparent 1px);
+      background-size: auto, auto, 64px 64px, 64px 64px; }
+    .act-bg .ring { position: absolute; border: 1px solid rgba(255,255,255,.08); border-radius: 50%; }
+    .act-bg .r1 { width: 70vmin; height: 70vmin; right: -12vmin; top: 50%; transform: translateY(-50%); }
+    .act-bg .r2 { width: 46vmin; height: 46vmin; right: 0; top: 50%; transform: translateY(-50%); border-color: rgba(34,197,94,.18); }
+    .act-bg .r3 { width: 22vmin; height: 22vmin; right: 12vmin; top: 50%; transform: translateY(-50%); border-style: dashed; }
+    .act-stage > .wrap { width: 100%; }
+    .act-head { position: relative; z-index: 2; padding-top: 96px; }
+    .act-head h2 { margin-bottom: 0; }
+    .act-slides { position: relative; z-index: 2; flex: 1; }
+    .act-slide { position: absolute; inset: 0; display: flex; align-items: center; will-change: transform, opacity; opacity: 0; }
+    .act-slide .wrap { width: 100%; }
+    .slide-inner { max-width: 760px; }
+    .slide-group { display: inline-block; font-family: var(--mono); font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--blue); border-top: 2px solid var(--blue); padding-top: 10px; margin-bottom: 18px; }
+    .slide-mark { display: block; font-family: var(--display); font-weight: 700; font-size: clamp(3.4rem, 9vw, 6.5rem); line-height: 1;
+      color: transparent; -webkit-text-stroke: 1.5px var(--green); margin-bottom: 14px; letter-spacing: -0.03em; }
+    .act-slide h3 { font-family: var(--display); font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.05; letter-spacing: -0.02em; }
+    .slide-when { display: block; font-family: var(--mono); font-size: .85rem; color: var(--teal); margin-top: 12px; }
+    .act-slide p { color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.15rem); margin-top: 18px; max-width: 58ch; }
+    .act-foot { position: relative; z-index: 2; padding-bottom: 40px; display: flex; align-items: center; gap: 20px; }
+    .act-count { font-family: var(--mono); font-size: .85rem; color: var(--muted); min-width: 64px; }
+    .act-count b { color: var(--green); font-weight: 500; }
+    .act-bar { flex: 1; height: 2px; background: var(--line); position: relative; overflow: hidden; }
+    .act-bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--green); }
+    .act-hint { font-family: var(--mono); font-size: .75rem; color: var(--muted); }
+    @media (max-width: 860px) {
+      .act-head { padding-top: 84px; }
+      .act-bg .r1 { right: -30vmin; } .act-bg .r2 { right: -16vmin; } .act-bg .r3 { display: none; }
+      .act-hint { display: none; }
+    }
+    /* No-motion fallback: plain stacked list */
+    @media (prefers-reduced-motion: reduce) {
+      .act-stage { position: relative; height: auto; overflow: visible; }
+      .act-slides { flex: none; }
+      .act-slide { position: relative; opacity: 1 !important; transform: none !important; padding: 28px 0; }
+      .act-foot { display: none; }
+    }
 
     /* ===== TRAVEL ===== */
     #travel { background: var(--bg-2); }
@@ -299,10 +315,6 @@
       .nav-links li.hide-sm { display: none; }
       .about-grid { grid-template-columns: 1fr; }
       .orb-hint { right: auto; left: 20px; bottom: 70px; }
-      .act-group { grid-template-columns: 1fr; gap: 18px; }
-      .group-label { position: static; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
-      .athletics { grid-template-columns: 1fr; }
-      .ath + .ath { border-left: 0; border-top: 1px solid var(--line); }
       .proj { grid-template-columns: 1fr; }
       .proj-index { flex-direction: row; align-items: flex-end; padding: 20px 24px; }
       .proj-index .num { font-size: 1.8rem; }
@@ -313,9 +325,6 @@
       .stats { grid-template-columns: 1fr; }
       .stat + .stat { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); margin-top: 16px; }
       .fact { grid-template-columns: 1fr; gap: 2px; }
-      .row { grid-template-columns: 38px 1fr; gap: 14px; padding-left: 4px; }
-      .sym, .row.feature .sym { width: 38px; height: 38px; font-size: .8rem; }
-      .row.feature .sym { font-size: .7rem; }
       .logo-name { display: none; }
       .nav-links a::before { content: none; }
       .link-row { grid-template-columns: 30px 1fr; }
@@ -494,122 +503,132 @@
   </section>
 
   <!-- ================= ACTIVITIES ================= -->
+  <!-- The section pins in place while you scroll; each activity slides in from the right and out to the left.
+       To add an activity: copy one <article class="act-slide"> block and change the text. The scroll length adjusts itself. -->
   <section id="activities">
-    <div class="wrap">
-      <div class="reveal from-up">
-        <div class="sec-head">Activities</div>
-        <h2>Beyond the <span class="accent">classroom.</span></h2>
-        <p class="lead">Organizations and teams at Gettysburg Area High School where I learn, compete, serve, and collaborate.</p>
-      </div>
-
-      <!-- Group A: STEM -->
-      <div class="act-group">
-        <div class="group-label reveal from-left">
-                    <h3>STEM &amp; Academics</h3>
+    <div class="act-track" id="act-track">
+      <div class="act-stage">
+        <div class="act-bg" aria-hidden="true"><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span></div>
+        <div class="act-head wrap">
+          <div class="sec-head">Activities</div>
+          <h2>Beyond the <span class="accent">classroom.</span></h2>
         </div>
-        <div class="rows">
-          <div class="row feature reveal from-right">
-            <span class="sym">TSA</span>
-            <div>
-              <div class="row-top"><h4>Technology Student Association</h4><span class="when">Member</span></div>
+        <div class="act-slides">
+          <article class="act-slide">
+            <div class="wrap"><div class="slide-inner">
+              <span class="slide-group">STEM &amp; Academics</span>
+              <span class="slide-mark">TSA</span>
+              <h3>Technology Student Association</h3>
+              <span class="slide-when">Member</span>
               <p>Through TSA, I take part in STEM-focused activities and competitive events that challenge me to apply engineering and technology concepts, work as part of a team, and present my work with confidence.</p>
-            </div>
-          </div>
-          <div class="row reveal from-right delay-1">
-            <span class="sym">∑</span>
-            <div>
-              <div class="row-top"><h4>National Math Honors Society</h4><span class="when">Member</span></div>
+            </div></div>
+          </article>
+          <article class="act-slide">
+            <div class="wrap"><div class="slide-inner">
+              <span class="slide-group">STEM &amp; Academics</span>
+              <span class="slide-mark">∑</span>
+              <h3>National Math Honors Society</h3>
+              <span class="slide-when">Member</span>
               <p>Recognized for achievement in mathematics, with a commitment to academic excellence and sharing a love of math with others.</p>
-            </div>
-          </div>
-          <div class="row reveal from-right delay-1">
-            <span class="sym">π</span>
-            <div>
-              <div class="row-top"><h4>Math Club</h4><span class="when">Member</span></div>
+            </div></div>
+          </article>
+          <article class="act-slide">
+            <div class="wrap"><div class="slide-inner">
+              <span class="slide-group">STEM &amp; Academics</span>
+              <span class="slide-mark">π</span>
+              <h3>Math Club</h3>
+              <span class="slide-when">Member</span>
               <p>Working through challenging problems with peers and building the analytical foundation that engineering depends on.</p>
-            </div>
-          </div>
-          <div class="row reveal from-right delay-1">
-            <span class="sym">♞</span>
-            <div>
-              <div class="row-top"><h4>Chess Club</h4><span class="when">2023 – 2026 · Grades 8–10</span></div>
+            </div></div>
+          </article>
+          <article class="act-slide">
+            <div class="wrap"><div class="slide-inner">
+              <span class="slide-group">STEM &amp; Academics</span>
+              <span class="slide-mark">♞</span>
+              <h3>Chess Club</h3>
+              <span class="slide-when">2023 – 2026 · Grades 8–10</span>
               <p>Three years of strategic play, sharpening my ability to plan ahead, recognize patterns, and stay patient under pressure.</p>
-            </div>
-          </div>
-          <div class="row reveal from-right delay-1">
-            <span class="sym">&lt;/&gt;</span>
-            <div>
-              <div class="row-top"><h4>Independent Building</h4><span class="when">Ongoing</span></div>
+            </div></div>
+          </article>
+          <article class="act-slide">
+            <div class="wrap"><div class="slide-inner">
+              <span class="slide-group">STEM &amp; Academics</span>
+              <span class="slide-mark">&lt;/&gt;</span>
+              <h3>Independent Building</h3>
+              <span class="slide-when">Ongoing</span>
               <p>Teaching myself web development by building and maintaining my own sites, GAHSgames.com and Shortutorial.com.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Group B: Speaking, service & culture -->
-      <div class="act-group">
-        <div class="group-label reveal from-left">
-                    <h3>Speaking, Service &amp; Culture</h3>
-        </div>
-        <div class="rows">
-          <div class="row reveal from-right">
-            <span class="sym">“”</span>
-            <div>
-              <div class="row-top"><h4>Speech and Debate</h4><span class="when">2025 – 2026</span></div>
+            </div></div>
+          </article>
+          <article class="act-slide">
+            <div class="wrap"><div class="slide-inner">
+              <span class="slide-group">Speaking, Service &amp; Culture</span>
+              <span class="slide-mark">“ ”</span>
+              <h3>Speech and Debate</h3>
+              <span class="slide-when">2025 – 2026</span>
               <p>Competed for the full school year as a sophomore, researching topics, building arguments, and speaking with confidence under time pressure.</p>
-            </div>
-          </div>
-          <div class="row reveal from-right delay-1">
-            <span class="sym">§</span>
-            <div>
-              <div class="row-top"><h4>Mock Trial</h4><span class="when">Team member</span></div>
+            </div></div>
+          </article>
+          <article class="act-slide">
+            <div class="wrap"><div class="slide-inner">
+              <span class="slide-group">Speaking, Service &amp; Culture</span>
+              <span class="slide-mark">§</span>
+              <h3>Mock Trial</h3>
+              <span class="slide-when">Team member</span>
               <p>Prepared and argued cases as part of a team, learning to think on my feet, analyze evidence, and present a clear, persuasive case.</p>
-            </div>
-          </div>
-          <div class="row reveal from-right delay-1">
-            <span class="sym">K</span>
-            <div>
-              <div class="row-top"><h4>Key Club</h4><span class="when">2025 – 2026</span></div>
+            </div></div>
+          </article>
+          <article class="act-slide">
+            <div class="wrap"><div class="slide-inner">
+              <span class="slide-group">Speaking, Service &amp; Culture</span>
+              <span class="slide-mark">K</span>
+              <h3>Key Club</h3>
+              <span class="slide-when">2025 – 2026</span>
               <p>Gave back to my school and community through Key Club, a student-led service organization focused on volunteering and leadership.</p>
-            </div>
-          </div>
-          <div class="row reveal from-right delay-1">
-            <span class="sym">Fr</span>
-            <div>
-              <div class="row-top"><h4>French Club</h4><span class="when">Member</span></div>
+            </div></div>
+          </article>
+          <article class="act-slide">
+            <div class="wrap"><div class="slide-inner">
+              <span class="slide-group">Speaking, Service &amp; Culture</span>
+              <span class="slide-mark">Fr</span>
+              <h3>French Club</h3>
+              <span class="slide-when">Member</span>
               <p>Exploring the French language and francophone culture. I speak French well, and alongside my near-fluent Spanish, it helps me connect with people beyond English.</p>
-            </div>
-          </div>
+            </div></div>
+          </article>
+          <article class="act-slide">
+            <div class="wrap"><div class="slide-inner">
+              <span class="slide-group">Athletics</span>
+              <span class="slide-mark">15–0</span>
+              <h3>Varsity Tennis</h3>
+              <span class="slide-when">Gettysburg Area HS</span>
+              <p>Competing on the varsity team, building discipline, focus, and resilience through practice, matches, and supporting my teammates.</p>
+            </div></div>
+          </article>
+          <article class="act-slide">
+            <div class="wrap"><div class="slide-inner">
+              <span class="slide-group">Athletics</span>
+              <span class="slide-mark">PICL</span>
+              <h3>Mountain Biking · PICL</h3>
+              <span class="slide-when">2020 – 2025 · Six seasons, ages 10–15</span>
+              <p>Raced in the Pennsylvania Interscholastic Cycling League, building endurance, grit, and the drive to push through demanding courses.</p>
+            </div></div>
+          </article>
+          <article class="act-slide">
+            <div class="wrap"><div class="slide-inner">
+              <span class="slide-group">Athletics</span>
+              <span class="slide-mark">7v7</span>
+              <h3>Ultimate Frisbee Club</h3>
+              <span class="slide-when">2025 – Present</span>
+              <p>Playing a self-refereed sport built on teamwork, communication, and sportsmanship.</p>
+            </div></div>
+          </article>
+        </div>
+        <div class="act-foot wrap">
+          <span class="act-count" id="act-count"><b>01</b> / 12</span>
+          <span class="act-bar"><i id="act-bar"></i></span>
+          <span class="act-hint">Keep scrolling ↓</span>
         </div>
       </div>
-
-      <!-- Group C: Athletics -->
-      <div class="act-group">
-        <div class="group-label reveal from-left">
-                    <h3>Athletics</h3>
-        </div>
-        <div class="athletics reveal from-up">
-          <div class="ath">
-            <div class="big">Varsity</div>
-            <h4>Tennis</h4>
-            <span class="when">Gettysburg Area HS</span>
-            <p>Competing on the varsity team, building discipline, focus, and resilience through practice, matches, and supporting my teammates.</p>
-          </div>
-          <div class="ath">
-            <div class="big">6<small>seasons</small></div>
-            <h4>Mountain Biking · PICL</h4>
-            <span class="when">2020 – 2025 · Ages 10–15</span>
-            <p>Raced in the Pennsylvania Interscholastic Cycling League, building endurance, grit, and the drive to push through demanding courses.</p>
-          </div>
-          <div class="ath">
-            <div class="big">2<small>seasons</small></div>
-            <h4>Ultimate Frisbee Club</h4>
-            <span class="when">2025 – Present</span>
-            <p>Playing a self-refereed sport built on teamwork, communication, and sportsmanship.</p>
-          </div>
-        </div>
-      </div>
-      <!-- To add an activity: copy any .row block into the right group and change the symbol, title, date, and text. -->
     </div>
   </section>
 
@@ -1183,6 +1202,48 @@
       const e = document.getElementById("email-link"), t = document.getElementById("text-link");
       e.href = "mailto:" + email; document.getElementById("email-text").textContent = email;
       t.href = "sms:+1" + digits.join(""); document.getElementById("text-text").textContent = "(" + digits[0] + ") " + digits[1] + "-" + digits[2];
+    })();
+
+    // ===== Activities: pinned scroll, slides in from the right and out to the left =====
+    (() => {
+      const track = document.getElementById("act-track");
+      const slides = [...track.querySelectorAll(".act-slide")];
+      const count = document.getElementById("act-count"), bar = document.getElementById("act-bar");
+      const hint = track.querySelector(".act-hint");
+      const n = slides.length;
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const PER = 0.75;                                       // screens of scrolling per activity
+      const pad = n2 => String(n2).padStart(2, "0");
+      const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      function size() { track.style.height = (n * PER + 1) * window.innerHeight + "px"; update(); }
+      function update() {
+        const r = track.getBoundingClientRect();
+        const total = track.offsetHeight - window.innerHeight;
+        const prog = Math.min(Math.max(-r.top / total, 0), 1);   // 0..1 across the section
+        const pos = prog * n;                                     // which activity we're on, fractional
+        slides.forEach((el, i) => {
+          // d: <0 waiting on the right · 0..1 this activity's turn · >1 gone to the left
+          const d = pos - i;
+          const IN = 0.24, OUT = 0.76;           // slide in during first 24% of its turn, out during last 24%
+          let x = 0, o = 1;
+          if (d < 0 && i > 0)                  { x = 100; o = 0; }
+          else if (d < IN && i > 0)            { const t = ease(d / IN); x = 100 * (1 - t); o = Math.min(1, t * 1.6); }
+          else if (d > OUT && i < n - 1) {
+            if (d >= 1)                        { x = -100; o = 0; }
+            else                               { const t = ease((d - OUT) / (1 - OUT)); x = -100 * t; o = Math.max(0, 1 - t * 1.6); }
+          }
+          el.style.transform = `translate3d(${x}vw,0,0)`;
+          el.style.opacity = o;
+          el.style.visibility = o < .01 ? "hidden" : "visible";
+        });
+        const cur = Math.min(n, Math.floor(pos) + 1);
+        count.innerHTML = `<b>${pad(cur)}</b> / ${pad(n)}`;
+        bar.style.width = (prog * 100) + "%";
+        hint.style.opacity = prog > .97 ? 0 : 1;
+      }
+      window.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", size);
+      size();
     })();
 
     // ===== Travel map =====
