@@ -234,6 +234,11 @@
     .act-slide h3 { font-family: var(--display); font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.05; letter-spacing: -0.02em; }
     .slide-when { display: block; font-family: var(--mono); font-size: .85rem; color: var(--teal); margin-top: 12px; }
     .act-slide p { color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.15rem); margin-top: 18px; max-width: 58ch; }
+    /* Denser slide for activities with several entries (Game Jams) */
+    .act-slide.dense .slide-mark { font-size: clamp(2.6rem, 6vw, 4.2rem); margin-bottom: 8px; }
+    .jam-list { display: grid; gap: 14px 40px; margin-top: 20px; }
+    .act-slide .jam-list p { margin-top: 0; }
+    @media (min-width: 861px) { .jam-list { grid-template-columns: 1fr 1fr; max-width: 980px; } .act-slide .jam-list p { font-size: 1rem; max-width: none; } }
     .act-foot { position: relative; z-index: 2; padding-bottom: 40px; display: flex; align-items: center; gap: 20px; }
     .act-count { font-family: var(--mono); font-size: .85rem; color: var(--muted); min-width: 64px; }
     .act-count b { color: var(--green); font-weight: 500; }
@@ -639,15 +644,17 @@
               <p>A member of <a href="https://hackclub.com" target="_blank" rel="noopener">Hack Club</a>, a global nonprofit community of more than 50,000 teenagers who design and build technical projects, from software and hardware to games. Through Hack Club, I collaborate with young builders around the world, share my work for feedback, and take part in coding events and game jams.</p>
             </div></div>
           </article>
-          <article class="act-slide">
+          <article class="act-slide dense">
             <div class="wrap"><div class="slide-inner">
               <span class="slide-group">STEM &amp; Academics</span>
               <span class="slide-mark">JAM</span>
               <h3>Game Jams</h3>
-              <span class="slide-when">Competitor · Upcoming events below</span>
+              <span class="slide-when">Competitor · 2026 jams</span>
               <p>I compete in game jams: time-limited challenges where developers design, build, and ship a complete game around a theme revealed at the start.</p>
-              <p><strong>Jame Gam Game Jam</strong> · Hack Club · October 22–25, 2026<br>A three-day online jam for teen developers worldwide, building solo or in teams around a surprise theme. My submission: <a href="https://dinglebonglewongle.itch.io/tiny-henry" target="_blank" rel="noopener">Tiny Henry</a>, a 3D adventure game made with <a href="https://noahpuckett.me" target="_blank" rel="noopener">Noah Puckett</a>.</p>
-              <p><strong>Hack Club Haven</strong> · November 14–15, 2026<br>Hack Club's official global game jam, held in more than 200 cities, where teams build a game over two days with workshops and mentors.</p>
+              <div class="jam-list">
+                <p><strong>Jame Gam Game Jam</strong> · Hack Club · October 22–25, 2026<br>A three-day online jam for teen developers worldwide, building solo or in teams around a surprise theme. My submission: <a href="https://dinglebonglewongle.itch.io/tiny-henry" target="_blank" rel="noopener">Tiny Henry</a>, a 3D adventure game made with <a href="https://noahpuckett.me" target="_blank" rel="noopener">Noah Puckett</a>.</p>
+                <p><strong>Hack Club Haven</strong> · November 14–15, 2026<br>Hack Club's official global game jam, held in more than 200 cities, where teams build a game over two days with workshops and mentors.</p>
+              </div>
             </div></div>
           </article>
           <article class="act-slide">
@@ -1306,7 +1313,18 @@
       const PER = 1;                                          // screens of scrolling per activity
       const pad = n2 => String(n2).padStart(2, "0");
       const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-      function size() { track.style.height = (n * PER + 1) * window.innerHeight + "px"; update(); }
+      const stage = track.querySelector(".act-slides");
+      // Shrink any slide whose text is taller than the space between the heading and the counter
+      function fit() {
+        slides.forEach(el => {
+          const inner = el.querySelector(".slide-inner");
+          inner.style.transform = "";
+          const s = Math.min(1, (stage.clientHeight - 16) / inner.offsetHeight);
+          inner.style.transformOrigin = "left center";
+          inner.style.transform = s < 1 ? `scale(${s})` : "";
+        });
+      }
+      function size() { track.style.height = (n * PER + 1) * window.innerHeight + "px"; fit(); update(); }
       function update() {
         const r = track.getBoundingClientRect();
         const total = track.offsetHeight - window.innerHeight;
@@ -1335,6 +1353,7 @@
       window.addEventListener("scroll", update, { passive: true });
       window.addEventListener("resize", size);
       size();
+      if (document.fonts) document.fonts.ready.then(size);
 
       // Mouse wheel / trackpad: one activity per scroll gesture, with a smooth animated transition,
       // so a fast flick doesn't fly past several at once. Touch and scrollbar dragging stay normal.
