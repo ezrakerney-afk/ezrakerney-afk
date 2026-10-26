@@ -1,0 +1,11 @@
+// Cloudflare Workers config for ezrakerney.com: a static site served straight from the repo root.
+// Workers Builds uses this for production deploys (main) and for preview builds on other branches.
+{
+  "name": "ezrakerney-afk",
+  "compatibility_date": "2026-10-11",
+  "assets": {
+    "directory": "."
+  },
+  // Required by `wrangler preview`, which Workers Builds runs for non-main branches
+  "previews": {}
+}
