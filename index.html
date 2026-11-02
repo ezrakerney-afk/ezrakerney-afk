@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ezra Kerney — Portfolio</title>
-  <meta name="description" content="Portfolio of Ezra Kerney, a 16-year-old junior at Gettysburg Area High School focused on engineering, creator of GAHSgames.com and the Roblox game Altus, member of TSA and the National Math Honors Society, and varsity tennis player.">
+  <meta name="description" content="Portfolio of Ezra Kerney, a 16-year-old junior at Gettysburg Area High School focused on engineering, creator of GAHSgames.com and the Roblox game Altus, member of TSA, the National Math Honors Society, and the Science National Honor Society, and varsity tennis player.">
   <!-- Tab icon -->
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon-48.png" sizes="48x48" type="image/png">
@@ -196,6 +196,8 @@
     .proj-body { padding: 38px 44px 38px 40px; }
     .proj-kicker { font-family: var(--mono); font-size: .78rem; color: var(--green); display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
     .proj-body h3 { font-family: var(--display); font-size: 1.9rem; margin-bottom: 10px; letter-spacing: -0.01em; }
+    .proj-stat { display: inline-flex; align-items: baseline; gap: 10px; margin: 0 0 14px; padding: 6px 14px; border: 1px solid var(--green); font-family: var(--mono); font-size: .8rem; color: var(--muted); }
+    .proj-stat b { font-family: var(--display); font-size: 1.3rem; color: var(--green); }
     .proj-body p { color: var(--muted); font-size: .98rem; max-width: 68ch; }
     .proj-tags { display: flex; flex-wrap: wrap; gap: 0; margin-top: 20px; font-family: var(--mono); font-size: .78rem; color: #a8c8ff; }
     .proj-tags span { padding: 4px 12px; border: 1px solid rgba(59,130,246,.4); margin: 0 -1px -1px 0; }
@@ -429,7 +431,7 @@
           I put that mindset into practice by independently creating <strong>GAHSgames.com</strong>, developing the
           Roblox game <strong>Altus</strong>, and I keep
           sharpening it through the <strong>Technology Student Association</strong>, the
-          <strong>National Math Honors Society</strong>, and Math Club, and as a member of <strong>Hack Club</strong>, a global
+          <strong>National Math Honors Society</strong>, the <strong>Science National Honor Society</strong>, and Math Club, and as a member of <strong>Hack Club</strong>, a global
           community of teen builders, I compete in game jams. Beyond STEM, I've built my public speaking
           and argumentation skills through <strong>Speech and Debate</strong> and <strong>Mock Trial</strong>,
           served my community through <strong>Key Club</strong>, and I'm a member of French Club. I compete on the
@@ -441,7 +443,7 @@
         </p>
         <div class="stats">
           <div class="stat"><b>4</b><small>Projects launched</small></div>
-          <div class="stat"><b>12</b><small>Activities &amp; teams</small></div>
+          <div class="stat"><b>13</b><small>Activities &amp; teams</small></div>
           <div class="stat"><b>2</b><small>Jobs held</small></div>
         </div>
       </div>
@@ -505,6 +507,8 @@
         <div class="proj-body">
           <span class="proj-kicker"><span class="dot"></span> Full-stack web app · Accounts, quizzes &amp; leaderboard</span>
           <h3>Shortutorial.com</h3>
+          <!-- Visit count from Cloudflare analytics (shortutorial.com, last 30 days). Updated weekly. -->
+          <div class="proj-stat"><b id="shortutorial-visits">4.55k</b> visits in the last 30 days</div>
           <p>
             Short, clear tutorials for anything. Visitors can search the catalog, browse by category, or jump to a
             random tutorial. The step-by-step fix guides cover everyday computer problems, like Wi-Fi that's connected
@@ -606,6 +610,15 @@
               <h3>National Math Honors Society</h3>
               <span class="slide-when">Member</span>
               <p>Recognized for achievement in mathematics, with a commitment to academic excellence and sharing a love of math with others.</p>
+            </div></div>
+          </article>
+          <article class="act-slide">
+            <div class="wrap"><div class="slide-inner">
+              <span class="slide-group">STEM &amp; Academics</span>
+              <span class="slide-mark">SNHS</span>
+              <h3>Science National Honor Society</h3>
+              <span class="slide-when">Member</span>
+              <p>Recognized for achievement in science, with a commitment to scientific inquiry, research, and sharing a passion for science with others.</p>
             </div></div>
           </article>
           <article class="act-slide">
@@ -1067,7 +1080,7 @@
     document.getElementById("year").textContent = new Date().getFullYear();
 
     // Typing effect in hero
-    const phrases = ["Aspiring Engineer", "Creator of GAHSgames.com", "Creator of Shortutorial.com", "Roblox Game Developer", "Hack Club Member", "Java Programmer", "TSA Member", "National Math Honors Society", "Varsity Tennis Player", "Problem Solver"];
+    const phrases = ["Aspiring Engineer", "Creator of GAHSgames.com", "Creator of Shortutorial.com", "Roblox Game Developer", "Hack Club Member", "Java Programmer", "TSA Member", "National Math Honors Society", "Science National Honor Society", "Varsity Tennis Player", "Problem Solver"];
     const el = document.getElementById("typed");
     let p = 0, c = 0, deleting = false;
     function type() {
