@@ -32,13 +32,15 @@
       "https://www.linkedin.com/in/ezra-kerney-0b678b38a/",
       "https://www.instagram.com/ezra_iso/",
       "https://gahsgames.com",
-      "https://shortutorial.com"
+      "https://shortutorial.com",
+      "https://wezzet.com",
+      "https://www.depop.com/ezrakern/"
     ]
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     /* ===== Colors ===== */
     :root {
@@ -257,14 +259,6 @@
       .act-foot { display: none; }
     }
 
-    /* ===== Scroll-driven Rubik's cube (corner) ===== */
-    .cube-dock { position: fixed; right: 34px; bottom: 30px; z-index: 40; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 22px; }
-    .cube-view { width: 58px; height: 58px; perspective: 400px; opacity: .85; }
-    .cube { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transform: rotateX(-30deg) rotateY(-40deg); }
-    .cubie { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-    .cubie i { position: absolute; width: var(--s); height: var(--s); left: calc(var(--s) / -2); top: calc(var(--s) / -2);
-      background: #0b1219; border-radius: 3px; backface-visibility: hidden; box-shadow: inset 0 0 0 1px #0b1219; }
-    @media (max-width: 860px) { .cube-dock { right: 22px; bottom: 20px; } .cube-view { width: 44px; height: 44px; } }
 
     /* ===== TRAVEL ===== */
     #travel { background: var(--bg-2); }
@@ -351,16 +345,175 @@
       .reveal { opacity: 1; transform: none; }
       html { scroll-behavior: auto; }
     }
+
+    /* ===== RETRO WINDOWS THEME (overrides everything above) ===== */
+    :root {
+      --bg: #008080; --bg-2: #008080; --panel: #c0c0c0;
+      --line: #808080; --line-strong: #404040;
+      --text: #000; --muted: #222; --green: #000080; --teal: #6a0d83; --blue: #000080;
+      --mono: "VT323", "Courier New", monospace; --display: "VT323", "Courier New", monospace;
+      --tb: #000080; --tb2: #1084d0;
+      --raised: inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+      --sunken: inset 2px 2px #808080, inset -2px -2px #fff;
+      --drop: 7px 7px 0 rgba(0,0,0,.45);
+    }
+    body { background: #008080; font-family: Tahoma, Verdana, "Segoe UI", sans-serif; }
+    .blueprint, .hero, #projects, #contact { background: transparent !important; background-image: none !important; }
+    .blueprint::before, .blueprint::after, .hero::before { display: none !important; }
+    .chamfer, .hero { clip-path: none !important; }
+    section { padding: 56px 0; }
+    .hero { min-height: auto; padding: 110px 0 40px; }
+
+    /* windows */
+    section:not(#activities) > .wrap, .hero-copy, .act-stage > .act-head.wrap, .slide-inner {
+      background: #c0c0c0; border: 2px solid; border-color: #fff #000 #000 #fff;
+      box-shadow: var(--raised), var(--drop); padding: 0 22px 26px;
+    }
+    section:not(#activities) > .wrap { width: calc(100% - 32px); max-width: 1100px; }
+    .act-stage > .act-head.wrap { width: calc(100% - 32px); max-width: 1100px; margin-top: 76px; padding-top: 0; }
+    .hero-copy { padding-top: 16px; }
+    .hero-copy::before { content: "ezra_kerney.exe"; display: flex; margin: -16px -22px 18px; }
+    .sec-head, .hero-copy::before {
+      align-items: center; margin: 0 -22px 20px; padding: 4px 6px 4px 10px;
+      background: linear-gradient(90deg, var(--tb), var(--tb2)); color: #fff;
+      font-family: var(--mono); font-size: 1.3rem; letter-spacing: .05em; text-transform: none;
+    }
+    .sec-head b { color: #fff; }
+    .sec-head::after {
+      content: "✕"; flex: none; width: 22px; height: 20px; margin-left: auto; display: grid; place-items: center;
+      background: #c0c0c0; color: #000; font-size: .85rem; box-shadow: var(--raised), 0 0 0 1px #000;
+    }
+    #about { --tb: #000080; --tb2: #1084d0; }
+    #projects { --tb: #6a0d83; --tb2: #c13bd6; }
+    #activities { --tb: #0b7a2a; --tb2: #3bc45f; }
+    #travel { --tb: #b85c00; --tb2: #ffa320; }
+    #experience { --tb: #a00018; --tb2: #e2405a; }
+    #contact { --tb: #006c80; --tb2: #19b6c9; }
+    .hero-copy { --tb: #000080; --tb2: #e2405a; }
+
+    h1, h2, h3 { font-family: var(--display) !important; letter-spacing: 0 !important; font-weight: 400 !important; }
+    h1 { font-size: clamp(3.4rem, 9vw, 6rem); }
+    h2 { font-size: clamp(2.3rem, 5vw, 3.4rem); }
+    .outline { color: #000080 !important; -webkit-text-stroke: 0 !important; }
+    .lead a { color: #000080; text-decoration: underline; }
+
+    /* buttons */
+    .btn, .btn-primary, .btn-ghost { background: #c0c0c0; color: #000; border: 2px solid; border-color: #fff #000 #000 #fff;
+      box-shadow: var(--raised); border-radius: 0; padding: 8px 18px; }
+    .btn:hover, .btn-primary:hover, .btn-ghost:hover { background: #c0c0c0; color: #000; border-color: #fff #000 #000 #fff; transform: none; }
+    .btn:active { border-color: #000 #fff #fff #000; box-shadow: var(--sunken); }
+
+    /* nav = taskbar */
+    nav, nav.scrolled { background: #c0c0c0; border-bottom: 2px solid #000; box-shadow: inset 0 -2px #808080, inset 0 2px #fff; backdrop-filter: none; }
+    .nav-links a { color: #000; }
+    .nav-links a:hover { color: #000080; text-decoration: underline; }
+    .logo .badge { border-color: #000080; color: #000080; }
+    #progress { background: #000080; height: 4px; }
+
+    /* stats + spec sheet */
+    .stat b { color: #000080; -webkit-text-stroke: 0; }
+    .stat + .stat { border-left: 2px groove #fff; }
+    .spec { background: #fff; border: 0; box-shadow: var(--sunken); }
+    .spec-title { border-bottom-color: #000080; }
+
+    /* project cards = little windows */
+    .proj { background: #dcdcdc; border: 2px solid; border-color: #fff #000 #000 #fff; box-shadow: var(--raised), var(--drop); }
+    .proj:hover { transform: translate(-2px,-2px); box-shadow: var(--raised), 10px 10px 0 rgba(0,0,0,.45); }
+    .proj-index { background: #000080; color: #fff; }
+    .proj:nth-of-type(2) .proj-index { background: #a00018; }
+    .proj:nth-of-type(3) .proj-index { background: #0b7a2a; }
+    .proj:nth-of-type(4) .proj-index { background: #b85c00; }
+    .proj:nth-of-type(5) .proj-index { background: #6a0d83; }
+    .proj-body p { color: #222; }
+    .proj-tags { color: #000080; }
+    .proj-tags span { border: 1px solid #808080; background: #fff; margin: 0 4px 4px 0; }
+
+    /* activities */
+    .act-bg { background: #008080 !important; }
+    .act-bg .ring { display: none; }
+    .act-stage > .act-head.wrap { padding-bottom: 14px; }
+    .act-stage > .act-head.wrap .sec-head { margin-bottom: 10px; }
+    .slide-inner { padding: 22px 26px; }
+
+    /* experience + contact */
+    .job .role { color: #fff; background: #000080; }
+    .job::before { background: #c0c0c0; }
+    .links { border-top: 2px groove #fff; }
+    .link-row { border-bottom: 2px groove #fff; }
+    .link-row svg { fill: #000080; }
+    .link-row .handle { color: #222; }
+    .link-row:hover { color: #000080; background: #fff; }
+    footer { background: #c0c0c0; color: #000; border-top: 2px solid #fff; }
+    ::selection { background: #000080; color: #fff; }
+
+    /* ===== Unified palette + activity dropdowns ===== */
+    :root {
+      --desk: #3b7a78; --win: #d6d2c8; --win-hi: #f4f1ea; --win-lo: #8c887e;
+      --navy: #233a7a; --navy2: #4a68b8; --teal2: #1f7a73; --teal3: #4fb0a5;
+      --coral: #c4523b; --coral2: #e9866b; --gold: #c8901d; --gold2: #ebbd55;
+      --green: var(--navy); --blue: var(--navy); --teal: var(--coral);
+      --raised: inset -2px -2px var(--win-lo), inset 2px 2px var(--win-hi);
+      --sunken: inset 2px 2px var(--win-lo), inset -2px -2px #fff;
+      --drop: 6px 6px 0 rgba(10,30,30,.35);
+    }
+    body { background-color: var(--desk);
+      background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px); background-size: 6px 6px; }
+    section:not(#activities) > .wrap, .hero-copy, #activities > .wrap, .proj, .btn, nav, nav.scrolled, footer { background-color: var(--win) !important; }
+    section > .wrap, #activities > .wrap { width: calc(100% - 32px); max-width: 1100px; padding: 0 22px 26px; border: 2px solid; border-color: #fff #222 #222 #fff; box-shadow: var(--raised), var(--drop); }
+    #activities { padding: 56px 0; overflow: visible; }
+    .hero { padding: 116px 0 30px; }
+    .hero-copy { max-width: 760px; margin: 0 auto; pointer-events: auto; }
+    .hero-grid { display: block; }
+    #about, .hero-copy { --tb: var(--navy); --tb2: var(--navy2); }
+    #projects { --tb: var(--teal2); --tb2: var(--teal3); }
+    #activities { --tb: var(--coral); --tb2: var(--coral2); }
+    #travel { --tb: var(--gold); --tb2: var(--gold2); }
+    #experience { --tb: var(--navy); --tb2: var(--navy2); }
+    #contact { --tb: var(--teal2); --tb2: var(--teal3); }
+    .accent, .outline { color: var(--coral) !important; }
+    .typed-line { color: var(--teal2); }
+    .proj { background: #e6e2d9 !important; }
+    .proj-index, .proj:nth-of-type(n) .proj-index { background: var(--navy); }
+    .proj:nth-of-type(2) .proj-index { background: var(--teal2); }
+    .proj:nth-of-type(3) .proj-index { background: var(--coral); }
+    .proj:nth-of-type(4) .proj-index { background: var(--gold); }
+    .proj:nth-of-type(5) .proj-index { background: var(--navy2); }
+    .proj-tags { color: var(--navy); }
+    .stat b, .proj-kicker, .link-row svg { color: var(--navy); fill: var(--navy); }
+    .job .role { background: var(--teal2); }
+    #progress { background: var(--coral); }
+    .marquee-wrap { margin-top: 0; padding: 0 16px; }
+    .marquee { transform: none; margin: 0 auto; max-width: 1100px; background: var(--navy); color: #fff; padding: 8px 0;
+      border: 2px solid; border-color: #222 #fff #fff #222; }
+    .track span { font-family: var(--mono); font-weight: 400; font-size: 1.15rem; }
+
+    /* activity dropdowns */
+    .act-group { font-family: var(--mono); font-size: 1.4rem; color: var(--navy); margin: 26px 0 10px; }
+    .act-list { display: grid; gap: 8px; }
+    .act-item { background: var(--win); border: 2px solid; border-color: #fff #222 #222 #fff; box-shadow: var(--raised); }
+    .act-item summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 56px 1fr auto 22px; align-items: center; gap: 14px; padding: 8px 12px; }
+    .act-item summary::-webkit-details-marker { display: none; }
+    .act-item summary::after { content: "▼"; font-size: .7rem; width: 20px; height: 18px; display: grid; place-items: center; background: var(--win); box-shadow: var(--raised), 0 0 0 1px #222; }
+    .act-item[open] summary::after { content: "▲"; }
+    .act-item summary:hover .act-title { color: var(--coral); }
+    .act-item[open] summary { background: linear-gradient(90deg, var(--navy), var(--navy2)); color: #fff; }
+    .act-item[open] .act-mark { background: #fff; color: var(--navy); }
+    .act-item[open] .act-when { color: #dfe6ff; }
+    .act-mark { font-family: var(--mono); font-size: 1.15rem; text-align: center; background: var(--navy); color: #fff; padding: 2px 4px; white-space: nowrap; overflow: hidden; }
+    .act-title { font-family: var(--mono); font-size: 1.35rem; line-height: 1.1; }
+    .act-when { font-family: var(--mono); font-size: 1rem; color: #444; text-align: right; }
+    .act-body { background: #fff; margin: 0 8px 8px; padding: 14px 16px; box-shadow: var(--sunken); color: #222; }
+    .act-body p + p, .act-body .jam-list p { margin-top: 10px; }
+    .act-body a { color: var(--navy); text-decoration: underline; }
+    @media (max-width: 640px) {
+      .act-item summary { grid-template-columns: 44px 1fr 22px; row-gap: 2px; }
+      .act-when { grid-column: 2; grid-row: 2; text-align: left; font-size: .9rem; }
+    }
   </style>
 </head>
 <body>
 
   <div id="progress"></div>
-
-  <!-- Rubik's cube: scrambled at the top of the page, solved step by step as you scroll -->
-  <div class="cube-dock" aria-hidden="true">
-    <div class="cube-view"><div class="cube" id="cube"></div></div>
-  </div>
 
   <nav id="nav">
     <div class="wrap">
@@ -378,8 +531,6 @@
 
   <!-- ================= HERO ================= -->
   <header class="hero blueprint" id="hero">
-    <canvas id="orbs" aria-hidden="true"></canvas>
-    <div class="orb-hint" aria-hidden="true">Click to drop an orb · drag to fling it</div>
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <div class="status reveal from-up"><span class="dot"></span> Junior · Gettysburg Area High School</div>
@@ -440,7 +591,7 @@
           place I visit.
         </p>
         <div class="stats">
-          <div class="stat"><b>4</b><small>Projects launched</small></div>
+          <div class="stat"><b>5</b><small>Projects launched</small></div>
           <div class="stat"><b>12</b><small>Activities &amp; teams</small></div>
           <div class="stat"><b>2</b><small>Jobs held</small></div>
         </div>
@@ -574,158 +725,135 @@
           <span class="proj-link">Play Tiny Henry on itch.io</span>
         </div>
       </a>
+      <a href="https://wezzet.com" target="_blank" rel="noopener" class="proj chamfer reveal from-left">
+        <div class="proj-index">
+          <span class="fig">● Live</span>
+          <span class="num">Wez<br>zet</span>
+        </div>
+        <div class="proj-body">
+          <span class="proj-kicker"><span class="dot"></span> AI chat · Agent chat room · Free tools</span>
+          <h3>Wezzet.com</h3>
+          <p>
+            A free site with AI chat that can search the web live, an open chat room where AI agents talk to each
+            other and split up work, and hundreds of free online tools. No sign-up needed.
+          </p>
+          <p style="margin-top:10px">
+            Wezzet also plugs straight into AI assistants, giving them everyday tools like notes that persist between
+            chats, a web page reader, a calculator, DNS and URL checks, and the AI Comms board.
+          </p>
+          <div class="proj-tags">
+            <span>AI</span><span>Web Development</span><span>Agent Chat Room</span><span>Online Tools</span>
+          </div>
+          <span class="proj-link">Visit Wezzet.com</span>
+        </div>
+      </a>
       <!-- To add a project: copy the <a class="proj ..."> block above and change "01" to "02", the link, title, and text. -->
     </div>
   </section>
 
   <!-- ================= ACTIVITIES ================= -->
-  <!-- The section pins in place while you scroll; each activity slides in from the right and out to the left.
-       To add an activity: copy one <article class="act-slide"> block and change the text. The scroll length adjusts itself. -->
+  <!-- To add an activity: copy one <details class="act-item"> block into the right group and change the text. -->
   <section id="activities">
-    <div class="act-track" id="act-track">
-      <div class="act-stage">
-        <div class="act-bg" aria-hidden="true"><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span></div>
-        <div class="act-head wrap">
-          <div class="sec-head">Activities</div>
-          <h2>Beyond the <span class="accent">classroom.</span></h2>
-        </div>
-        <div class="act-slides">
-          <article class="act-slide">
-            <div class="wrap"><div class="slide-inner">
-              <span class="slide-group">STEM &amp; Academics</span>
-              <span class="slide-mark">TSA</span>
-              <h3>Technology Student Association</h3>
-              <span class="slide-when">Member</span>
-              <p>Through TSA, I take part in STEM-focused activities and competitive events that challenge me to apply engineering and technology concepts, work as part of a team, and present my work with confidence.</p>
-            </div></div>
-          </article>
-          <article class="act-slide">
-            <div class="wrap"><div class="slide-inner">
-              <span class="slide-group">STEM &amp; Academics</span>
-              <span class="slide-mark">∑</span>
-              <h3>National Math Honors Society</h3>
-              <span class="slide-when">Member</span>
-              <p>Recognized for achievement in mathematics, with a commitment to academic excellence and sharing a love of math with others.</p>
-            </div></div>
-          </article>
-          <article class="act-slide">
-            <div class="wrap"><div class="slide-inner">
-              <span class="slide-group">STEM &amp; Academics</span>
-              <span class="slide-mark">π</span>
-              <h3>Math Club</h3>
-              <span class="slide-when">Member</span>
-              <p>Working through challenging problems with peers and building the analytical foundation that engineering depends on.</p>
-            </div></div>
-          </article>
-          <article class="act-slide">
-            <div class="wrap"><div class="slide-inner">
-              <span class="slide-group">STEM &amp; Academics</span>
-              <span class="slide-mark">♞</span>
-              <h3>Chess Club</h3>
-              <span class="slide-when">2023 – 2026 · Grades 8–10</span>
-              <p>Three years of strategic play, sharpening my ability to plan ahead, recognize patterns, and stay patient under pressure.</p>
-            </div></div>
-          </article>
-          <article class="act-slide">
-            <div class="wrap"><div class="slide-inner">
-              <span class="slide-group">STEM &amp; Academics</span>
-              <span class="slide-mark">&lt;/&gt;</span>
-              <h3>Independent Building</h3>
-              <span class="slide-when">Ongoing</span>
-              <p>Teaching myself web development by building and maintaining my own sites, GAHSgames.com and Shortutorial.com, and developing the Roblox game Altus.</p>
-            </div></div>
-          </article>
-          <article class="act-slide">
-            <div class="wrap"><div class="slide-inner">
-              <span class="slide-group">STEM &amp; Academics</span>
-              <span class="slide-mark">#</span>
-              <h3>Hack Club</h3>
-              <span class="slide-when">Member · Global nonprofit</span>
-              <p>A member of <a href="https://hackclub.com" target="_blank" rel="noopener">Hack Club</a>, a global nonprofit community of more than 50,000 teenagers who design and build technical projects, from software and hardware to games. Through Hack Club, I collaborate with young builders around the world, share my work for feedback, and take part in coding events and game jams.</p>
-            </div></div>
-          </article>
-          <article class="act-slide dense">
-            <div class="wrap"><div class="slide-inner">
-              <span class="slide-group">STEM &amp; Academics</span>
-              <span class="slide-mark">JAM</span>
-              <h3>Game Jams</h3>
-              <span class="slide-when">Competitor · 2026 jams</span>
-              <p>I compete in game jams: time-limited challenges where developers design, build, and ship a complete game around a theme revealed at the start.</p>
+    <div class="wrap reveal from-up">
+      <div class="sec-head">Activities</div>
+      <h2>Beyond the <span class="accent">classroom.</span></h2>
+      <p class="lead">Click any activity to open it.</p>
+      <h3 class="act-group">STEM &amp; Academics</h3>
+      <div class="act-list">
+        <details class="act-item">
+          <summary><span class="act-mark">TSA</span><span class="act-title">Technology Student Association</span><span class="act-when">Member</span></summary>
+          <div class="act-body">
+            <p>Through TSA, I take part in STEM-focused activities and competitive events that challenge me to apply engineering and technology concepts, work as part of a team, and present my work with confidence.</p>
+          </div>
+        </details>
+        <details class="act-item">
+          <summary><span class="act-mark">∑</span><span class="act-title">National Math Honors Society</span><span class="act-when">Member</span></summary>
+          <div class="act-body">
+            <p>Recognized for achievement in mathematics, with a commitment to academic excellence and sharing a love of math with others.</p>
+          </div>
+        </details>
+        <details class="act-item">
+          <summary><span class="act-mark">π</span><span class="act-title">Math Club</span><span class="act-when">Member</span></summary>
+          <div class="act-body">
+            <p>Working through challenging problems with peers and building the analytical foundation that engineering depends on.</p>
+          </div>
+        </details>
+        <details class="act-item">
+          <summary><span class="act-mark">♞</span><span class="act-title">Chess Club</span><span class="act-when">2023 – 2026 · Grades 8–10</span></summary>
+          <div class="act-body">
+            <p>Three years of strategic play, sharpening my ability to plan ahead, recognize patterns, and stay patient under pressure.</p>
+          </div>
+        </details>
+        <details class="act-item">
+          <summary><span class="act-mark">&lt;/&gt;</span><span class="act-title">Independent Building</span><span class="act-when">Ongoing</span></summary>
+          <div class="act-body">
+            <p>Teaching myself web development by building and maintaining my own sites, GAHSgames.com and Shortutorial.com, and developing the Roblox game Altus.</p>
+          </div>
+        </details>
+        <details class="act-item">
+          <summary><span class="act-mark">#</span><span class="act-title">Hack Club</span><span class="act-when">Member · Global nonprofit</span></summary>
+          <div class="act-body">
+            <p>A member of <a href="https://hackclub.com" target="_blank" rel="noopener">Hack Club</a>, a global nonprofit community of more than 50,000 teenagers who design and build technical projects, from software and hardware to games. Through Hack Club, I collaborate with young builders around the world, share my work for feedback, and take part in coding events and game jams.</p>
+          </div>
+        </details>
+        <details class="act-item">
+          <summary><span class="act-mark">JAM</span><span class="act-title">Game Jams</span><span class="act-when">Competitor · 2026 jams</span></summary>
+          <div class="act-body">
+            <p>I compete in game jams: time-limited challenges where developers design, build, and ship a complete game around a theme revealed at the start.</p>
               <div class="jam-list">
                 <p><strong>Jame Gam Game Jam</strong> · Hack Club · October 22–25, 2026<br>A three-day online jam for teen developers worldwide, building solo or in teams around a surprise theme. My submission: <a href="https://dinglebonglewongle.itch.io/tiny-henry" target="_blank" rel="noopener">Tiny Henry</a>, a 3D adventure game made with <a href="https://noahpuckett.me" target="_blank" rel="noopener">Noah Puckett</a>.</p>
                 <p><strong>Hack Club Haven</strong> · November 14–15, 2026<br>Hack Club's official global game jam, held in more than 200 cities, where teams build a game over two days with workshops and mentors.</p>
               </div>
-            </div></div>
-          </article>
-          <article class="act-slide">
-            <div class="wrap"><div class="slide-inner">
-              <span class="slide-group">Speaking, Service &amp; Culture</span>
-              <span class="slide-mark">“ ”</span>
-              <h3>Speech and Debate</h3>
-              <span class="slide-when">2025 – 2026</span>
-              <p>Competed for the full school year as a sophomore, researching topics, building arguments, and speaking with confidence under time pressure.</p>
-            </div></div>
-          </article>
-          <article class="act-slide">
-            <div class="wrap"><div class="slide-inner">
-              <span class="slide-group">Speaking, Service &amp; Culture</span>
-              <span class="slide-mark">§</span>
-              <h3>Mock Trial</h3>
-              <span class="slide-when">Team member</span>
-              <p>Prepared and argued cases as part of a team, learning to think on my feet, analyze evidence, and present a clear, persuasive case.</p>
-            </div></div>
-          </article>
-          <article class="act-slide">
-            <div class="wrap"><div class="slide-inner">
-              <span class="slide-group">Speaking, Service &amp; Culture</span>
-              <span class="slide-mark">K</span>
-              <h3>Key Club</h3>
-              <span class="slide-when">2025 – 2026</span>
-              <p>Gave back to my school and community through Key Club, a student-led service organization focused on volunteering and leadership.</p>
-            </div></div>
-          </article>
-          <article class="act-slide">
-            <div class="wrap"><div class="slide-inner">
-              <span class="slide-group">Speaking, Service &amp; Culture</span>
-              <span class="slide-mark">Fr</span>
-              <h3>French Club</h3>
-              <span class="slide-when">Member</span>
-              <p>Exploring the French language and francophone culture. I speak French well, and alongside my near-fluent Spanish, it helps me connect with people beyond English.</p>
-            </div></div>
-          </article>
-          <article class="act-slide">
-            <div class="wrap"><div class="slide-inner">
-              <span class="slide-group">Athletics</span>
-              <span class="slide-mark">15–0</span>
-              <h3>Varsity Tennis</h3>
-              <span class="slide-when">Gettysburg Area HS</span>
-              <p>Competing on the varsity team, building discipline, focus, and resilience through practice, matches, and supporting my teammates.</p>
-            </div></div>
-          </article>
-          <article class="act-slide">
-            <div class="wrap"><div class="slide-inner">
-              <span class="slide-group">Athletics</span>
-              <span class="slide-mark">PICL</span>
-              <h3>Mountain Biking · PICL</h3>
-              <span class="slide-when">2020 – 2025 · Six seasons, ages 10–15</span>
-              <p>Raced in the Pennsylvania Interscholastic Cycling League, building endurance, grit, and the drive to push through demanding courses.</p>
-            </div></div>
-          </article>
-          <article class="act-slide">
-            <div class="wrap"><div class="slide-inner">
-              <span class="slide-group">Athletics</span>
-              <span class="slide-mark">7v7</span>
-              <h3>Ultimate Frisbee Club</h3>
-              <span class="slide-when">2025 – Present</span>
-              <p>Playing a self-refereed sport built on teamwork, communication, and sportsmanship.</p>
-            </div></div>
-          </article>
-        </div>
-        <div class="act-foot wrap">
-          <span class="act-count" id="act-count"><b>01</b> / 12</span>
-          <span class="act-spacer"></span>
-          <span class="act-hint">Keep scrolling ↓</span>
-        </div>
+          </div>
+        </details>
+      </div>
+      <h3 class="act-group">Speaking, Service &amp; Culture</h3>
+      <div class="act-list">
+        <details class="act-item">
+          <summary><span class="act-mark">“ ”</span><span class="act-title">Speech and Debate</span><span class="act-when">2025 – 2026</span></summary>
+          <div class="act-body">
+            <p>Competed for the full school year as a sophomore, researching topics, building arguments, and speaking with confidence under time pressure.</p>
+          </div>
+        </details>
+        <details class="act-item">
+          <summary><span class="act-mark">§</span><span class="act-title">Mock Trial</span><span class="act-when">Team member</span></summary>
+          <div class="act-body">
+            <p>Prepared and argued cases as part of a team, learning to think on my feet, analyze evidence, and present a clear, persuasive case.</p>
+          </div>
+        </details>
+        <details class="act-item">
+          <summary><span class="act-mark">K</span><span class="act-title">Key Club</span><span class="act-when">2025 – 2026</span></summary>
+          <div class="act-body">
+            <p>Gave back to my school and community through Key Club, a student-led service organization focused on volunteering and leadership.</p>
+          </div>
+        </details>
+        <details class="act-item">
+          <summary><span class="act-mark">Fr</span><span class="act-title">French Club</span><span class="act-when">Member</span></summary>
+          <div class="act-body">
+            <p>Exploring the French language and francophone culture. I speak French well, and alongside my near-fluent Spanish, it helps me connect with people beyond English.</p>
+          </div>
+        </details>
+      </div>
+      <h3 class="act-group">Athletics</h3>
+      <div class="act-list">
+        <details class="act-item">
+          <summary><span class="act-mark">15–0</span><span class="act-title">Varsity Tennis</span><span class="act-when">Gettysburg Area HS</span></summary>
+          <div class="act-body">
+            <p>Competing on the varsity team, building discipline, focus, and resilience through practice, matches, and supporting my teammates.</p>
+          </div>
+        </details>
+        <details class="act-item">
+          <summary><span class="act-mark">PICL</span><span class="act-title">Mountain Biking · PICL</span><span class="act-when">2020 – 2025 · Six seasons, ages 10–15</span></summary>
+          <div class="act-body">
+            <p>Raced in the Pennsylvania Interscholastic Cycling League, building endurance, grit, and the drive to push through demanding courses.</p>
+          </div>
+        </details>
+        <details class="act-item">
+          <summary><span class="act-mark">7v7</span><span class="act-title">Ultimate Frisbee Club</span><span class="act-when">2025 – Present</span></summary>
+          <div class="act-body">
+            <p>Playing a self-refereed sport built on teamwork, communication, and sportsmanship.</p>
+          </div>
+        </details>
       </div>
     </div>
   </section>
@@ -1047,6 +1175,10 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/></svg>
           <span class="name">Facebook</span><span class="handle">Ezra Kerney</span>
         </a>
+        <a class="link-row" href="https://www.depop.com/ezrakern/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7V6a5 5 0 0 1 10 0v1h3l1 15H3L4 7h3zm2 0h6V6a3 3 0 0 0-6 0v1zm-3.1 2-.8 11h13.8l-.8-11H5.9z"/></svg>
+          <span class="name">Depop</span><span class="handle">Shop my stuff · @ezrakern</span>
+        </a>
         <a class="link-row" href="https://gahsgames.com" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 6H3a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4-3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
           <span class="name">GAHSgames.com</span><span class="handle">My project</span>
@@ -1086,212 +1218,6 @@
     }, { threshold: 0.12 });
     document.querySelectorAll(".reveal").forEach(r => io.observe(r));
 
-    // ===== Jelly orb playground in the hero =====
-    (() => {
-      const hero = document.getElementById("hero");
-      const canvas = document.getElementById("orbs");
-      const hint = document.querySelector(".orb-hint");
-      const ctx = canvas.getContext("2d");
-      let W = 0, H = 0, dpr = 1;
-      const orbs = [];
-      const MAX = 45;
-      const N = 20;                                   // points around each jelly blob
-      const ANG = Array.from({ length: N }, (_, i) => (i / N) * Math.PI * 2);
-      const COS = ANG.map(Math.cos), SIN = ANG.map(Math.sin);
-
-      // Random green or blue, in different shades
-      function color() {
-        const blue = Math.random() < .5;
-        const h = blue ? 195 + Math.random() * 35 : 125 + Math.random() * 35;
-        const s = 35 + Math.random() * 30;
-        const l = 36 + Math.random() * 24;
-        return `hsl(${h.toFixed(0)}, ${s.toFixed(0)}%, ${l.toFixed(0)}%)`;
-      }
-
-      function resize() {
-        const r = hero.getBoundingClientRect();
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
-        W = r.width; H = r.height;
-        canvas.width = W * dpr; canvas.height = H * dpr;
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      }
-
-      function makeOrb(x, y, r) {
-        return {
-          x, y, r: r || 22 + Math.random() * 30,
-          vx: (Math.random() - .5) * 2, vy: (Math.random() - .5) * 2,
-          pvx: 0, pvy: 0,
-          off: new Float32Array(N), ov: new Float32Array(N),   // jelly surface offsets + their speeds
-          c: color(), born: performance.now()
-        };
-      }
-
-      // Push the side of the jelly that faces direction (nx, ny) inward
-      function dent(o, nx, ny, amount) {
-        for (let i = 0; i < N; i++) {
-          const d = COS[i] * nx + SIN[i] * ny;
-          if (d > 0) o.ov[i] -= amount * d * d;
-        }
-      }
-
-      // Cursor orb: follows the mouse and pushes others around
-      const cursor = { x: -999, y: -999, px: -999, py: -999, vx: 0, vy: 0, r: 24, c: color(), alpha: 0, active: false };
-      let grabbed = null, downAt = null;
-
-      const local = e => { const r = hero.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
-      const isUI = e => e.target.closest("a, button, nav");
-
-      hero.addEventListener("pointermove", e => {
-        const p = local(e);
-        if (!cursor.active) { cursor.x = cursor.px = p.x; cursor.y = cursor.py = p.y; cursor.c = color(); }
-        cursor.active = !isUI(e);
-        cursor.tx = p.x; cursor.ty = p.y;
-      });
-      hero.addEventListener("pointerleave", () => { cursor.active = false; grabbed = null; });
-      hero.addEventListener("pointerdown", e => {
-        if (isUI(e)) return;
-        const p = local(e);
-        downAt = p;
-        grabbed = orbs.find(o => Math.hypot(o.x - p.x, o.y - p.y) < o.r);
-        if (grabbed) e.preventDefault();
-      });
-      window.addEventListener("pointerup", e => {
-        if (downAt && !grabbed && !isUI(e)) {
-          const p = local(e);
-          if (Math.hypot(p.x - downAt.x, p.y - downAt.y) < 8) {
-            orbs.push(makeOrb(p.x, p.y));
-            if (orbs.length > MAX) orbs.shift();
-            if (hint) hint.style.opacity = 0;
-          }
-        }
-        grabbed = null; downAt = null;
-      });
-
-      function step() {
-        if (cursor.tx !== undefined) {
-          cursor.x += (cursor.tx - cursor.x) * .35;
-          cursor.y += (cursor.ty - cursor.y) * .35;
-        }
-        cursor.vx = cursor.x - cursor.px; cursor.vy = cursor.y - cursor.py;
-        cursor.px = cursor.x; cursor.py = cursor.y;
-        cursor.alpha += ((cursor.active ? 1 : 0) - cursor.alpha) * .12;
-
-        // move bodies
-        for (const o of orbs) {
-          if (o === grabbed && cursor.tx !== undefined) {
-            o.vx += (cursor.tx - o.x) * .18; o.vy += (cursor.ty - o.y) * .18;
-            o.vx *= .62; o.vy *= .62;
-          }
-          o.vx += (Math.random() - .5) * .015; o.vy += (Math.random() - .5) * .015;
-          o.vx *= .988; o.vy *= .988;
-          o.x += o.vx; o.y += o.vy;
-
-          const k = .1;
-          if (o.x < o.r)     { o.vx += (o.r - o.x) * k;        dent(o, -1, 0, (o.r - o.x) * .35); }
-          if (o.x > W - o.r) { o.vx -= (o.x - (W - o.r)) * k;  dent(o, 1, 0, (o.x - (W - o.r)) * .35); }
-          if (o.y < o.r)     { o.vy += (o.r - o.y) * k;        dent(o, 0, -1, (o.r - o.y) * .35); }
-          if (o.y > H - o.r) { o.vy -= (o.y - (H - o.r)) * k;  dent(o, 0, 1, (o.y - (H - o.r)) * .35); }
-        }
-
-        // soft collisions between orbs
-        for (let i = 0; i < orbs.length; i++) {
-          const a = orbs[i];
-          for (let j = i + 1; j < orbs.length; j++) {
-            const b = orbs[j];
-            const dx = b.x - a.x, dy = b.y - a.y;
-            const d = Math.hypot(dx, dy) || .001, min = a.r + b.r;
-            if (d < min) {
-              const nx = dx / d, ny = dy / d, over = min - d;
-              const ma = a.r * a.r, mb = b.r * b.r, tot = ma + mb;
-              const rel = (b.vx - a.vx) * nx + (b.vy - a.vy) * ny;
-              const f = over * .08 - (rel < 0 ? rel * .05 : 0);
-              a.vx -= nx * f * (mb / tot) * 2; a.vy -= ny * f * (mb / tot) * 2;
-              b.vx += nx * f * (ma / tot) * 2; b.vy += ny * f * (ma / tot) * 2;
-              dent(a, nx, ny, over * .25);
-              dent(b, -nx, -ny, over * .25);
-            }
-          }
-          if (cursor.alpha > .3 && a !== grabbed) {
-            const dx = a.x - cursor.x, dy = a.y - cursor.y;
-            const d = Math.hypot(dx, dy) || .001, min = a.r + cursor.r;
-            if (d < min) {
-              const nx = dx / d, ny = dy / d, over = min - d;
-              a.vx += nx * over * .12 + cursor.vx * .05;
-              a.vy += ny * over * .12 + cursor.vy * .05;
-              dent(a, -nx, -ny, over * .3);
-            }
-          }
-        }
-
-        // jelly surface: inertia, springs, ripples, volume
-        for (const o of orbs) {
-          const ax = o.vx - o.pvx, ay = o.vy - o.pvy;      // how hard the body just accelerated
-          o.pvx = o.vx; o.pvy = o.vy;
-          const lim = o.r * .45;
-          let mean = 0;
-          for (let i = 0; i < N; i++) {
-            // surface lags behind the body, so the leading side squashes and the trailing side bulges
-            o.ov[i] -= (COS[i] * ax + SIN[i] * ay) * 1.6;
-            const prev = o.off[(i + N - 1) % N], next = o.off[(i + 1) % N];
-            o.ov[i] += -o.off[i] * .04 + (prev + next - 2 * o.off[i]) * .2;
-            o.ov[i] *= .955;                                   // low damping = lots of wobble
-          }
-          for (let i = 0; i < N; i++) {
-            o.off[i] += o.ov[i];
-            if (o.off[i] > lim) o.off[i] = lim;
-            if (o.off[i] < -lim) o.off[i] = -lim;
-            mean += o.off[i];
-          }
-          mean /= N;
-          for (let i = 0; i < N; i++) o.off[i] -= mean * .6;   // keep roughly the same size, so dents bulge elsewhere
-        }
-      }
-
-      // Smooth closed blob through the surface points
-      function blobPath(x, y, r, off, scale) {
-        const px = [], py = [];
-        for (let i = 0; i < N; i++) {
-          const rr = (r + (off ? off[i] : 0)) * scale;
-          px.push(x + COS[i] * rr); py.push(y + SIN[i] * rr);
-        }
-        ctx.beginPath();
-        ctx.moveTo((px[N - 1] + px[0]) / 2, (py[N - 1] + py[0]) / 2);
-        for (let i = 0; i < N; i++) {
-          const n = (i + 1) % N;
-          ctx.quadraticCurveTo(px[i], py[i], (px[i] + px[n]) / 2, (py[i] + py[n]) / 2);
-        }
-        ctx.closePath();
-      }
-
-      function draw(now) {
-        ctx.clearRect(0, 0, W, H);
-        for (const o of orbs) {
-          const g = Math.max(0, Math.min((now - o.born) / 260, 1));
-          const scale = 1 - Math.pow(1 - g, 3);                  // pop-in
-          if (scale <= 0) continue;
-          ctx.fillStyle = o.c;
-          ctx.globalAlpha = .9;
-          blobPath(o.x, o.y, o.r, o.off, scale);
-          ctx.fill();
-        }
-        if (cursor.alpha > .02) {
-          ctx.globalAlpha = cursor.alpha * .55;
-          ctx.fillStyle = cursor.c;
-          blobPath(cursor.x, cursor.y, cursor.r, null, 1);
-          ctx.fill();
-        }
-        ctx.globalAlpha = 1;
-      }
-
-      function loop(now) { step(); draw(now); requestAnimationFrame(loop); }
-
-      if (hint && matchMedia("(pointer: coarse)").matches) hint.textContent = "Tap to drop an orb · drag to fling it";
-      resize();
-      window.addEventListener("resize", resize);
-      for (let i = 0; i < 7; i++) orbs.push(makeOrb(W * (.55 + Math.random() * .4), H * (.2 + Math.random() * .6)));
-      requestAnimationFrame(loop);
-    })();
-
     // Contact links (built here instead of in the HTML to keep them away from spam scrapers)
     (() => {
       const user = ["ezra", "kerney"].join(""), domain = ["gmail", "com"].join(".");
@@ -1300,204 +1226,6 @@
       const e = document.getElementById("email-link"), t = document.getElementById("text-link");
       e.href = "mailto:" + email; document.getElementById("email-text").textContent = email;
       t.href = "sms:+1" + digits.join(""); document.getElementById("text-text").textContent = "(" + digits[0] + ") " + digits[1] + "-" + digits[2];
-    })();
-
-    // ===== Activities: pinned scroll, slides in from the right and out to the left =====
-    (() => {
-      const track = document.getElementById("act-track");
-      const slides = [...track.querySelectorAll(".act-slide")];
-      const count = document.getElementById("act-count");
-      const hint = track.querySelector(".act-hint");
-      const n = slides.length;
-      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      const PER = 1;                                          // screens of scrolling per activity
-      const pad = n2 => String(n2).padStart(2, "0");
-      const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-      const stage = track.querySelector(".act-slides");
-      // Shrink any slide whose text is taller than the space between the heading and the counter
-      function fit() {
-        slides.forEach(el => {
-          const inner = el.querySelector(".slide-inner");
-          inner.style.transform = "";
-          const s = Math.min(1, (stage.clientHeight - 16) / inner.offsetHeight);
-          inner.style.transformOrigin = "left center";
-          inner.style.transform = s < 1 ? `scale(${s})` : "";
-        });
-      }
-      function size() { track.style.height = (n * PER + 1) * window.innerHeight + "px"; fit(); update(); }
-      function update() {
-        const r = track.getBoundingClientRect();
-        const total = track.offsetHeight - window.innerHeight;
-        const prog = Math.min(Math.max(-r.top / total, 0), 1);   // 0..1 across the section
-        const pos = prog * n;                                     // which activity we're on, fractional
-        slides.forEach((el, i) => {
-          // d: <0 waiting on the right · 0..1 this activity's turn · >1 gone to the left
-          const d = pos - i;
-          const A = 0.18, IN = 0.32, OUT = 0.68;  // incoming starts a bit early and outgoing leaves a bit late, so they cross over
-          let x = 0, o = 1;
-          if (i > 0 && d < IN) {
-            if (d <= -A)                       { x = 100; o = 0; }
-            else                               { const t = ease((d + A) / (IN + A)); x = 100 * (1 - t); o = t; }
-          } else if (i < n - 1 && d > OUT) {
-            if (d >= 1 + A)                    { x = -100; o = 0; }
-            else                               { const t = ease((d - OUT) / (1 + A - OUT)); x = -100 * t; o = 1 - t; }
-          }
-          el.style.transform = `translate3d(${x}vw,0,0)`;
-          el.style.opacity = o;
-          el.style.visibility = o < .01 ? "hidden" : "visible";
-        });
-        const cur = Math.min(n, Math.floor(pos) + 1);
-        count.innerHTML = `<b>${pad(cur)}</b> / ${pad(n)}`;
-        hint.style.opacity = prog > .97 ? 0 : 1;
-      }
-      window.addEventListener("scroll", update, { passive: true });
-      window.addEventListener("resize", size);
-      size();
-      if (document.fonts) document.fonts.ready.then(size);
-
-      // Mouse wheel / trackpad: one activity per scroll gesture, with a smooth animated transition,
-      // so a fast flick doesn't fly past several at once. Touch and scrollbar dragging stay normal.
-      const DURATION = 1000;
-      let animating = false, animStart = 0, curTarget = -1, token = 0, lastWheel = 0, lastAbs = 0, acc = 0;
-      const total = () => track.offsetHeight - window.innerHeight;
-      const top = () => track.getBoundingClientRect().top + window.scrollY;
-      const yFor = i => top() + ((i + 0.5) / n) * total();          // scroll position where activity i is centered
-      const easeIO = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-      const easeOut = t => 1 - Math.pow(1 - t, 3);
-      function tweenTo(i, retarget) {
-        const y0 = window.scrollY, dy = yFor(i) - y0, t0 = performance.now(), my = ++token;
-        const curve = retarget ? easeOut : easeIO;                   // keep moving smoothly if redirected mid-slide
-        animating = true; animStart = t0; curTarget = i;
-        (function frame(now) {
-          if (my !== token) return;
-          const t = Math.min((now - t0) / DURATION, 1);
-          window.scrollTo({ top: y0 + dy * curve(t), behavior: "instant" });
-          if (t < 1) requestAnimationFrame(frame);
-          else { animating = false; acc = 0; }
-        })(t0);
-      }
-      window.addEventListener("wheel", e => {
-        const r = track.getBoundingClientRect();
-        if (r.top > 1 || r.bottom < window.innerHeight - 1) return;    // only while the section is pinned
-        const dir = Math.sign(e.deltaY);
-        if (!dir) return;
-        const now = performance.now(), abs = Math.abs(e.deltaY);
-        // A new scroll gesture = a short pause since the last wheel event, or the scroll speeding up again.
-        // Trackpad "momentum" arrives as a steady stream of shrinking events, which is ignored.
-        const fresh = now - lastWheel > 90 || abs > lastAbs * 1.6 + 4;
-        lastWheel = now; lastAbs = abs;
-        const pos = Math.min(Math.max(-r.top / total(), 0), 1) * n;
-        const i = Math.min(n - 1, Math.max(0, Math.floor(pos)));
-        const from = animating ? curTarget : i;
-        // let the page scroll normally to leave the section from either end
-        if (!animating && dir > 0 && i === n - 1 && pos >= n - 0.5 - 0.02) return;
-        if (!animating && dir < 0 && i === 0 && pos <= 0.5 + 0.02) return;
-        e.preventDefault();
-        if (animating) {
-          // allow the next move once the current slide is mostly across, if it's a new gesture
-          if (!fresh || now - animStart < DURATION * 0.45) return;
-          const next = Math.min(n - 1, Math.max(0, from + dir));
-          if (next !== curTarget) tweenTo(next, true);
-          return;
-        }
-        if (!fresh && acc === 0) return;                             // tail of momentum from the last move
-        acc += e.deltaY;
-        if (Math.abs(acc) < 30) return;
-        acc = 0;
-        let target;
-        if (dir > 0) target = (i === 0 || pos >= i + 0.45) ? i + 1 : i;
-        else         target = (i === n - 1 || pos <= i + 0.55) ? i - 1 : i;
-        tweenTo(Math.min(n - 1, Math.max(0, target)), false);
-      }, { passive: false });
-    })();
-
-    // ===== Rubik's cube solved by scrolling =====
-    (() => {
-      const cubeEl = document.getElementById("cube");
-      const S = cubeEl.parentElement.clientWidth / 3.25;            // cubie size in px
-      cubeEl.style.setProperty("--s", (S * 0.94) + "px");
-      // Math frame: x right, y up, z toward viewer. Faces: U white, D yellow, F green, B blue, R red, L orange.
-      const COLORS = { R: "#9b4a4f", L: "#b07a4c", U: "#c9cfd3", D: "#bfa95a", F: "#4f8a66", B: "#4a6593" };   // muted tones
-      const MOVES = { R: [0, 1], L: [0, -1], U: [1, 1], D: [1, -1], F: [2, 1], B: [2, -1] };
-      const rot = (axis, a) => {                                      // rotation matrix about x/y/z
-        const c = Math.cos(a), s = Math.sin(a);
-        if (axis === 0) return [[1,0,0],[0,c,-s],[0,s,c]];
-        if (axis === 1) return [[c,0,s],[0,1,0],[-s,0,c]];
-        return [[c,-s,0],[s,c,0],[0,0,1]];
-      };
-      const mul = (A, B) => A.map((r, i) => B[0].map((_, j) => r[0]*B[0][j] + r[1]*B[1][j] + r[2]*B[2][j]));
-      const mv = (A, v) => A.map(r => r[0]*v[0] + r[1]*v[1] + r[2]*v[2]);
-      const I = [[1,0,0],[0,1,0],[0,0,1]];
-
-      // Build the 26 visible cubies
-      const cubies = [];
-      for (let x = -1; x <= 1; x++) for (let y = -1; y <= 1; y++) for (let z = -1; z <= 1; z++) {
-        if (!x && !y && !z) continue;
-        const el = document.createElement("div"); el.className = "cubie";
-        // [face key, outward normal check, css transform for the sticker]
-        const faces = [
-          ["R", x === 1,  "rotateY(90deg)"],  ["L", x === -1, "rotateY(-90deg)"],
-          ["U", y === 1,  "rotateX(90deg)"],  ["D", y === -1, "rotateX(-90deg)"],
-          ["F", z === 1,  "rotateY(0deg)"],   ["B", z === -1, "rotateY(180deg)"]
-        ];
-        for (const [k, on, t] of faces) {
-          const f = document.createElement("i");
-          f.style.transform = `${t} translateZ(${S / 2}px)`;
-          if (on) f.style.background = COLORS[k];
-          el.appendChild(f);
-        }
-        cubeEl.appendChild(el);
-        cubies.push({ el, home: [x, y, z] });
-      }
-
-      // Random scramble (no same face twice in a row), then the solution is the scramble undone in reverse
-      const faceKeys = Object.keys(MOVES), scramble = [];
-      while (scramble.length < 20) {
-        const f = faceKeys[Math.floor(Math.random() * 6)];
-        if (scramble.length && scramble[scramble.length - 1][0] === f) continue;
-        scramble.push([f, Math.random() < .5 ? 1 : -1]);
-      }
-      const solution = scramble.slice().reverse().map(([f, d]) => [f, -d]);
-      const name = ([f, d]) => f + (d < 0 ? "'" : "");
-      // clockwise (seen from the face) = -90° about that face's outward axis
-      const angleOf = ([f, d]) => -d * MOVES[f][1] * Math.PI / 2;
-
-      function applyMove(state, move, a) {
-        const [axis, layer] = MOVES[move[0]], Rm = rot(axis, a);
-        return state.map(c => Math.round(c.p[axis]) === layer ? { p: mv(Rm, c.p), R: mul(Rm, c.R) } : c);
-      }
-      const solved = cubies.map(c => ({ p: c.home.slice(), R: I }));
-      let scrambled = solved;
-      for (const m of scramble) scrambled = applyMove(scrambled, m, angleOf(m));
-      const snap = st => st.map(c => ({ p: c.p.map(Math.round), R: c.R.map(r => r.map(Math.round)) }));
-      scrambled = snap(scrambled);
-      // precompute the state after each solution step
-      const steps = [scrambled];
-      for (const m of solution) steps.push(snap(applyMove(steps[steps.length - 1], m, angleOf(m))));
-
-      function render(state) {
-        state.forEach((c, i) => {
-          const R = c.R;   // convert math frame (y up) to CSS (y down) by flipping y
-          const M = [[R[0][0], -R[0][1], R[0][2]], [-R[1][0], R[1][1], -R[1][2]], [R[2][0], -R[2][1], R[2][2]]];
-          const t = [c.p[0] * S, -c.p[1] * S, c.p[2] * S];
-          cubies[i].el.style.transform = `matrix3d(${M[0][0]},${M[1][0]},${M[2][0]},0,${M[0][1]},${M[1][1]},${M[2][1]},0,${M[0][2]},${M[1][2]},${M[2][2]},0,${t[0]},${t[1]},${t[2]},1)`;
-        });
-      }
-      const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-      let last = -1;
-      function update() {
-        const h = document.documentElement.scrollHeight - window.innerHeight;
-        const prog = h > 0 ? Math.min(Math.max(window.scrollY / h, 0), 1) : 0;
-        const t = Math.min(Math.max((prog - 0.02) / 0.94, 0), 1) * solution.length;   // small holds at top and bottom
-        if (t === last) return; last = t;
-        const k = Math.min(Math.floor(t), solution.length), f = t - k;
-        if (k >= solution.length) { render(steps[k]); return; }
-        const m = solution[k];
-        render(f > 0 ? applyMove(steps[k], m, angleOf(m) * ease(f)) : steps[k]);
-      }
-      window.addEventListener("scroll", update, { passive: true });
-      window.addEventListener("resize", () => { last = -1; update(); });
-      update();
     })();
 
     // ===== Travel map =====
