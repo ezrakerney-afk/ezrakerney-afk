@@ -32,13 +32,15 @@
       "https://www.linkedin.com/in/ezra-kerney-0b678b38a/",
       "https://www.instagram.com/ezra_iso/",
       "https://gahsgames.com",
-      "https://shortutorial.com"
+      "https://shortutorial.com",
+      "https://wezzet.com",
+      "https://www.depop.com/ezrakern/"
     ]
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     /* ===== Colors ===== */
     :root {
@@ -257,14 +259,6 @@
       .act-foot { display: none; }
     }
 
-    /* ===== Scroll-driven Rubik's cube (corner) ===== */
-    .cube-dock { position: fixed; right: 34px; bottom: 30px; z-index: 40; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 22px; }
-    .cube-view { width: 58px; height: 58px; perspective: 400px; opacity: .85; }
-    .cube { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transform: rotateX(-30deg) rotateY(-40deg); }
-    .cubie { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-    .cubie i { position: absolute; width: var(--s); height: var(--s); left: calc(var(--s) / -2); top: calc(var(--s) / -2);
-      background: #0b1219; border-radius: 3px; backface-visibility: hidden; box-shadow: inset 0 0 0 1px #0b1219; }
-    @media (max-width: 860px) { .cube-dock { right: 22px; bottom: 20px; } .cube-view { width: 44px; height: 44px; } }
 
     /* ===== TRAVEL ===== */
     #travel { background: var(--bg-2); }
@@ -351,16 +345,111 @@
       .reveal { opacity: 1; transform: none; }
       html { scroll-behavior: auto; }
     }
+
+    /* ===== RETRO WINDOWS THEME (overrides everything above) ===== */
+    :root {
+      --bg: #008080; --bg-2: #008080; --panel: #c0c0c0;
+      --line: #808080; --line-strong: #404040;
+      --text: #000; --muted: #222; --green: #000080; --teal: #6a0d83; --blue: #000080;
+      --mono: "VT323", "Courier New", monospace; --display: "VT323", "Courier New", monospace;
+      --tb: #000080; --tb2: #1084d0;
+      --raised: inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+      --sunken: inset 2px 2px #808080, inset -2px -2px #fff;
+      --drop: 7px 7px 0 rgba(0,0,0,.45);
+    }
+    body { background: #008080; font-family: Tahoma, Verdana, "Segoe UI", sans-serif; }
+    .blueprint, .hero, #projects, #contact { background: transparent !important; background-image: none !important; }
+    .blueprint::before, .blueprint::after, .hero::before { display: none !important; }
+    .chamfer, .hero { clip-path: none !important; }
+    section { padding: 56px 0; }
+    .hero { min-height: auto; padding: 110px 0 40px; }
+
+    /* windows */
+    section:not(#activities) > .wrap, .hero-copy, .act-stage > .act-head.wrap, .slide-inner {
+      background: #c0c0c0; border: 2px solid; border-color: #fff #000 #000 #fff;
+      box-shadow: var(--raised), var(--drop); padding: 0 22px 26px;
+    }
+    section:not(#activities) > .wrap { width: calc(100% - 32px); max-width: 1100px; }
+    .act-stage > .act-head.wrap { width: calc(100% - 32px); max-width: 1100px; margin-top: 76px; padding-top: 0; }
+    .hero-copy { padding-top: 16px; }
+    .hero-copy::before { content: "ezra_kerney.exe"; display: flex; margin: -16px -22px 18px; }
+    .sec-head, .hero-copy::before {
+      align-items: center; margin: 0 -22px 20px; padding: 4px 6px 4px 10px;
+      background: linear-gradient(90deg, var(--tb), var(--tb2)); color: #fff;
+      font-family: var(--mono); font-size: 1.3rem; letter-spacing: .05em; text-transform: none;
+    }
+    .sec-head b { color: #fff; }
+    .sec-head::after {
+      content: "✕"; flex: none; width: 22px; height: 20px; margin-left: auto; display: grid; place-items: center;
+      background: #c0c0c0; color: #000; font-size: .85rem; box-shadow: var(--raised), 0 0 0 1px #000;
+    }
+    #about { --tb: #000080; --tb2: #1084d0; }
+    #projects { --tb: #6a0d83; --tb2: #c13bd6; }
+    #activities { --tb: #0b7a2a; --tb2: #3bc45f; }
+    #travel { --tb: #b85c00; --tb2: #ffa320; }
+    #experience { --tb: #a00018; --tb2: #e2405a; }
+    #contact { --tb: #006c80; --tb2: #19b6c9; }
+    .hero-copy { --tb: #000080; --tb2: #e2405a; }
+
+    h1, h2, h3 { font-family: var(--display) !important; letter-spacing: 0 !important; font-weight: 400 !important; }
+    h1 { font-size: clamp(3.4rem, 9vw, 6rem); }
+    h2 { font-size: clamp(2.3rem, 5vw, 3.4rem); }
+    .outline { color: #000080 !important; -webkit-text-stroke: 0 !important; }
+    .lead a { color: #000080; text-decoration: underline; }
+
+    /* buttons */
+    .btn, .btn-primary, .btn-ghost { background: #c0c0c0; color: #000; border: 2px solid; border-color: #fff #000 #000 #fff;
+      box-shadow: var(--raised); border-radius: 0; padding: 8px 18px; }
+    .btn:hover, .btn-primary:hover, .btn-ghost:hover { background: #c0c0c0; color: #000; border-color: #fff #000 #000 #fff; transform: none; }
+    .btn:active { border-color: #000 #fff #fff #000; box-shadow: var(--sunken); }
+
+    /* nav = taskbar */
+    nav, nav.scrolled { background: #c0c0c0; border-bottom: 2px solid #000; box-shadow: inset 0 -2px #808080, inset 0 2px #fff; backdrop-filter: none; }
+    .nav-links a { color: #000; }
+    .nav-links a:hover { color: #000080; text-decoration: underline; }
+    .logo .badge { border-color: #000080; color: #000080; }
+    #progress { background: #000080; height: 4px; }
+
+    /* stats + spec sheet */
+    .stat b { color: #000080; -webkit-text-stroke: 0; }
+    .stat + .stat { border-left: 2px groove #fff; }
+    .spec { background: #fff; border: 0; box-shadow: var(--sunken); }
+    .spec-title { border-bottom-color: #000080; }
+
+    /* project cards = little windows */
+    .proj { background: #dcdcdc; border: 2px solid; border-color: #fff #000 #000 #fff; box-shadow: var(--raised), var(--drop); }
+    .proj:hover { transform: translate(-2px,-2px); box-shadow: var(--raised), 10px 10px 0 rgba(0,0,0,.45); }
+    .proj-index { background: #000080; color: #fff; }
+    .proj:nth-of-type(2) .proj-index { background: #a00018; }
+    .proj:nth-of-type(3) .proj-index { background: #0b7a2a; }
+    .proj:nth-of-type(4) .proj-index { background: #b85c00; }
+    .proj:nth-of-type(5) .proj-index { background: #6a0d83; }
+    .proj-body p { color: #222; }
+    .proj-tags { color: #000080; }
+    .proj-tags span { border: 1px solid #808080; background: #fff; margin: 0 4px 4px 0; }
+
+    /* activities */
+    .act-bg { background: #008080 !important; }
+    .act-bg .ring { display: none; }
+    .act-stage > .act-head.wrap { padding-bottom: 14px; }
+    .act-stage > .act-head.wrap .sec-head { margin-bottom: 10px; }
+    .slide-inner { padding: 22px 26px; }
+
+    /* experience + contact */
+    .job .role { color: #fff; background: #000080; }
+    .job::before { background: #c0c0c0; }
+    .links { border-top: 2px groove #fff; }
+    .link-row { border-bottom: 2px groove #fff; }
+    .link-row svg { fill: #000080; }
+    .link-row .handle { color: #222; }
+    .link-row:hover { color: #000080; background: #fff; }
+    footer { background: #c0c0c0; color: #000; border-top: 2px solid #fff; }
+    ::selection { background: #000080; color: #fff; }
   </style>
 </head>
 <body>
 
   <div id="progress"></div>
-
-  <!-- Rubik's cube: scrambled at the top of the page, solved step by step as you scroll -->
-  <div class="cube-dock" aria-hidden="true">
-    <div class="cube-view"><div class="cube" id="cube"></div></div>
-  </div>
 
   <nav id="nav">
     <div class="wrap">
@@ -440,7 +529,7 @@
           place I visit.
         </p>
         <div class="stats">
-          <div class="stat"><b>4</b><small>Projects launched</small></div>
+          <div class="stat"><b>5</b><small>Projects launched</small></div>
           <div class="stat"><b>12</b><small>Activities &amp; teams</small></div>
           <div class="stat"><b>2</b><small>Jobs held</small></div>
         </div>
@@ -572,6 +661,28 @@
             <span>Game Development</span><span>3D Adventure</span><span>Game Jam</span><span>Team Project</span><span>Windows</span>
           </div>
           <span class="proj-link">Play Tiny Henry on itch.io</span>
+        </div>
+      </a>
+      <a href="https://wezzet.com" target="_blank" rel="noopener" class="proj chamfer reveal from-left">
+        <div class="proj-index">
+          <span class="fig">● Live</span>
+          <span class="num">Wez<br>zet</span>
+        </div>
+        <div class="proj-body">
+          <span class="proj-kicker"><span class="dot"></span> AI chat · Agent chat room · Free tools</span>
+          <h3>Wezzet.com</h3>
+          <p>
+            A free site with AI chat that can search the web live, an open chat room where AI agents talk to each
+            other and split up work, and hundreds of free online tools. No sign-up needed.
+          </p>
+          <p style="margin-top:10px">
+            Wezzet also plugs straight into AI assistants, giving them everyday tools like notes that persist between
+            chats, a web page reader, a calculator, DNS and URL checks, and the AI Comms board.
+          </p>
+          <div class="proj-tags">
+            <span>AI</span><span>Web Development</span><span>Agent Chat Room</span><span>Online Tools</span>
+          </div>
+          <span class="proj-link">Visit Wezzet.com</span>
         </div>
       </a>
       <!-- To add a project: copy the <a class="proj ..."> block above and change "01" to "02", the link, title, and text. -->
@@ -1047,6 +1158,10 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/></svg>
           <span class="name">Facebook</span><span class="handle">Ezra Kerney</span>
         </a>
+        <a class="link-row" href="https://www.depop.com/ezrakern/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7V6a5 5 0 0 1 10 0v1h3l1 15H3L4 7h3zm2 0h6V6a3 3 0 0 0-6 0v1zm-3.1 2-.8 11h13.8l-.8-11H5.9z"/></svg>
+          <span class="name">Depop</span><span class="handle">Shop my stuff · @ezrakern</span>
+        </a>
         <a class="link-row" href="https://gahsgames.com" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 6H3a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4-3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
           <span class="name">GAHSgames.com</span><span class="handle">My project</span>
@@ -1409,95 +1524,6 @@
         else         target = (i === n - 1 || pos <= i + 0.55) ? i - 1 : i;
         tweenTo(Math.min(n - 1, Math.max(0, target)), false);
       }, { passive: false });
-    })();
-
-    // ===== Rubik's cube solved by scrolling =====
-    (() => {
-      const cubeEl = document.getElementById("cube");
-      const S = cubeEl.parentElement.clientWidth / 3.25;            // cubie size in px
-      cubeEl.style.setProperty("--s", (S * 0.94) + "px");
-      // Math frame: x right, y up, z toward viewer. Faces: U white, D yellow, F green, B blue, R red, L orange.
-      const COLORS = { R: "#9b4a4f", L: "#b07a4c", U: "#c9cfd3", D: "#bfa95a", F: "#4f8a66", B: "#4a6593" };   // muted tones
-      const MOVES = { R: [0, 1], L: [0, -1], U: [1, 1], D: [1, -1], F: [2, 1], B: [2, -1] };
-      const rot = (axis, a) => {                                      // rotation matrix about x/y/z
-        const c = Math.cos(a), s = Math.sin(a);
-        if (axis === 0) return [[1,0,0],[0,c,-s],[0,s,c]];
-        if (axis === 1) return [[c,0,s],[0,1,0],[-s,0,c]];
-        return [[c,-s,0],[s,c,0],[0,0,1]];
-      };
-      const mul = (A, B) => A.map((r, i) => B[0].map((_, j) => r[0]*B[0][j] + r[1]*B[1][j] + r[2]*B[2][j]));
-      const mv = (A, v) => A.map(r => r[0]*v[0] + r[1]*v[1] + r[2]*v[2]);
-      const I = [[1,0,0],[0,1,0],[0,0,1]];
-
-      // Build the 26 visible cubies
-      const cubies = [];
-      for (let x = -1; x <= 1; x++) for (let y = -1; y <= 1; y++) for (let z = -1; z <= 1; z++) {
-        if (!x && !y && !z) continue;
-        const el = document.createElement("div"); el.className = "cubie";
-        // [face key, outward normal check, css transform for the sticker]
-        const faces = [
-          ["R", x === 1,  "rotateY(90deg)"],  ["L", x === -1, "rotateY(-90deg)"],
-          ["U", y === 1,  "rotateX(90deg)"],  ["D", y === -1, "rotateX(-90deg)"],
-          ["F", z === 1,  "rotateY(0deg)"],   ["B", z === -1, "rotateY(180deg)"]
-        ];
-        for (const [k, on, t] of faces) {
-          const f = document.createElement("i");
-          f.style.transform = `${t} translateZ(${S / 2}px)`;
-          if (on) f.style.background = COLORS[k];
-          el.appendChild(f);
-        }
-        cubeEl.appendChild(el);
-        cubies.push({ el, home: [x, y, z] });
-      }
-
-      // Random scramble (no same face twice in a row), then the solution is the scramble undone in reverse
-      const faceKeys = Object.keys(MOVES), scramble = [];
-      while (scramble.length < 20) {
-        const f = faceKeys[Math.floor(Math.random() * 6)];
-        if (scramble.length && scramble[scramble.length - 1][0] === f) continue;
-        scramble.push([f, Math.random() < .5 ? 1 : -1]);
-      }
-      const solution = scramble.slice().reverse().map(([f, d]) => [f, -d]);
-      const name = ([f, d]) => f + (d < 0 ? "'" : "");
-      // clockwise (seen from the face) = -90° about that face's outward axis
-      const angleOf = ([f, d]) => -d * MOVES[f][1] * Math.PI / 2;
-
-      function applyMove(state, move, a) {
-        const [axis, layer] = MOVES[move[0]], Rm = rot(axis, a);
-        return state.map(c => Math.round(c.p[axis]) === layer ? { p: mv(Rm, c.p), R: mul(Rm, c.R) } : c);
-      }
-      const solved = cubies.map(c => ({ p: c.home.slice(), R: I }));
-      let scrambled = solved;
-      for (const m of scramble) scrambled = applyMove(scrambled, m, angleOf(m));
-      const snap = st => st.map(c => ({ p: c.p.map(Math.round), R: c.R.map(r => r.map(Math.round)) }));
-      scrambled = snap(scrambled);
-      // precompute the state after each solution step
-      const steps = [scrambled];
-      for (const m of solution) steps.push(snap(applyMove(steps[steps.length - 1], m, angleOf(m))));
-
-      function render(state) {
-        state.forEach((c, i) => {
-          const R = c.R;   // convert math frame (y up) to CSS (y down) by flipping y
-          const M = [[R[0][0], -R[0][1], R[0][2]], [-R[1][0], R[1][1], -R[1][2]], [R[2][0], -R[2][1], R[2][2]]];
-          const t = [c.p[0] * S, -c.p[1] * S, c.p[2] * S];
-          cubies[i].el.style.transform = `matrix3d(${M[0][0]},${M[1][0]},${M[2][0]},0,${M[0][1]},${M[1][1]},${M[2][1]},0,${M[0][2]},${M[1][2]},${M[2][2]},0,${t[0]},${t[1]},${t[2]},1)`;
-        });
-      }
-      const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-      let last = -1;
-      function update() {
-        const h = document.documentElement.scrollHeight - window.innerHeight;
-        const prog = h > 0 ? Math.min(Math.max(window.scrollY / h, 0), 1) : 0;
-        const t = Math.min(Math.max((prog - 0.02) / 0.94, 0), 1) * solution.length;   // small holds at top and bottom
-        if (t === last) return; last = t;
-        const k = Math.min(Math.floor(t), solution.length), f = t - k;
-        if (k >= solution.length) { render(steps[k]); return; }
-        const m = solution[k];
-        render(f > 0 ? applyMove(steps[k], m, angleOf(m) * ease(f)) : steps[k]);
-      }
-      window.addEventListener("scroll", update, { passive: true });
-      window.addEventListener("resize", () => { last = -1; update(); });
-      update();
     })();
 
     // ===== Travel map =====
