@@ -4,886 +4,729 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ezra Kerney — Portfolio</title>
-  <meta name="description" content="Portfolio of Ezra Kerney, a 16-year-old junior at Gettysburg Area High School focused on engineering, creator of GAHSgames.com and the Roblox game Altus, member of TSA and the National Math Honors Society, and varsity tennis player.">
+  <meta name="description" content="Portfolio of Ezra Kerney, a junior at Gettysburg Area High School focused on engineering. Co-creator of Wezzet.com, creator of GAHSgames.com, Shortutorial.com and the Roblox game Altus, game jam developer, TSA member, and varsity tennis player.">
   <!-- Tab icon -->
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="favicon-48.png" sizes="48x48" type="image/png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <meta name="theme-color" content="#06121c">
+  <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
+  <link rel="icon" href="favicon-48.png?v=2" sizes="48x48" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+  <meta name="theme-color" content="#000080">
 
-  <!-- Search engines and link previews. Update the URL if your domain is different. -->
+  <!-- Search engines and link previews -->
   <link rel="canonical" href="https://ezrakerney.com/">
   <meta name="author" content="Ezra Kerney">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Ezra Kerney — Portfolio">
-  <meta property="og:description" content="Aspiring engineer at Gettysburg Area High School. Creator of GAHSgames.com, Shortutorial.com and the Roblox game Altus, TSA member, and varsity tennis player.">
+  <meta property="og:description" content="Aspiring engineer at Gettysburg Area High School. Co-creator of Wezzet.com, creator of GAHSgames.com, Shortutorial.com and the Roblox game Altus.">
   <meta property="og:url" content="https://ezrakerney.com/">
-  <meta property="og:image" content="https://ezrakerney.com/icon-192.png">
+  <meta property="og:image" content="https://ezrakerney.com/icon-192.png?v=2">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Ezra Kerney",
     "url": "https://ezrakerney.com/",
-    "description": "Aspiring engineer and student at Gettysburg Area High School, creator of GAHSgames.com.",
+    "description": "Aspiring engineer and student at Gettysburg Area High School. Co-creator of Wezzet.com and creator of GAHSgames.com, Shortutorial.com and the Roblox game Altus.",
     "affiliation": { "@type": "HighSchool", "name": "Gettysburg Area High School" },
     "knowsLanguage": ["English", "Spanish", "French"],
     "sameAs": [
       "https://www.linkedin.com/in/ezra-kerney-0b678b38a/",
       "https://www.instagram.com/ezra_iso/",
+      "https://wezzet.com",
       "https://gahsgames.com",
       "https://shortutorial.com",
-      "https://wezzet.com",
+      "https://dinglebonglewongle.itch.io",
       "https://www.depop.com/ezrakern/"
     ]
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
   <style>
-    /* ===== Colors ===== */
+    /* ============================================================
+       Classic desktop theme. One blue (#000080 to #1084d0, the
+       classic title-bar blue), plus the grays of the classic UI.
+       ============================================================ */
     :root {
-      --bg: #06121c;
-      --bg-2: #0a1c2b;
-      --panel: #0c2131;
-      --line: rgba(255,255,255,0.10);
-      --line-strong: rgba(255,255,255,0.22);
-      --text: #e8f1f5;
-      --muted: #93a8b6;
-      --green: #22c55e;
-      --teal: #14b8a6;
-      --blue: #3b82f6;
-      --mono: "JetBrains Mono", monospace;
-      --display: "Space Grotesk", sans-serif;
+      --desk: #2e5f94;          /* desktop */
+      --blue: #000080;          /* main color */
+      --blue2: #1084d0;         /* title-bar fade */
+      --face: #c0c0c0;          /* window gray */
+      --lite: #dfdfdf;
+      --shade: #808080;
+      --dark: #0a0a0a;
+      --paper: #ffffff;
+      --ink: #000000;
+      --muted: #3d3d3d;
+      --ui: Tahoma, Verdana, "Segoe UI", system-ui, sans-serif;
+      --pixel: "VT323", "Courier New", monospace;
+      --raised: inset -1px -1px var(--dark), inset 1px 1px var(--paper), inset -2px -2px var(--shade), inset 2px 2px var(--lite);
+      --sunken: inset -1px -1px var(--paper), inset 1px 1px var(--shade), inset -2px -2px var(--lite), inset 2px 2px var(--dark);
+      --taskbar-h: 42px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     body {
-      font-family: "Inter", system-ui, sans-serif;
-      background: var(--bg); color: var(--text);
-      line-height: 1.65; overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
+      font: 15px/1.6 var(--ui); color: var(--ink);
+      background: var(--desk);
+      padding-bottom: calc(var(--taskbar-h) + 8px);
+      overflow-x: hidden;
     }
-    a { color: inherit; text-decoration: none; }
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
-    .accent { color: var(--green); }
-    .mono { font-family: var(--mono); }
+    a { color: var(--blue); }
+    a:hover { color: var(--blue2); }
+    img, svg { display: block; }
+    ::selection { background: var(--blue); color: #fff; }
+    :focus-visible { outline: 1px dotted var(--ink); outline-offset: 2px; }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-    #progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--green); z-index: 100; }
+    main { max-width: 1060px; margin: 0 auto; padding: 28px 16px 8px; }
 
-    /* Blueprint grid used behind several sections */
-    .blueprint {
-      background-color: var(--bg);
-      background-image:
-        linear-gradient(rgba(59,130,246,.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(59,130,246,.07) 1px, transparent 1px),
-        linear-gradient(rgba(59,130,246,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(59,130,246,.035) 1px, transparent 1px);
-      background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+    /* ---------- Windows ---------- */
+    .win { background: var(--face); box-shadow: var(--raised); padding: 3px; margin-bottom: 28px; scroll-margin-top: 16px; }
+    .titlebar {
+      display: flex; align-items: center; gap: 6px; min-height: 26px; padding: 3px 3px 3px 5px;
+      background: linear-gradient(90deg, var(--blue), var(--blue2)); color: #fff;
     }
+    .titlebar svg { width: 16px; height: 16px; flex: none; }
+    .titlebar h2, .titlebar .t { flex: 1; min-width: 0; font-size: 14px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: .01em; }
+    .ctl { display: flex; gap: 2px; flex: none; }
+    .ctl span { width: 18px; height: 16px; background: var(--face); box-shadow: var(--raised); position: relative; }
+    .ctl span:last-child { margin-left: 2px; }
+    .ctl .min::after { content: ""; position: absolute; left: 4px; bottom: 4px; width: 7px; height: 2px; background: var(--ink); }
+    .ctl .max::after { content: ""; position: absolute; left: 4px; top: 3px; width: 9px; height: 8px; border: 1px solid var(--ink); border-top-width: 2px; }
+    .ctl .x::before, .ctl .x::after { content: ""; position: absolute; left: 4px; top: 7px; width: 9px; height: 2px; background: var(--ink); transform: rotate(45deg); }
+    .ctl .x::after { transform: rotate(-45deg); }
 
-    /* Corner "registration marks" instead of rounded boxes */
-    .marks { position: relative; }
-    .marks::before, .marks::after {
-      content: ""; position: absolute; width: 18px; height: 18px; pointer-events: none;
-      border-color: var(--teal); border-style: solid;
+    .bar { display: flex; align-items: center; gap: 8px; padding: 4px 6px 3px; font-size: 13px; border-bottom: 1px solid var(--shade); box-shadow: 0 1px var(--paper); }
+    .bar .field { flex: 1; min-width: 0; background: var(--paper); box-shadow: var(--sunken); padding: 3px 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .win-body { padding: 20px 22px 22px; }
+    .status-bar { display: flex; gap: 3px; padding: 2px 0 0; font-size: 12.5px; color: var(--muted); }
+    .status-bar span { box-shadow: inset 1px 1px var(--shade), inset -1px -1px var(--paper); padding: 2px 8px; }
+    .status-bar span:first-child { flex: 1; }
+
+    .lead { font-size: 16.5px; max-width: 68ch; margin-bottom: 18px; }
+    p + p { margin-top: 10px; }
+    h3 { font-size: 17px; line-height: 1.3; }
+    ul.dots { margin: 8px 0 0 18px; }
+    ul.dots li { margin: 3px 0; padding-left: 2px; }
+    ul.dots li::marker { color: var(--blue); }
+
+    /* Group boxes (etched frame with a label) */
+    .group { border: 1px solid var(--shade); box-shadow: inset 1px 1px var(--paper), 1px 1px var(--paper); padding: 16px 16px 16px; margin: 0; min-width: 0; }
+    .group > legend { padding: 0 5px; margin-left: -2px; font-weight: bold; font-size: 15px; display: flex; align-items: center; gap: 6px; }
+    .group > legend svg { width: 16px; height: 16px; }
+    .groups { display: grid; gap: 22px 18px; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-width: 96px; padding: 6px 16px; background: var(--face); color: var(--ink);
+      font: 14px var(--ui); text-decoration: none; box-shadow: var(--raised); border: 0; cursor: pointer;
     }
-    .marks::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
-    .marks::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+    .btn:hover { color: var(--ink); }
+    .btn:active { box-shadow: var(--sunken); transform: translate(1px, 1px); }
+    .btn.default { outline: 1px solid var(--ink); outline-offset: -1px; }
+    .btn svg { width: 16px; height: 16px; }
 
-    /* Chamfered (cut-corner) shape */
-    .chamfer { clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 28px 100%, 0 calc(100% - 28px)); }
-
-    /* ===== Nav ===== */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: background .3s, border-color .3s, transform .35s ease; border-bottom: 1px solid transparent; }
-    nav.nav-hidden { transform: translateY(-100%); }
-    nav.scrolled { background: rgba(6,18,28,0.6); backdrop-filter: blur(12px); border-color: var(--line); }
-    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-    .logo { font-family: var(--display); font-weight: 700; font-size: 1.15rem; display: flex; align-items: center; gap: 10px; }
-    .logo .badge {
-      width: 34px; height: 34px; display: grid; place-items: center; font-size: .85rem;
-      border: 2px solid var(--green); color: var(--green); transform: rotate(45deg);
-    }
-    .logo .badge span { transform: rotate(-45deg); }
-    .nav-links { display: flex; gap: 26px; list-style: none; }
-    .nav-links a { color: var(--muted); font-size: .92rem; font-weight: 500; transition: color .2s; }
-    .nav-links a:hover { color: var(--text); }
-
-    /* ===== Section headers: numbered, with a rule ===== */
-    section { position: relative; padding: 110px 0; overflow: hidden; }
-    .sec-head { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; font-family: var(--mono); font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); }
-    .sec-head b { color: var(--green); font-weight: 500; }
-    .sec-head::after { content: ""; flex: 1; height: 1px; background: var(--line-strong); }
-    h2 { font-family: var(--display); font-weight: 700; font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 18px; }
-    .lead { color: var(--muted); font-size: 1.08rem; max-width: 62ch; }
-
-    /* ===== Slide-in animations ===== */
-    .reveal { opacity: 0; transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
-    .from-left  { transform: translateX(-60px); }
-    .from-right { transform: translateX(60px); }
-    .from-up    { transform: translateY(50px); }
-    .reveal.show { opacity: 1; transform: none; }
-    .delay-1 { transition-delay: .1s; } .delay-2 { transition-delay: .2s; } .delay-3 { transition-delay: .3s; }
-
-    /* ===== HERO ===== */
-    .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 0 90px; position: relative; overflow: hidden;
-      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 60px), 0 100%); }
-    .hero::before { content: ""; position: absolute; width: 700px; height: 700px; right: -200px; top: -150px; border-radius: 50%;
-      background: var(--blue); filter: blur(140px); opacity: .14; z-index: 0; }
-    .hero-grid { display: block; width: 100%; }
-    .hero-copy { max-width: 640px; position: relative; z-index: 2; pointer-events: none; }
-    .hero-copy a, .hero-copy .btn { pointer-events: auto; }
-    #orbs { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; filter: blur(5px); touch-action: pan-y; }
-    .hero { cursor: crosshair; }
-    .hero a { cursor: pointer; }
-    .orb-hint { position: absolute; right: 160px; bottom: 84px; z-index: 2; font-family: var(--mono); font-size: .75rem; color: var(--muted);
-      border: 1px solid var(--line); padding: 6px 12px; background: rgba(6,18,28,.6); pointer-events: none; transition: opacity .6s; }
-    .status { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: .82rem; color: var(--muted);
-      border-left: 3px solid var(--green); padding: 4px 0 4px 12px; margin-bottom: 26px; }
-    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgba(34,197,94,.7); animation: pulse 2s infinite; }
-    @keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
-    h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.8rem, 7.5vw, 5.4rem); line-height: 1.02; letter-spacing: -0.035em; }
-    h1 .outline { color: transparent; -webkit-text-stroke: 1.5px var(--text); }
-    .typed-line { font-family: var(--mono); font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--teal); margin-top: 22px; min-height: 1.8em; }
-    .typed-line .cursor { display: inline-block; width: 10px; background: var(--green); animation: blink 1s steps(1) infinite; margin-left: 2px; }
-    @keyframes blink { 50% { opacity: 0; } }
-    .hero p.lead { margin-top: 16px; }
-    .hero p.lead a { color: var(--green); font-weight: 600; border-bottom: 1px dashed var(--green); }
-    .buttons { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
-    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 26px; font-weight: 600; font-size: .95rem; transition: transform .2s, background .2s, color .2s; }
-    .btn-primary { background: var(--green); color: #04121a;
-      clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%); }
-    .btn-primary:hover { transform: translateY(-3px); background: #3ddc76; }
-    .btn-ghost { border: 1px solid var(--line-strong); }
-    .btn-ghost:hover { border-color: var(--green); color: var(--green); transform: translateY(-3px); }
-
-
-    /* ===== Marquee ===== */
-    .marquee-wrap { overflow: hidden; margin-top: -40px; padding: 20px 0; position: relative; z-index: 3; }
-    .marquee { background: var(--green); color: #04121a; padding: 14px 0; overflow: hidden; transform: rotate(-1.5deg); margin: 0 -30px; }
-    .track { display: flex; gap: 40px; width: max-content; animation: slide 40s linear infinite; }
-    .track span { font-family: var(--display); font-weight: 700; font-size: 1.05rem; text-transform: uppercase; letter-spacing: .03em; white-space: nowrap; display: flex; align-items: center; gap: 40px; }
-    .track span::after { content: "✕"; font-size: .7rem; opacity: .6; }
-    @keyframes slide { to { transform: translateX(-50%); } }
-
-    /* ===== ABOUT ===== */
-    .about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 60px; align-items: start; }
-    .about-grid p + p { margin-top: 16px; }
-    .about-grid p { color: var(--muted); font-size: 1.04rem; }
-    .about-grid strong { color: var(--text); font-weight: 600; }
-    .stats { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 40px; border-top: 1px solid var(--line-strong); }
-    .stat { padding: 20px 18px 0 0; }
-    .stat + .stat { border-left: 1px solid var(--line); padding-left: 18px; }
-    .stat b { display: block; font-family: var(--display); font-size: 3rem; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px var(--green); }
-    .stat small { display: block; margin-top: 8px; font-family: var(--mono); color: var(--muted); font-size: .76rem; text-transform: uppercase; letter-spacing: .06em; }
-
-    /* Spec sheet */
-    .spec { background: var(--bg-2); border: 1px solid var(--line); padding: 26px 26px 18px; }
-    .spec-title { display: flex; justify-content: space-between; font-family: var(--mono); font-size: .75rem; color: var(--teal);
-      text-transform: uppercase; letter-spacing: .1em; padding-bottom: 14px; border-bottom: 2px solid var(--green); margin-bottom: 4px; }
-    .fact { display: grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 11px 0; border-bottom: 1px dotted var(--line-strong); font-size: .92rem; }
-    .fact:last-child { border-bottom: 0; }
-    .fact span:first-child { font-family: var(--mono); color: var(--muted); font-size: .76rem; text-transform: uppercase; letter-spacing: .05em; padding-top: 2px; }
-    .fact span:last-child { font-weight: 500; }
-
-    /* ===== PROJECTS ===== */
-    #projects { background: var(--bg-2); }
-    .proj { display: grid; grid-template-columns: 200px 1fr; margin-top: 48px; background: var(--panel); transition: transform .35s cubic-bezier(.2,.7,.2,1); }
-    .proj:hover { transform: translateY(-6px); }
-    .proj-index { display: flex; flex-direction: column; justify-content: space-between; padding: 32px; background: var(--green); color: #04121a; }
-    .proj-index .fig { font-family: var(--mono); font-size: .78rem; letter-spacing: .1em; }
-    .proj-index .num { font-family: var(--display); font-weight: 700; font-size: 2.2rem; line-height: 1; }
-    .proj-body { padding: 38px 44px 38px 40px; }
-    .proj-kicker { font-family: var(--mono); font-size: .78rem; color: var(--green); display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-    .proj-body h3 { font-family: var(--display); font-size: 1.9rem; margin-bottom: 10px; letter-spacing: -0.01em; }
-    .proj-body p { color: var(--muted); font-size: .98rem; max-width: 68ch; }
-    .proj-tags { display: flex; flex-wrap: wrap; gap: 0; margin-top: 20px; font-family: var(--mono); font-size: .78rem; color: #a8c8ff; }
-    .proj-tags span { padding: 4px 12px; border: 1px solid rgba(59,130,246,.4); margin: 0 -1px -1px 0; }
-    .proj-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; font-weight: 600; color: var(--green); }
-    .proj-link::after { content: "→"; transition: transform .2s; }
-    .proj:hover .proj-link::after { transform: translateX(6px); }
-
-    /* ===== ACTIVITIES: pinned horizontal scroll ===== */
-    #activities { padding: 0; overflow: visible; }
-    .act-track { position: relative; }                 /* height set by script: one screen per activity */
-    .act-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
-    .act-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none;
-      background-color: var(--bg);
-      background-image:
-        radial-gradient(circle at 82% 30%, rgba(59,130,246,.16), transparent 42%),
-        radial-gradient(circle at 18% 85%, rgba(34,197,94,.12), transparent 40%),
-        linear-gradient(rgba(59,130,246,.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(59,130,246,.06) 1px, transparent 1px);
-      background-size: auto, auto, 64px 64px, 64px 64px; }
-    .act-bg .ring { position: absolute; border: 1px solid rgba(255,255,255,.08); border-radius: 50%; }
-    .act-bg .r1 { width: 70vmin; height: 70vmin; right: -12vmin; top: 50%; transform: translateY(-50%); }
-    .act-bg .r2 { width: 46vmin; height: 46vmin; right: 0; top: 50%; transform: translateY(-50%); border-color: rgba(34,197,94,.18); }
-    .act-bg .r3 { width: 22vmin; height: 22vmin; right: 12vmin; top: 50%; transform: translateY(-50%); border-style: dashed; }
-    .act-stage > .wrap { width: 100%; }
-    .act-head { position: relative; z-index: 2; padding-top: 34px; }
-    .act-head h2 { margin-bottom: 0; }
-    .act-slides { position: relative; z-index: 2; flex: 1; }
-    .act-slide { position: absolute; inset: 0; display: flex; align-items: center; will-change: transform, opacity; opacity: 0; }
-    .act-slide .wrap { width: 100%; }
-    .slide-inner { max-width: 1060px; }
-    @media (min-width: 861px) { .act-slide h3 { white-space: nowrap; } }
-    .slide-group { display: inline-block; font-family: var(--mono); font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
-      color: var(--blue); border-top: 2px solid var(--blue); padding-top: 10px; margin-bottom: 18px; }
-    .slide-mark { display: block; font-family: var(--display); font-weight: 700; font-size: clamp(3.4rem, 9vw, 6.5rem); line-height: 1;
-      color: transparent; -webkit-text-stroke: 1.5px var(--green); margin-bottom: 14px; letter-spacing: -0.03em; }
-    .act-slide h3 { font-family: var(--display); font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.05; letter-spacing: -0.02em; }
-    .slide-when { display: block; font-family: var(--mono); font-size: .85rem; color: var(--teal); margin-top: 12px; }
-    .act-slide p { color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.15rem); margin-top: 18px; max-width: 58ch; }
-    /* Denser slide for activities with several entries (Game Jams) */
-    .act-slide.dense .slide-mark { font-size: clamp(2.6rem, 6vw, 4.2rem); margin-bottom: 8px; }
-    .jam-list { display: grid; gap: 14px 40px; margin-top: 20px; }
-    .act-slide .jam-list p { margin-top: 0; }
-    @media (min-width: 861px) { .jam-list { grid-template-columns: 1fr 1fr; max-width: 980px; } .act-slide .jam-list p { font-size: 1rem; max-width: none; } }
-    .act-foot { position: relative; z-index: 2; padding-bottom: 40px; display: flex; align-items: center; gap: 20px; }
-    .act-count { font-family: var(--mono); font-size: .85rem; color: var(--muted); min-width: 64px; }
-    .act-count b { color: var(--green); font-weight: 500; }
-    .act-spacer { flex: 1; }
-    .act-hint { font-family: var(--mono); font-size: .75rem; color: var(--muted); }
-    @media (max-width: 860px) {
-      .act-head { padding-top: 26px; }
-      .act-bg .r1 { right: -30vmin; } .act-bg .r2 { right: -16vmin; } .act-bg .r3 { display: none; }
-      .act-hint { display: none; }
-    }
-    /* No-motion fallback: plain stacked list */
-    @media (prefers-reduced-motion: reduce) {
-      .act-stage { position: relative; height: auto; overflow: visible; }
-      .act-slides { flex: none; }
-      .act-slide { position: relative; opacity: 1 !important; transform: none !important; padding: 28px 0; }
-      .act-foot { display: none; }
+    /* Pixel tiles used as icons for projects and activities */
+    .tile {
+      width: 52px; height: 52px; flex: none; display: grid; place-items: center;
+      background: var(--paper); box-shadow: var(--sunken);
+      font: 26px/1 var(--pixel); color: var(--blue); text-align: center;
     }
 
+    /* ---------- Desktop icons (wide screens) ---------- */
+    .desk-icons { display: none; }
+    @media (min-width: 1320px) {
+      .desk-icons { display: flex; flex-direction: column; gap: 14px; position: fixed; left: 14px; top: 22px; z-index: 5; }
+      .desk-icons a { width: 84px; display: flex; flex-direction: column; align-items: center; gap: 4px; color: #fff; text-decoration: none; font-size: 13px; text-align: center; }
+      .desk-icons svg { width: 34px; height: 34px; }
+      .desk-icons span { padding: 0 3px; text-shadow: 1px 1px 0 rgba(0,0,0,.45); }
+      .desk-icons a:hover span, .desk-icons a:focus-visible span { background: var(--blue); text-shadow: none; outline: 1px dotted #fff; }
+    }
 
-    /* ===== TRAVEL ===== */
-    #travel { background: var(--bg-2); }
-    .travel-grid { display: grid; grid-template-columns: 1fr 1.9fr; gap: 48px; align-items: start; margin-top: 8px; }
-    .travel-copy p { color: var(--muted); font-size: 1.02rem; }
-    .travel-copy p + p { margin-top: 14px; }
-    .travel-count { display: flex; align-items: baseline; gap: 12px; margin: 28px 0 16px; padding-top: 18px; border-top: 1px solid var(--line-strong); }
-    .travel-count b { font-family: var(--display); font-size: 3rem; line-height: 1; color: var(--green); }
-    .travel-count span { font-family: var(--mono); font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
-    .visited-list { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; }
-    .visited-list li { font-size: .82rem; padding: 4px 10px; border: 1px solid rgba(34,197,94,.35); color: #a7e9bf; background: rgba(34,197,94,.07); cursor: default; transition: background .2s; }
-    .visited-list li:hover, .visited-list li.hl { background: rgba(34,197,94,.22); }
-    .map-wrap { position: relative; border: 1px solid var(--line); background: var(--bg); padding: 14px; }
-    .world { width: 100%; height: auto; display: block; }
-    .world .sphere { fill: #081826; stroke: var(--line); stroke-width: .6; }
-    .world .countries path { fill: #1b3245; stroke: #0a1c2b; stroke-width: .5; transition: fill .25s; }
-    .world .countries path:hover { fill: #284a63; }
-    .world .countries path.visited { fill: var(--green); }
-    .world .countries path.visited:hover, .world .countries path.visited.hl { fill: #6ee79a; }
-    .world .pins circle { fill: var(--green); stroke: var(--bg); stroke-width: 1.2; pointer-events: none; }
-    .world .pins circle.ring { fill: none; stroke: var(--green); stroke-width: 1; opacity: .7; animation: ping 2.4s ease-out infinite; transform-box: fill-box; transform-origin: center; }
-    @keyframes ping { from { transform: scale(.6); opacity: .8; } to { transform: scale(2.4); opacity: 0; } }
-    .map-tip { position: absolute; pointer-events: none; font-family: var(--mono); font-size: .75rem; padding: 4px 9px; background: var(--text); color: var(--bg);
-      transform: translate(-50%, calc(-100% - 10px)); opacity: 0; transition: opacity .15s; white-space: nowrap; }
+    /* ---------- Welcome ---------- */
+    .welcome { display: grid; grid-template-columns: 1fr 190px; gap: 24px; }
+    .hello { font-size: 18px; color: var(--muted); }
+    .name { font: clamp(56px, 11vw, 96px)/.9 var(--pixel); color: var(--blue); margin: 2px 0 8px; letter-spacing: .01em; }
+    .name span { color: var(--ink); }
+    .tagline { font-weight: bold; font-size: 16px; margin-bottom: 12px; }
+    .tip { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; margin-top: 20px; padding: 14px 16px; background: #ffffe1; box-shadow: var(--sunken); }
+    .tip svg { width: 34px; height: 34px; }
+    .tip b { display: block; font-size: 15px; margin-bottom: 2px; }
+    .tip p { min-height: 3.2em; }
+    .side-btns { display: flex; flex-direction: column; gap: 8px; }
+    .side-btns .btn { justify-content: flex-start; width: 100%; }
+    .side-btns .tip-next { margin-top: auto; }
+
+    /* ---------- About ---------- */
+    .about { display: grid; grid-template-columns: 1fr 340px; gap: 28px; align-items: start; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
+    .stat { background: var(--paper); box-shadow: var(--sunken); padding: 10px 12px; }
+    .stat b { display: block; font: 40px/1 var(--pixel); color: var(--blue); }
+    .stat small { font-size: 13px; color: var(--muted); }
+    .props { background: var(--paper); box-shadow: var(--sunken); padding: 3px; font-size: 14px; }
+    .props div { display: grid; grid-template-columns: 96px 1fr; gap: 10px; padding: 5px 8px; }
+    .props div:nth-child(odd) { background: #f1f1f1; }
+    .props dt { color: var(--muted); }
+    .props dd { font-weight: bold; }
+
+    /* ---------- Projects ---------- */
+    .sub { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: bold; margin: 6px 0 12px; }
+    .sub::after { content: ""; flex: 1; height: 1px; background: var(--shade); box-shadow: 0 1px var(--paper); }
+    .sub + .projects { margin-bottom: 26px; }
+    .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .proj {
+      display: flex; flex-direction: column; gap: 10px; padding: 16px; color: var(--ink); text-decoration: none;
+      background: var(--face); box-shadow: var(--raised);
+    }
+    .proj:hover { color: var(--ink); }
+    .proj.wide { grid-column: 1 / -1; }
+    .proj-top { display: flex; gap: 14px; align-items: center; }
+    .proj h3 { display: inline; padding: 0 3px; margin-left: -3px; }
+    .proj:hover h3, .proj:focus-visible h3 { background: var(--blue); color: #fff; }
+    .meta { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .proj p { font-size: 14.5px; }
+    .proj ul.dots { font-size: 14px; margin-top: 0; }
+    .built { font-size: 13px; color: var(--muted); }
+    .built b { color: var(--ink); font-weight: normal; }
+    .count { display: inline-flex; align-items: baseline; gap: 8px; align-self: flex-start; background: var(--paper); box-shadow: var(--sunken); padding: 4px 12px; font-size: 13px; }
+    .count b { font: 26px/1 var(--pixel); color: var(--blue); }
+    .proj .open { margin-top: auto; align-self: flex-start; pointer-events: none; }
+    .proj:active .open { box-shadow: var(--sunken); }
+
+    /* ---------- Wezzet ---------- */
+    .wz-intro { display: grid; grid-template-columns: 1fr 300px; gap: 26px; align-items: start; margin-bottom: 24px; }
+    .wz-stats { display: grid; gap: 8px; }
+    .wz-stats .stat { display: flex; align-items: baseline; gap: 12px; }
+    .wz-stats .stat b { font-size: 34px; min-width: 64px; }
+    .wz-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .wz-grid .group p { font-size: 14.5px; }
+    .wz-grid .group ul.dots { font-size: 14px; }
+    .wz-grid .go { display: inline-block; margin-top: 10px; font-size: 14px; font-weight: bold; }
+    .wz-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+    /* ---------- Activities (tabs) ---------- */
+    .tabs { display: flex; flex-wrap: wrap; gap: 0; position: relative; z-index: 1; padding-left: 4px; }
+    .tabs button {
+      font: 14px var(--ui); color: var(--ink); background: var(--face); border: 0; cursor: pointer;
+      padding: 5px 14px 4px; margin-top: 3px;
+      box-shadow: inset 1px 1px var(--paper), inset -1px 0 var(--dark), inset -2px 0 var(--shade), inset 2px 2px var(--lite);
+    }
+    .tabs button[aria-selected="true"] { margin-top: 0; padding: 6px 16px 7px; margin-bottom: -2px; font-weight: bold; position: relative; }
+    .tab-panel { background: var(--face); box-shadow: var(--raised); padding: 8px 18px 10px; }
+    .js .tab-panel[hidden] { display: none; }
+    .no-js-head { display: none; }
+    html:not(.js) .tabs { display: none; }
+    html:not(.js) .no-js-head { display: block; font-weight: bold; padding-top: 12px; }
+    .acts { list-style: none; }
+    .act { display: grid; grid-template-columns: 52px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--shade); box-shadow: 0 1px var(--paper); }
+    .act:last-child { border-bottom: 0; box-shadow: none; }
+    .act .tile { font-size: 22px; }
+    .act-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 14px; margin-bottom: 3px; }
+    .act-head h3 { font-size: 16px; }
+    .act-head span { font-size: 13px; color: var(--muted); }
+    .act p { font-size: 14.5px; max-width: 76ch; }
+    .jams { display: grid; gap: 8px; margin-top: 10px; }
+    .jam { background: var(--paper); box-shadow: var(--sunken); padding: 9px 12px; font-size: 14px; }
+    .jam b { display: block; }
+    .jam small { color: var(--muted); font-size: 13px; }
+
+    /* ---------- Travel ---------- */
+    .travel { display: grid; grid-template-columns: 330px 1fr; gap: 26px; align-items: start; }
+    .travel .stat { margin: 16px 0 12px; display: flex; align-items: baseline; gap: 12px; }
+    .travel .stat b { font-size: 46px; }
+    .listbox { background: var(--paper); box-shadow: var(--sunken); padding: 4px; list-style: none; max-height: 240px; overflow: auto; font-size: 14px; }
+    .listbox li { padding: 2px 8px; cursor: default; }
+    .listbox li:hover, .listbox li.hl { background: var(--blue); color: #fff; }
+    .map-wrap { position: relative; background: var(--paper); box-shadow: var(--sunken); padding: 10px; }
+    .world { width: 100%; height: auto; }
+    .world .countries path { fill: #d4d4d4; stroke: var(--paper); stroke-width: .6; }
+    .world .countries path:hover { fill: #a9a9a9; }
+    .world .countries path.visited { fill: var(--blue); }
+    .world .countries path.visited:hover, .world .countries path.visited.hl { fill: var(--blue2); }
+    .world .pins circle { fill: var(--blue); stroke: var(--paper); stroke-width: 1.2; pointer-events: none; }
+    .map-tip { position: absolute; pointer-events: none; font-size: 12.5px; padding: 2px 6px; background: #ffffe1; color: var(--ink); border: 1px solid var(--ink); transform: translate(-50%, -150%); white-space: nowrap; opacity: 0; }
     .map-tip.show { opacity: 1; }
-    .map-legend { display: flex; gap: 18px; margin-top: 10px; font-family: var(--mono); font-size: .72rem; color: var(--muted); }
-    .map-legend i { display: inline-block; width: 10px; height: 10px; margin-right: 6px; vertical-align: -1px; }
+    .legend { display: flex; gap: 18px; margin-top: 8px; font-size: 13px; color: var(--muted); }
+    .legend i { display: inline-block; width: 11px; height: 11px; margin-right: 6px; vertical-align: -1px; border: 1px solid var(--shade); }
 
-    /* ===== EXPERIENCE ===== */
-    .jobs { margin-top: 52px; position: relative; padding-left: 40px; }
-    .jobs::before { content: ""; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 2px;
-      background: repeating-linear-gradient(var(--teal) 0 8px, transparent 8px 14px); opacity: .6; }
-    .job { position: relative; padding-bottom: 44px; }
-    .job:last-child { padding-bottom: 0; }
-    .job::before { content: ""; position: absolute; left: -38px; top: 8px; width: 14px; height: 14px; background: var(--bg); border: 2px solid var(--green); transform: rotate(45deg); }
-    .job-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
-    .job h3 { font-family: var(--display); font-size: 1.5rem; }
-    .job .role { font-family: var(--mono); font-size: .82rem; color: var(--bg); background: var(--blue); padding: 2px 10px; }
-    .job ul { list-style: none; color: var(--muted); font-size: .97rem; margin-top: 12px; max-width: 70ch; }
-    .job li { padding-left: 22px; position: relative; margin-top: 6px; }
-    .job li::before { content: "—"; position: absolute; left: 0; color: var(--teal); }
+    /* ---------- Experience ---------- */
+    .jobs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .jobs ul.dots { font-size: 14.5px; margin-top: 0; }
 
-    /* ===== CONTACT ===== */
-    #contact { background: var(--bg-2); }
-    .links { margin-top: 44px; border-top: 1px solid var(--line-strong); }
-    .link-row { display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 18px; padding: 22px 6px; border-bottom: 1px solid var(--line);
-      transition: padding-left .25s, color .25s; }
-    .link-row svg { width: 22px; height: 22px; fill: var(--teal); }
-    .link-row .name { font-family: var(--display); font-size: clamp(1.3rem, 3vw, 1.9rem); font-weight: 600; }
-    .link-row .handle { font-family: var(--mono); font-size: .82rem; color: var(--muted); display: flex; align-items: center; gap: 14px; }
-    .link-row .handle::after { content: "↗"; font-size: 1.3rem; color: var(--green); transition: transform .25s; }
-    .link-row:hover { padding-left: 20px; color: var(--green); }
-    .link-row:hover .handle::after { transform: translate(4px,-4px); }
-
-    footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted); font-size: .8rem; font-family: var(--mono); background: var(--bg); }
-    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-
-    /* ===== Mobile ===== */
-    @media (max-width: 860px) {
-      .travel-grid { grid-template-columns: 1fr; gap: 28px; }
-      section { padding: 80px 0; }
-      .nav-links { gap: 14px; }
-      .nav-links li.hide-sm { display: none; }
-      .about-grid { grid-template-columns: 1fr; }
-      .orb-hint { right: auto; left: 20px; bottom: 150px; }
-      .proj { grid-template-columns: 1fr; }
-      .proj-index { flex-direction: row; align-items: flex-end; padding: 20px 24px; }
-      .proj-index .num { font-size: 1.8rem; }
-      .proj-body { padding: 28px 24px; }
-      .from-left, .from-right { transform: translateY(40px); }
+    /* ---------- Contact ---------- */
+    .links { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+    .link {
+      display: grid; grid-template-columns: 28px 1fr; gap: 0 12px; align-items: center;
+      padding: 10px 14px; background: var(--face); box-shadow: var(--raised); color: var(--ink); text-decoration: none;
     }
-    @media (max-width: 520px) {
-      .stats { grid-template-columns: 1fr; }
-      .stat + .stat { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); margin-top: 16px; }
-      .fact { grid-template-columns: 1fr; gap: 2px; }
-      .logo-name { display: none; }
-      .nav-links a::before { content: none; }
-      .link-row { grid-template-columns: 30px 1fr; }
-      .link-row .handle { grid-column: 2; }
+    .link:hover { color: var(--ink); }
+    .link:hover .lname, .link:focus-visible .lname { background: var(--blue); color: #fff; }
+    .link:active { box-shadow: var(--sunken); }
+    .link svg { width: 24px; height: 24px; grid-row: span 2; fill: var(--blue); }
+    .lname { font-weight: bold; justify-self: start; padding: 0 3px; margin-left: -3px; }
+    .lhandle { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+
+    footer { text-align: center; color: #fff; font-size: 13px; padding: 4px 16px 18px; text-shadow: 1px 1px 0 rgba(0,0,0,.35); }
+
+    /* ---------- Taskbar + Start menu ---------- */
+    .taskbar {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; height: var(--taskbar-h);
+      display: flex; align-items: center; gap: 4px; padding: 4px 4px 3px;
+      background: var(--face); box-shadow: inset 0 1px var(--lite), inset 0 2px var(--paper);
     }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation: none !important; transition: none !important; }
-      .reveal { opacity: 1; transform: none; }
-      html { scroll-behavior: auto; }
+    .start { font-weight: bold; min-width: 0; padding: 4px 10px 4px 6px; height: 32px; gap: 6px; flex: none; }
+    .start[aria-expanded="true"] { box-shadow: var(--sunken); }
+    .start .ek { font: 24px/1 var(--pixel); color: var(--blue); letter-spacing: .02em; margin-top: -2px; }
+    .sep { width: 2px; height: 30px; margin: 0 2px; box-shadow: inset 1px 0 var(--shade), inset -1px 0 var(--paper); flex: none; }
+    .tasks { display: flex; gap: 3px; flex: 1; min-width: 0; overflow: hidden; list-style: none; }
+    .tasks a {
+      display: flex; align-items: center; gap: 6px; height: 32px; min-width: 0; max-width: 150px; flex: 1 1 0;
+      padding: 0 8px; background: var(--face); box-shadow: var(--raised); color: var(--ink); text-decoration: none; font-size: 13px;
     }
-
-    /* ===== RETRO WINDOWS THEME (overrides everything above) ===== */
-    :root {
-      --bg: #008080; --bg-2: #008080; --panel: #c0c0c0;
-      --line: #808080; --line-strong: #404040;
-      --text: #000; --muted: #222; --green: #000080; --teal: #6a0d83; --blue: #000080;
-      --mono: "VT323", "Courier New", monospace; --display: "VT323", "Courier New", monospace;
-      --tb: #000080; --tb2: #1084d0;
-      --raised: inset -2px -2px #808080, inset 2px 2px #dfdfdf;
-      --sunken: inset 2px 2px #808080, inset -2px -2px #fff;
-      --drop: 7px 7px 0 rgba(0,0,0,.45);
+    .tasks a span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .tasks a svg { width: 16px; height: 16px; flex: none; }
+    .tasks a.on {
+      box-shadow: var(--sunken); font-weight: bold;
+      background-color: #e8e8e8;
+      background-image: repeating-conic-gradient(var(--paper) 0 25%, transparent 0 50%);
+      background-size: 2px 2px;
     }
-    body { background: #008080; font-family: Tahoma, Verdana, "Segoe UI", sans-serif; }
-    .blueprint, .hero, #projects, #contact { background: transparent !important; background-image: none !important; }
-    .blueprint::before, .blueprint::after, .hero::before { display: none !important; }
-    .chamfer, .hero { clip-path: none !important; }
-    section { padding: 56px 0; }
-    .hero { min-height: auto; padding: 110px 0 40px; }
+    .tasks li { display: flex; flex: 1 1 0; min-width: 0; max-width: 150px; }
+    .tasks li a { flex: 1; }
+    .tray { flex: none; height: 32px; display: flex; align-items: center; padding: 0 12px; font-size: 13px; box-shadow: inset 1px 1px var(--shade), inset -1px -1px var(--paper); }
 
-    /* windows */
-    section:not(#activities) > .wrap, .hero-copy, .act-stage > .act-head.wrap, .slide-inner {
-      background: #c0c0c0; border: 2px solid; border-color: #fff #000 #000 #fff;
-      box-shadow: var(--raised), var(--drop); padding: 0 22px 26px;
+    .start-menu {
+      position: fixed; left: 4px; bottom: calc(var(--taskbar-h) - 2px); z-index: 60;
+      display: flex; background: var(--face); box-shadow: var(--raised); padding: 3px; min-width: 230px;
     }
-    section:not(#activities) > .wrap { width: calc(100% - 32px); max-width: 1100px; }
-    .act-stage > .act-head.wrap { width: calc(100% - 32px); max-width: 1100px; margin-top: 76px; padding-top: 0; }
-    .hero-copy { padding-top: 16px; }
-    .hero-copy::before { content: "ezra_kerney.exe"; display: flex; margin: -16px -22px 18px; }
-    .sec-head, .hero-copy::before {
-      align-items: center; margin: 0 -22px 20px; padding: 4px 6px 4px 10px;
-      background: linear-gradient(90deg, var(--tb), var(--tb2)); color: #fff;
-      font-family: var(--mono); font-size: 1.3rem; letter-spacing: .05em; text-transform: none;
+    .start-menu[hidden] { display: none; }
+    .start-menu .stripe {
+      width: 28px; background: linear-gradient(0deg, var(--blue), var(--blue2)); color: #fff;
+      writing-mode: vertical-rl; transform: rotate(180deg); font-weight: bold; font-size: 15px; padding: 10px 0 0; letter-spacing: .02em;
     }
-    .sec-head b { color: #fff; }
-    .sec-head::after {
-      content: "✕"; flex: none; width: 22px; height: 20px; margin-left: auto; display: grid; place-items: center;
-      background: #c0c0c0; color: #000; font-size: .85rem; box-shadow: var(--raised), 0 0 0 1px #000;
+    .start-menu .stripe span { font-weight: normal; }
+    .start-menu ul { list-style: none; flex: 1; padding: 2px 0; }
+    .start-menu a { display: flex; align-items: center; gap: 12px; padding: 7px 18px 7px 10px; color: var(--ink); text-decoration: none; font-size: 14px; }
+    .start-menu a svg { width: 22px; height: 22px; }
+    .start-menu a:hover, .start-menu a:focus-visible { background: var(--blue); color: #fff; outline: none; }
+    .start-menu hr { border: 0; height: 2px; margin: 3px 4px; box-shadow: inset 0 1px var(--shade), inset 0 -1px var(--paper); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      .welcome, .about, .wz-intro, .travel { grid-template-columns: 1fr; }
+      .side-btns { flex-direction: row; flex-wrap: wrap; }
+      .side-btns .btn { width: auto; flex: 1 1 140px; }
+      .side-btns .tip-next { margin-top: 0; }
+      .projects, .wz-grid, .jobs { grid-template-columns: 1fr; }
+      .tasks { display: none; }
+      .taskbar .spacer { flex: 1; }
     }
-    #about { --tb: #000080; --tb2: #1084d0; }
-    #projects { --tb: #6a0d83; --tb2: #c13bd6; }
-    #activities { --tb: #0b7a2a; --tb2: #3bc45f; }
-    #travel { --tb: #b85c00; --tb2: #ffa320; }
-    #experience { --tb: #a00018; --tb2: #e2405a; }
-    #contact { --tb: #006c80; --tb2: #19b6c9; }
-    .hero-copy { --tb: #000080; --tb2: #e2405a; }
-
-    h1, h2, h3 { font-family: var(--display) !important; letter-spacing: 0 !important; font-weight: 400 !important; }
-    h1 { font-size: clamp(3.4rem, 9vw, 6rem); }
-    h2 { font-size: clamp(2.3rem, 5vw, 3.4rem); }
-    .outline { color: #000080 !important; -webkit-text-stroke: 0 !important; }
-    .lead a { color: #000080; text-decoration: underline; }
-
-    /* buttons */
-    .btn, .btn-primary, .btn-ghost { background: #c0c0c0; color: #000; border: 2px solid; border-color: #fff #000 #000 #fff;
-      box-shadow: var(--raised); border-radius: 0; padding: 8px 18px; }
-    .btn:hover, .btn-primary:hover, .btn-ghost:hover { background: #c0c0c0; color: #000; border-color: #fff #000 #000 #fff; transform: none; }
-    .btn:active { border-color: #000 #fff #fff #000; box-shadow: var(--sunken); }
-
-    /* nav = taskbar */
-    nav, nav.scrolled { background: #c0c0c0; border-bottom: 2px solid #000; box-shadow: inset 0 -2px #808080, inset 0 2px #fff; backdrop-filter: none; }
-    .nav-links a { color: #000; }
-    .nav-links a:hover { color: #000080; text-decoration: underline; }
-    .logo .badge { border-color: #000080; color: #000080; }
-    #progress { background: #000080; height: 4px; }
-
-    /* stats + spec sheet */
-    .stat b { color: #000080; -webkit-text-stroke: 0; }
-    .stat + .stat { border-left: 2px groove #fff; }
-    .spec { background: #fff; border: 0; box-shadow: var(--sunken); }
-    .spec-title { border-bottom-color: #000080; }
-
-    /* project cards = little windows */
-    .proj { background: #dcdcdc; border: 2px solid; border-color: #fff #000 #000 #fff; box-shadow: var(--raised), var(--drop); }
-    .proj:hover { transform: translate(-2px,-2px); box-shadow: var(--raised), 10px 10px 0 rgba(0,0,0,.45); }
-    .proj-index { background: #000080; color: #fff; }
-    .proj:nth-of-type(2) .proj-index { background: #a00018; }
-    .proj:nth-of-type(3) .proj-index { background: #0b7a2a; }
-    .proj:nth-of-type(4) .proj-index { background: #b85c00; }
-    .proj:nth-of-type(5) .proj-index { background: #6a0d83; }
-    .proj-body p { color: #222; }
-    .proj-tags { color: #000080; }
-    .proj-tags span { border: 1px solid #808080; background: #fff; margin: 0 4px 4px 0; }
-
-    /* activities */
-    .act-bg { background: #008080 !important; }
-    .act-bg .ring { display: none; }
-    .act-stage > .act-head.wrap { padding-bottom: 14px; }
-    .act-stage > .act-head.wrap .sec-head { margin-bottom: 10px; }
-    .slide-inner { padding: 22px 26px; }
-
-    /* experience + contact */
-    .job .role { color: #fff; background: #000080; }
-    .job::before { background: #c0c0c0; }
-    .links { border-top: 2px groove #fff; }
-    .link-row { border-bottom: 2px groove #fff; }
-    .link-row svg { fill: #000080; }
-    .link-row .handle { color: #222; }
-    .link-row:hover { color: #000080; background: #fff; }
-    footer { background: #c0c0c0; color: #000; border-top: 2px solid #fff; }
-    ::selection { background: #000080; color: #fff; }
-
-    /* ===== Unified palette + activity dropdowns ===== */
-    :root {
-      --desk: #3b7a78; --win: #d6d2c8; --win-hi: #f4f1ea; --win-lo: #8c887e;
-      --navy: #233a7a; --navy2: #4a68b8; --teal2: #1f7a73; --teal3: #4fb0a5;
-      --coral: #c4523b; --coral2: #e9866b; --gold: #c8901d; --gold2: #ebbd55;
-      --green: var(--navy); --blue: var(--navy); --teal: var(--coral);
-      --raised: inset -2px -2px var(--win-lo), inset 2px 2px var(--win-hi);
-      --sunken: inset 2px 2px var(--win-lo), inset -2px -2px #fff;
-      --drop: 6px 6px 0 rgba(10,30,30,.35);
+    @media (min-width: 901px) { .taskbar .spacer { display: none; } }
+    @media (max-width: 560px) {
+      main { padding: 16px 10px 4px; }
+      .win-body { padding: 16px 14px 18px; }
+      .stats { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+      .stat { padding: 8px; }
+      .stat b { font-size: 32px; }
+      .stat small { font-size: 12px; }
+      .tabs button { padding: 5px 9px 4px; font-size: 13px; }
+      .tabs button[aria-selected="true"] { padding: 6px 10px 7px; }
+      .tab-panel { padding: 4px 12px 8px; }
+      .act { grid-template-columns: 44px 1fr; gap: 12px; }
+      .act .tile { width: 44px; height: 44px; font-size: 19px; }
+      .props div { grid-template-columns: 84px 1fr; }
+      .bar .lbl { display: none; }
     }
-    body { background-color: var(--desk);
-      background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px); background-size: 6px 6px; }
-    section:not(#activities) > .wrap, .hero-copy, #activities > .wrap, .proj, .btn, nav, nav.scrolled, footer { background-color: var(--win) !important; }
-    section > .wrap, #activities > .wrap { width: calc(100% - 32px); max-width: 1100px; padding: 0 22px 26px; border: 2px solid; border-color: #fff #222 #222 #fff; box-shadow: var(--raised), var(--drop); }
-    #activities { padding: 56px 0; overflow: visible; }
-    .hero { padding: 116px 0 30px; }
-    .hero-copy { max-width: 760px; margin: 0 auto; pointer-events: auto; }
-    .hero-grid { display: block; }
-    #about, .hero-copy { --tb: var(--navy); --tb2: var(--navy2); }
-    #projects { --tb: var(--teal2); --tb2: var(--teal3); }
-    #activities { --tb: var(--coral); --tb2: var(--coral2); }
-    #travel { --tb: var(--gold); --tb2: var(--gold2); }
-    #experience { --tb: var(--navy); --tb2: var(--navy2); }
-    #contact { --tb: var(--teal2); --tb2: var(--teal3); }
-    .accent, .outline { color: var(--coral) !important; }
-    .typed-line { color: var(--teal2); }
-    .proj { background: #e6e2d9 !important; }
-    .proj-index, .proj:nth-of-type(n) .proj-index { background: var(--navy); }
-    .proj:nth-of-type(2) .proj-index { background: var(--teal2); }
-    .proj:nth-of-type(3) .proj-index { background: var(--coral); }
-    .proj:nth-of-type(4) .proj-index { background: var(--gold); }
-    .proj:nth-of-type(5) .proj-index { background: var(--navy2); }
-    .proj-tags { color: var(--navy); }
-    .stat b, .proj-kicker, .link-row svg { color: var(--navy); fill: var(--navy); }
-    .job .role { background: var(--teal2); }
-    #progress { background: var(--coral); }
-    .marquee-wrap { margin-top: 0; padding: 0 16px; }
-    .marquee { transform: none; margin: 0 auto; max-width: 1100px; background: var(--navy); color: #fff; padding: 8px 0;
-      border: 2px solid; border-color: #222 #fff #fff #222; }
-    .track span { font-family: var(--mono); font-weight: 400; font-size: 1.15rem; }
-
-    /* activity dropdowns */
-    .act-group { font-family: var(--mono); font-size: 1.4rem; color: var(--navy); margin: 26px 0 10px; }
-    .act-list { display: grid; gap: 8px; }
-    .act-item { background: var(--win); border: 2px solid; border-color: #fff #222 #222 #fff; box-shadow: var(--raised); }
-    .act-item summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 56px 1fr auto 22px; align-items: center; gap: 14px; padding: 8px 12px; }
-    .act-item summary::-webkit-details-marker { display: none; }
-    .act-item summary::after { content: "▼"; font-size: .7rem; width: 20px; height: 18px; display: grid; place-items: center; background: var(--win); box-shadow: var(--raised), 0 0 0 1px #222; }
-    .act-item[open] summary::after { content: "▲"; }
-    .act-item summary:hover .act-title { color: var(--coral); }
-    .act-item[open] summary { background: linear-gradient(90deg, var(--navy), var(--navy2)); color: #fff; }
-    .act-item[open] .act-mark { background: #fff; color: var(--navy); }
-    .act-item[open] .act-when { color: #dfe6ff; }
-    .act-mark { font-family: var(--mono); font-size: 1.15rem; text-align: center; background: var(--navy); color: #fff; padding: 2px 4px; white-space: nowrap; overflow: hidden; }
-    .act-title { font-family: var(--mono); font-size: 1.35rem; line-height: 1.1; }
-    .act-when { font-family: var(--mono); font-size: 1rem; color: #444; text-align: right; }
-    .act-body { background: #fff; margin: 0 8px 8px; padding: 14px 16px; box-shadow: var(--sunken); color: #222; }
-    .act-body p + p, .act-body .jam-list p { margin-top: 10px; }
-    .act-body a { color: var(--navy); text-decoration: underline; }
-    @media (max-width: 640px) {
-      .act-item summary { grid-template-columns: 44px 1fr 22px; row-gap: 2px; }
-      .act-when { grid-column: 2; grid-row: 2; text-align: left; font-size: .9rem; }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .taskbar, .start-menu, .desk-icons, .ctl, .side-btns { display: none !important; }
+      .tab-panel[hidden] { display: block !important; }
     }
   </style>
+  <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
 
-  <div id="progress"></div>
+  <!-- Icon set (16x16 pixel-style, blue and gray only) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-pc" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="1" width="14" height="10" fill="#c0c0c0" stroke="#000" stroke-width="1"/><rect x="3" y="3" width="10" height="6" fill="#000080"/><rect x="4" y="4" width="4" height="1" fill="#1084d0"/><rect x="5" y="12" width="6" height="2" fill="#808080"/><rect x="3" y="14" width="10" height="1" fill="#000"/></symbol>
+      <symbol id="i-user" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="5" y="1" width="6" height="6" fill="#dfdfdf" stroke="#000"/><rect x="2" y="9" width="12" height="6" fill="#000080" stroke="#000"/><rect x="6" y="9" width="4" height="2" fill="#fff"/></symbol>
+      <symbol id="i-folder" viewBox="0 0 16 16" shape-rendering="crispEdges"><path d="M1 3h5l1 2h8v9H1z" fill="#dfdfdf" stroke="#000"/><rect x="1" y="6" width="14" height="8" fill="#c0c0c0" stroke="#000"/><rect x="2" y="7" width="12" height="1" fill="#fff"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="#1084d0" stroke="#000"/><path d="M8 1.5v13M1.5 8h13M3 4.5h10M3 11.5h10" stroke="#fff" stroke-width="1" fill="none"/><ellipse cx="8" cy="8" rx="3" ry="6.5" fill="none" stroke="#fff"/></symbol>
+      <symbol id="i-w" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="1" width="14" height="14" fill="#000080" stroke="#000"/><path d="M3 4h2l1 7 2-5 2 5 1-7h2l-2 9h-2l-1-3-1 3H5z" fill="#fff"/></symbol>
+      <symbol id="i-star" viewBox="0 0 16 16"><path d="M8 1l2.1 4.5 4.9.6-3.6 3.4.9 4.9L8 12l-4.3 2.4.9-4.9L1 6.1l4.9-.6z" fill="#1084d0" stroke="#000" stroke-linejoin="round"/></symbol>
+      <symbol id="i-case" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="5" y="2" width="6" height="3" fill="none" stroke="#000"/><rect x="1" y="5" width="14" height="9" fill="#c0c0c0" stroke="#000"/><rect x="1" y="8" width="14" height="1" fill="#000080"/><rect x="7" y="7" width="2" height="3" fill="#000"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="3" width="14" height="10" fill="#fff" stroke="#000"/><path d="M1.5 3.5L8 9l6.5-5.5" fill="none" stroke="#000080" stroke-width="1.2"/></symbol>
+      <symbol id="i-game" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="4" width="14" height="8" fill="#c0c0c0" stroke="#000"/><rect x="3" y="7" width="4" height="2" fill="#000080"/><rect x="4" y="6" width="2" height="4" fill="#000080"/><rect x="10" y="6" width="2" height="2" fill="#000080"/><rect x="12" y="8" width="2" height="2" fill="#1084d0"/></symbol>
+      <symbol id="i-bulb" viewBox="0 0 34 34"><circle cx="17" cy="13" r="9" fill="#fff" stroke="#000" stroke-width="1.5"/><path d="M13 22h8v4h-8z" fill="#c0c0c0" stroke="#000" stroke-width="1.5"/><path d="M14 28h6" stroke="#000" stroke-width="2"/><path d="M17 8v9M14 12l3 3 3-3" fill="none" stroke="#000080" stroke-width="1.5"/></symbol>
+    </defs>
+  </svg>
 
-  <nav id="nav">
-    <div class="wrap">
-      <a href="#" class="logo"><span class="badge"><span>EK</span></span> <span class="logo-name">Ezra Kerney</span></a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li class="hide-sm"><a href="#projects">Projects</a></li>
-        <li><a href="#activities">Activities</a></li>
-        <li class="hide-sm"><a href="#travel">Travel</a></li>
-        <li class="hide-sm"><a href="#experience">Experience</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
+  <!-- Desktop shortcuts (only on wide screens) -->
+  <nav class="desk-icons" aria-label="Desktop shortcuts">
+    <a href="#about"><svg><use href="#i-user"/></svg><span>About Me</span></a>
+    <a href="#projects"><svg><use href="#i-folder"/></svg><span>Projects</span></a>
+    <a href="#wezzet"><svg><use href="#i-w"/></svg><span>Wezzet</span></a>
+    <a href="#activities"><svg><use href="#i-star"/></svg><span>Activities</span></a>
+    <a href="#travel"><svg><use href="#i-globe"/></svg><span>Travel</span></a>
+    <a href="#experience"><svg><use href="#i-case"/></svg><span>Experience</span></a>
+    <a href="#contact"><svg><use href="#i-mail"/></svg><span>Contact</span></a>
   </nav>
 
-  <!-- ================= HERO ================= -->
-  <header class="hero blueprint" id="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <div class="status reveal from-up"><span class="dot"></span> Junior · Gettysburg Area High School</div>
-        <h1 class="reveal from-left delay-1">Ezra<br><span class="outline">Kerney</span><span class="accent">.</span></h1>
-        <div class="typed-line reveal from-left delay-2"><span id="typed"></span><span class="cursor">&nbsp;</span></div>
-        <p class="lead reveal from-left delay-3">
-          I'm a student focused on engineering, with interests that span computer science, math, and design.
-          I like turning ideas into working builds, like
-          <a href="https://gahsgames.com" target="_blank" rel="noopener">GAHSgames.com</a>,
-          a student game-sharing platform, and
-          <a href="https://shortutorial.com" target="_blank" rel="noopener">Shortutorial.com</a>,
-          a site of short, interactive tutorials, and
-          <a href="https://www.roblox.com/games/127799712646377" target="_blank" rel="noopener">Altus</a>,
-          a multiplayer shooter on Roblox.
-        </p>
-        <div class="buttons reveal from-up delay-3">
-          <a href="#projects" class="btn btn-primary">See what I've built →</a>
-          <a href="#activities" class="btn btn-ghost">My activities</a>
+  <main>
+
+    <!-- ================= WELCOME ================= -->
+    <header class="win" id="top">
+      <div class="titlebar"><svg><use href="#i-pc"/></svg><span class="t">Welcome</span><span class="ctl" aria-hidden="true"><span class="min"></span><span class="max"></span><span class="x"></span></span></div>
+      <div class="win-body welcome">
+        <div>
+          <div class="hello">Welcome to the portfolio of</div>
+          <h1 class="name">Ezra Kerney<span>.</span></h1>
+          <p class="tagline">Aspiring engineer · Junior at Gettysburg Area High School</p>
+          <p class="lead">
+            I build things people actually use: <a href="#wezzet">Wezzet.com</a>, a free toolbox with more than
+            700 tools and a chat network for AI agents; <a href="https://gahsgames.com" target="_blank" rel="noopener">GAHSgames.com</a>
+            and <a href="https://shortutorial.com" target="_blank" rel="noopener">Shortutorial.com</a>; and games, from the
+            Roblox shooter <a href="https://www.roblox.com/games/127799712646377" target="_blank" rel="noopener">Altus</a> to
+            game jam entries made in a weekend.
+          </p>
+          <div class="tip" aria-live="polite">
+            <svg aria-hidden="true"><use href="#i-bulb"/></svg>
+            <div><b>Did you know...</b><p id="tip-text">Wezzet.com has more than 700 free tools, and almost all of them run right in your browser.</p></div>
+          </div>
+        </div>
+        <div class="side-btns">
+          <a class="btn default" href="#projects"><svg><use href="#i-folder"/></svg>Projects</a>
+          <a class="btn" href="#wezzet"><svg><use href="#i-w"/></svg>Wezzet</a>
+          <a class="btn" href="#activities"><svg><use href="#i-star"/></svg>Activities</a>
+          <a class="btn" href="#contact"><svg><use href="#i-mail"/></svg>Contact</a>
+          <button class="btn tip-next" id="tip-next" type="button">Next Tip</button>
         </div>
       </div>
+    </header>
 
-    </div>
-  </header>
+    <!-- ================= ABOUT ================= -->
+    <section class="win" id="about" aria-labelledby="about-t">
+      <div class="titlebar"><svg><use href="#i-user"/></svg><h2 id="about-t">About Me</h2><span class="ctl" aria-hidden="true"><span class="min"></span><span class="max"></span><span class="x"></span></span></div>
+      <div class="win-body about">
+        <div>
+          <p class="lead">I'm a 16-year-old junior who wants to be an engineer. What I love is the process: spot a problem, design a fix, and keep refining it until it works.</p>
+          <p>
+            Most of what I build is software. With my friend Noah Puckett I build and run <strong>Wezzet.com</strong>.
+            On my own I made <strong>GAHSgames.com</strong> and <strong>Shortutorial.com</strong>, and I design games,
+            from the Roblox shooter <strong>Altus</strong> to game jam entries with <strong>Hack Club</strong>.
+          </p>
+          <p>
+            In school I compete in the <strong>Technology Student Association</strong> and on the <strong>varsity tennis</strong>
+            team, and I'm a member of the <strong>National Math Honors Society</strong> and the
+            <strong>Science National Honor Society</strong>. Speech and Debate and Mock Trial taught me to build an argument and
+            speak under pressure.
+          </p>
+          <p>
+            I speak Spanish nearly fluently and French well, and I've traveled to <span class="travel-n">13</span> countries and
+            territories. Working in a busy kitchen and at a grocery checkout taught me to be reliable and stay calm when it gets hectic.
+          </p>
+          <div class="stats">
+            <div class="stat"><b>6</b><small>Projects launched</small></div>
+            <div class="stat"><b>14</b><small>Activities &amp; teams</small></div>
+            <div class="stat"><b>2</b><small>Jobs held</small></div>
+          </div>
+        </div>
+        <fieldset class="group">
+          <legend>Properties</legend>
+          <dl class="props">
+            <div><dt>Name</dt><dd>Ezra Kerney</dd></div>
+            <div><dt>School</dt><dd>Gettysburg Area High School</dd></div>
+            <div><dt>Grade</dt><dd>Junior · Age 16</dd></div>
+            <div><dt>Focus</dt><dd>Engineering</dd></div>
+            <div><dt>Also into</dt><dd>Computer science · Math · Design</dd></div>
+            <div><dt>Code</dt><dd>Java · JavaScript · Luau</dd></div>
+            <div><dt>Languages</dt><dd>English · Spanish (near-fluent) · French</dd></div>
+            <div><dt>Built</dt><dd>Wezzet · GAHSgames · Shortutorial · Altus</dd></div>
+            <div><dt>Honors</dt><dd>NMHS · SNHS</dd></div>
+            <div><dt>Sports</dt><dd>Varsity tennis · Ultimate · Mountain biking</dd></div>
+            <div><dt>Travel</dt><dd><span class="travel-n">13</span> countries &amp; territories</dd></div>
+          </dl>
+        </fieldset>
+      </div>
+    </section>
 
-  <!-- Sliding strip (both copies must match for a seamless loop) -->
-  <div class="marquee-wrap" aria-hidden="true"><div class="marquee">
-    <div class="track">
-      <span>Engineering</span><span>Problem Solving</span><span>Mathematics</span><span>Computer Science</span><span>Java</span><span>Web Development</span><span>Game Development</span><span>Game Jams</span><span>Design Thinking</span><span>Teamwork</span><span>Public Speaking</span><span>Community Service</span><span>Spanish</span><span>French</span><span>Travel</span><span>Varsity Tennis</span><span>Mountain Biking</span><span>Ultimate Frisbee</span><span>Chess</span>
-      <span>Engineering</span><span>Problem Solving</span><span>Mathematics</span><span>Computer Science</span><span>Java</span><span>Web Development</span><span>Game Development</span><span>Game Jams</span><span>Design Thinking</span><span>Teamwork</span><span>Public Speaking</span><span>Community Service</span><span>Spanish</span><span>French</span><span>Travel</span><span>Varsity Tennis</span><span>Mountain Biking</span><span>Ultimate Frisbee</span><span>Chess</span>
-    </div>
-  </div></div>
+    <!-- ================= PROJECTS ================= -->
+    <!-- Each project is one <a class="proj"> card. Cards are whole links, so never put another <a> inside one. -->
+    <section class="win" id="projects" aria-labelledby="projects-t">
+      <div class="titlebar"><svg><use href="#i-folder"/></svg><h2 id="projects-t">Projects</h2><span class="ctl" aria-hidden="true"><span class="min"></span><span class="max"></span><span class="x"></span></span></div>
+      <div class="bar" aria-hidden="true"><span class="lbl">Address</span><span class="field">C:\Ezra\Projects</span></div>
+      <div class="win-body">
+        <p class="lead">Websites and games I've designed, built, and launched. Click any project to open it.</p>
 
-  <!-- ================= ABOUT ================= -->
-  <section id="about">
-    <div class="wrap about-grid">
-      <div class="reveal from-left">
-        <div class="sec-head">About me</div>
-        <h2>An aspiring engineer who <span class="accent">loves to build.</span></h2>
-        <p>
-          I'm a 16-year-old junior at <strong>Gettysburg Area High School</strong> with my sights set on
-          <strong>engineering</strong>. I'm drawn to the process of identifying a problem, designing a solution,
-          and refining it until it works. Computer science is one branch of that interest, alongside math and
-          hands-on design, and I program in <strong>Java</strong>. I'm also a strong language learner: I'm
-          nearly fluent in <strong>Spanish</strong> and speak <strong>French</strong> well.
-        </p>
-        <p>
-          I put that mindset into practice by independently creating <strong>GAHSgames.com</strong>, developing the
-          Roblox game <strong>Altus</strong>, and I keep
-          sharpening it through the <strong>Technology Student Association</strong>, the
-          <strong>National Math Honors Society</strong>, and Math Club, and as a member of <strong>Hack Club</strong>, a global
-          community of teen builders, I compete in game jams. Beyond STEM, I've built my public speaking
-          and argumentation skills through <strong>Speech and Debate</strong> and <strong>Mock Trial</strong>,
-          served my community through <strong>Key Club</strong>, and I'm a member of French Club. I compete on the
-          <strong>varsity tennis</strong> team, play <strong>Ultimate Frisbee</strong>, raced mountain bikes in the
-          <strong>Pennsylvania Interscholastic Cycling League (PICL)</strong> for six seasons, and was in Chess Club
-          for three years. My jobs in retail and food service have taught me reliability, teamwork, and how to
-          perform under pressure. I'm also well traveled, and I make a point of learning about the culture of each
-          place I visit.
-        </p>
-        <div class="stats">
-          <div class="stat"><b>5</b><small>Projects launched</small></div>
-          <div class="stat"><b>12</b><small>Activities &amp; teams</small></div>
-          <div class="stat"><b>2</b><small>Jobs held</small></div>
+        <h3 class="sub">Websites &amp; web apps</h3>
+        <div class="projects">
+          <a href="#wezzet" class="proj wide">
+            <div class="proj-top"><span class="tile">WZ</span><div><h3>Wezzet.com</h3><span class="meta">Co-creator with Noah Puckett · Live</span></div></div>
+            <p>A free toolbox for the internet: more than 700 tools that run in your browser, an AI assistant that searches the web live, and AI Comms, a chat network where AI agents talk to each other and split up work.</p>
+            <p class="built">Wezzet has a lot going on, so it gets <b>its own section below</b>.</p>
+            <span class="btn open">See Wezzet ↓</span>
+          </a>
+          <a href="https://gahsgames.com" target="_blank" rel="noopener" class="proj">
+            <div class="proj-top"><span class="tile">GG</span><div><h3>GAHSgames.com</h3><span class="meta">Solo project · Live</span></div></div>
+            <p>A place for students at my school to share the games they make, whether for a class or just for fun. Student developers get an audience, and everyone else gets games to play and ideas for their own.</p>
+            <p>I planned, built, and launched the whole site myself: the game catalog, a highscores page, feedback and contact pages, and site policies.</p>
+            <p class="built">Built with <b>HTML, CSS and JavaScript</b></p>
+            <span class="btn open">Visit site</span>
+          </a>
+          <a href="https://shortutorial.com" target="_blank" rel="noopener" class="proj">
+            <div class="proj-top"><span class="tile">ST</span><div><h3>Shortutorial.com</h3><span class="meta">Solo project · Full-stack web app · Live</span></div></div>
+            <!-- Visit count from Cloudflare analytics (shortutorial.com, last 30 days). Updated weekly. -->
+            <span class="count"><b id="shortutorial-visits">4.55k</b> visits in the last 30 days</span>
+            <p>Short, clear tutorials for everyday problems. Every tutorial ends with a quiz that earns a certification.</p>
+            <ul class="dots">
+              <li>Step-by-step fixes for common computer problems, like Wi-Fi with no internet, an offline printer, or a second monitor that isn't detected, with a Windows/Mac switch and a built-in troubleshooter</li>
+              <li>A crash course on JCurses for building colorful terminal programs in Java</li>
+              <li>Accounts, certifications, and a world leaderboard, with quiz answers checked on the server so they can't be read from the page</li>
+            </ul>
+            <p class="built">Built with <b>JavaScript, Cloudflare Workers and a D1 database</b></p>
+            <span class="btn open">Visit site</span>
+          </a>
+        </div>
+
+        <h3 class="sub">Games</h3>
+        <div class="projects">
+          <a href="https://www.roblox.com/games/127799712646377" target="_blank" rel="noopener" class="proj">
+            <div class="proj-top"><span class="tile">AL</span><div><h3>Altus</h3><span class="meta">4v4 shooter on Roblox · Lead designer &amp; developer</span></div></div>
+            <p>A fast-paced first-person shooter with Capture the Flag and Deathmatch across ten handcrafted maps, from a Japanese town to a storm-swept harbor and jungle ruins. Bots fill empty slots, so every match is a full 4v4.</p>
+            <ul class="dots">
+              <li>Elo-based ranked ladder, with the top tier reserved for the top 10% of players, and skill-based matchmaking across servers</li>
+              <li>Server-validated hit detection and saved player progress</li>
+              <li>Unlockable abilities, weapon skins and knives, a 60-tier season pass, and an in-game economy with disclosed case odds</li>
+              <li>Mobile touch controls, a cross-server lobby browser, and a private dashboard for live settings and player management</li>
+            </ul>
+            <p class="built">Built with <b>Roblox Studio and Luau</b>, using AI-assisted tools and lots of playtesting</p>
+            <span class="btn open">Play on Roblox</span>
+          </a>
+          <div class="groups" style="gap:16px">
+            <a href="https://dinglebonglewongle.itch.io/bouncingbulletbaby" target="_blank" rel="noopener" class="proj">
+              <div class="proj-top"><span class="tile">BB</span><div><h3>BouncingBulletBaby</h3><span class="meta">Hack Club Haven game jam · Made with Noah Puckett</span></div></div>
+              <p>A puzzle game starring a cowboy baby with only a few bullets. Walls stand between you and every target, so you aim with the mouse and bank each shot off the walls to land the hit.</p>
+              <p class="built">Built in a weekend with <b>Unity</b> and hand-drawn pixel art · Free to play in the browser</p>
+              <span class="btn open">Play on itch.io</span>
+            </a>
+            <a href="https://dinglebonglewongle.itch.io/tiny-henry" target="_blank" rel="noopener" class="proj">
+              <div class="proj-top"><span class="tile">TH</span><div><h3>Tiny Henry</h3><span class="meta">Jame Gam game jam · Made with Noah Puckett</span></div></div>
+              <p>A 3D adventure built in three days. Aliens have shrunk Henry, stuffed him in a cereal box, and left him on a grocery store shelf. Run, jump, and grab items to escape the store and get back to normal size.</p>
+              <p class="built">I did development and design, Noah did level design and storyboarding, and Leif Andresen made the music and sound · Free for Windows</p>
+              <span class="btn open">Get it on itch.io</span>
+            </a>
+          </div>
         </div>
       </div>
+      <div class="status-bar" aria-hidden="true"><span>6 projects</span><span>3 websites · 3 games</span></div>
+    </section>
 
-      <div class="spec marks reveal from-right delay-1">
-        <div class="spec-title"><span>Quick facts</span></div>
-        <div class="fact"><span>Name</span><span>Ezra Kerney</span></div>
-        <div class="fact"><span>School</span><span>Gettysburg Area High School</span></div>
-        <div class="fact"><span>Grade</span><span>Junior · Age 16</span></div>
-        <div class="fact"><span>Focus</span><span>Engineering</span></div>
-        <div class="fact"><span>Also into</span><span>Computer Science · Math</span></div>
-        <div class="fact"><span>Code</span><span>Java</span></div>
-        <div class="fact"><span>Languages</span><span>English · Spanish (near-fluent) · French</span></div>
-        <div class="fact"><span>Travel</span><span id="fact-travel">13 countries &amp; territories</span></div>
-        <div class="fact"><span>Built</span><span>GAHSgames.com · Shortutorial.com · Altus (Roblox)</span></div>
-        <div class="fact"><span>Member of</span><span>TSA · NMHS · Hack Club · Math Club · French Club</span></div>
-        <div class="fact"><span>Competed in</span><span>Speech &amp; Debate · Mock Trial</span></div>
-        <div class="fact"><span>Service</span><span>Key Club</span></div>
-        <div class="fact"><span>Sports</span><span>Varsity Tennis · Ultimate Frisbee · Mountain Biking (PICL)</span></div>
+    <!-- ================= WEZZET ================= -->
+    <section class="win" id="wezzet" aria-labelledby="wezzet-t">
+      <div class="titlebar"><svg><use href="#i-w"/></svg><h2 id="wezzet-t">Wezzet.com</h2><span class="ctl" aria-hidden="true"><span class="min"></span><span class="max"></span><span class="x"></span></span></div>
+      <div class="bar" aria-hidden="true"><span class="lbl">Address</span><span class="field">https://wezzet.com</span></div>
+      <div class="win-body">
+        <div class="wz-intro">
+          <div>
+            <p class="lead"><strong>Wezzet</strong> is a free website for getting everyday jobs done online. Noah Puckett and I build and run all of it ourselves: we design the site, write the tools, and answer the support email.</p>
+            <p>There's nothing to install and no account needed. Most tools run entirely in your browser, so the files you convert never leave your device. Ads on some pages pay for hosting, and we don't sell anyone's files or data.</p>
+          </div>
+          <div class="wz-stats">
+            <div class="stat"><b>700+</b><small>free online tools</small></div>
+            <div class="stat"><b>Free</b><small>no account needed for the tools</small></div>
+            <div class="stat"><b>2</b><small>people build and run it</small></div>
+          </div>
+        </div>
+
+        <div class="groups wz-grid">
+          <fieldset class="group">
+            <legend><svg><use href="#i-pc"/></svg>Web Tools</legend>
+            <p>The heart of Wezzet: hundreds of converters, calculators, and utilities, sorted by task.</p>
+            <ul class="dots">
+              <li><b>Files:</b> merge PDFs, convert images (HEIC, WebP), video and audio (MP4, MOV, MP3), and data (CSV, JSON, Excel)</li>
+              <li><b>Numbers:</b> unit converters and calculators for percentages, tips, and more</li>
+              <li><b>Text &amp; code:</b> word counts, regex, text compare, and developer utilities</li>
+              <li><b>Security:</b> hashes, AES encryption, classic ciphers, and JWT decoding</li>
+            </ul>
+            <a class="go" href="https://wezzet.com/#tools" target="_blank" rel="noopener">Browse the tools ›</a>
+          </fieldset>
+
+          <fieldset class="group">
+            <legend><svg><use href="#i-star"/></svg>WezzetAI</legend>
+            <p>A free AI chat with no sign-up. It searches the web live, so you can ask about today's news, and you can drop in a file. It also points you to the right Wezzet tool for the job.</p>
+            <a class="go" href="https://wezzet.com/ai" target="_blank" rel="noopener">Chat with WezzetAI ›</a>
+          </fieldset>
+
+          <fieldset class="group">
+            <legend><svg><use href="#i-mail"/></svg>AI Comms</legend>
+            <p>A chat network and shared workspace for AI agents. Agents join with one link, then:</p>
+            <ul class="dots">
+              <li>DM each other and talk in private or public rooms</li>
+              <li>Post tasks on a shared board and claim each other's work</li>
+              <li>Ask built-in helper bots for code, writing, and translation</li>
+            </ul>
+            <p style="margin-top:8px">Works with Claude, ChatGPT, and any MCP client.</p>
+            <a class="go" href="https://wezzet.com/aicomms" target="_blank" rel="noopener">Open AI Comms ›</a>
+          </fieldset>
+
+          <fieldset class="group">
+            <legend><svg><use href="#i-user"/></svg>Wezzet for Claude &amp; ChatGPT</legend>
+            <p>Brings Wezzet into your AI assistant: notes that last between chats, a web page reader, a calculator, DNS and URL checks, and AI Comms messaging, with webhook wake-ups when a new message arrives.</p>
+            <p>The one-click apps are waiting on store approval. It already works today through AI Comms.</p>
+            <a class="go" href="https://wezzet.com/plugin" target="_blank" rel="noopener">See how it works ›</a>
+          </fieldset>
+
+          <fieldset class="group">
+            <legend><svg><use href="#i-globe"/></svg>Live Transport Tracker</legend>
+            <p>Track flights, trains, and ships live anywhere in the world. Search a flight number, station, ship, or port and watch it move.</p>
+            <a class="go" href="https://wezzet.com/transport" target="_blank" rel="noopener">Open the tracker ›</a>
+          </fieldset>
+
+          <fieldset class="group">
+            <legend><svg><use href="#i-case"/></svg>Crypto Tracker: Chain Watch</legend>
+            <p>A watcher that follows stolen crypto. It starts from wallets named in public FBI and OFAC notices and follows the money on its own, hop by hop, until it reaches an exchange, mixer, bridge, or swap.</p>
+            <ul class="dots">
+              <li>Checks addresses automatically every couple of minutes and flags new movements</li>
+              <li>Maps where the funds went, with alerts by browser or Telegram and short AI summaries</li>
+              <li>Drafts tips you can send yourself to Rewards for Justice, the FBI, or an exchange</li>
+            </ul>
+            <a class="go" href="https://wezzet.com/tracker#watch" target="_blank" rel="noopener">Open Chain Watch ›</a>
+          </fieldset>
+
+          <fieldset class="group">
+            <legend><svg><use href="#i-game"/></svg>Creative Studio</legend>
+            <p>Browser-based apps for making things: a video editor for cutting clips and editing audio, a screen recorder, an image editor, an art studio, and a metronome.</p>
+            <a class="go" href="https://wezzet.com/video-editor" target="_blank" rel="noopener">Try the video editor ›</a>
+          </fieldset>
+
+          <fieldset class="group">
+            <legend><svg><use href="#i-folder"/></svg>Community &amp; Extension</legend>
+            <p><b>Messages</b> and a <b>forum</b> for people who use the site, all on one account shared with WezzetAI and AI Comms. The <b>Chrome extension</b> keeps every tool one click away in your toolbar.</p>
+            <a class="go" href="https://wezzet.com/forum" target="_blank" rel="noopener">Visit the forum ›</a>
+          </fieldset>
+        </div>
+
+        <div class="wz-cta">
+          <a class="btn default" href="https://wezzet.com" target="_blank" rel="noopener"><svg><use href="#i-w"/></svg>Visit Wezzet.com</a>
+          <a class="btn" href="https://wezzet.com/about" target="_blank" rel="noopener">About Wezzet</a>
+        </div>
       </div>
-    </div>
-  </section>
+      <div class="status-bar" aria-hidden="true"><span>8 parts</span><span>Free · No sign-up</span></div>
+    </section>
 
-  <!-- ================= PROJECTS ================= -->
-  <section id="projects" class="blueprint">
-    <div class="wrap">
-      <div class="reveal from-up">
-        <div class="sec-head">Projects</div>
-        <h2>Things I've <span class="accent">built.</span></h2>
-        <p class="lead">Projects I've designed and brought to life.</p>
-      </div>
+    <!-- ================= ACTIVITIES ================= -->
+    <!-- To add an activity: copy one <li class="act"> into the right tab and update the count in About. -->
+    <section class="win" id="activities" aria-labelledby="activities-t">
+      <div class="titlebar"><svg><use href="#i-star"/></svg><h2 id="activities-t">Activities</h2><span class="ctl" aria-hidden="true"><span class="min"></span><span class="max"></span><span class="x"></span></span></div>
+      <div class="win-body">
+        <p class="lead">Clubs, competitions, and teams outside the classroom. Pick a tab to switch groups.</p>
+        <div class="tabs" role="tablist" aria-label="Activity groups">
+          <button type="button" role="tab" id="tab-stem" aria-controls="panel-stem" aria-selected="true">STEM &amp; Tech</button>
+          <button type="button" role="tab" id="tab-speak" aria-controls="panel-speak" aria-selected="false" tabindex="-1">Speaking &amp; Service</button>
+          <button type="button" role="tab" id="tab-sport" aria-controls="panel-sport" aria-selected="false" tabindex="-1">Athletics</button>
+        </div>
 
-      <a href="https://gahsgames.com" target="_blank" rel="noopener" class="proj chamfer reveal from-left">
-        <div class="proj-index">
-          <span class="fig">● Live</span>
-          <span class="num">GAHS<br>games</span>
-        </div>
-        <div class="proj-body">
-          <span class="proj-kicker"><span class="dot"></span> Solo project · Designed &amp; built independently</span>
-          <h3>GAHSgames.com</h3>
-          <p>
-            A student-created platform where students can share games they've built with each other,
-            whether for a class project or just for fun. The site gives student developers a place to
-            showcase their ideas, learn from one another's work, and get inspired for their next project.
-          </p>
-          <p style="margin-top:10px">
-            I planned, built, and launched the entire site on my own, including the game catalog,
-            a highscores page, feedback and contact pages, and site policies.
-          </p>
-          <div class="proj-tags">
-            <span>Web Development</span><span>Community Platform</span><span>Game Catalog</span><span>Solo Build</span>
-          </div>
-          <span class="proj-link">Visit GAHSgames.com</span>
-        </div>
-      </a>
-      <a href="https://shortutorial.com" target="_blank" rel="noopener" class="proj chamfer reveal from-right">
-        <div class="proj-index">
-          <span class="fig">● Live</span>
-          <span class="num">Short<br>tutorial</span>
-        </div>
-        <div class="proj-body">
-          <span class="proj-kicker"><span class="dot"></span> Full-stack web app · Accounts, quizzes &amp; leaderboard</span>
-          <h3>Shortutorial.com</h3>
-          <p>
-            Short, clear tutorials for anything. Visitors can search the catalog, browse by category, or jump to a
-            random tutorial. The step-by-step fix guides cover everyday computer problems, like Wi-Fi that's connected
-            with no internet, an offline printer, a full drive, a slow computer, or a second monitor that isn't
-            detected, with a Windows/Mac switch and a built-in troubleshooter. There's also a programming crash course
-            on JCurses for building colorful terminal programs in Java.
-          </p>
-          <p style="margin-top:10px">
-            Every tutorial ends with a certification quiz. Visitors can create an account, earn certifications, and
-            compete on a world leaderboard. Quiz answers are checked on the server so they can't be read from the page.
-          </p>
-          <div class="proj-tags">
-            <span>JavaScript</span><span>Cloudflare Workers</span><span>D1 Database</span><span>User Accounts</span><span>Quizzes &amp; Leaderboard</span>
-          </div>
-          <span class="proj-link">Visit Shortutorial.com</span>
-        </div>
-      </a>
-      <a href="https://www.roblox.com/games/127799712646377" target="_blank" rel="noopener" class="proj chamfer reveal from-left">
-        <div class="proj-index">
-          <span class="fig">● Roblox</span>
-          <span class="num">Altus</span>
-        </div>
-        <div class="proj-body">
-          <span class="proj-kicker"><span class="dot"></span> Multiplayer game · Designed &amp; developed in Roblox Studio</span>
-          <h3>Altus</h3>
-          <p>
-            A fast-paced 4v4 first-person shooter on Roblox with Capture the Flag and Deathmatch modes across ten
-            handcrafted maps, from a Japanese town to a storm-swept harbor and jungle ruins. Matches feature a
-            ranked ladder, unlockable abilities, weapon skins and knives, a 60-tier season pass, and an animated
-            MVP showcase at the end of every round. Bots fill empty slots so every match is a full 4v4, and real
-            players take their places as they join.
-          </p>
-          <p style="margin-top:10px">
-            I designed the game and led its development from the ground up in Roblox Studio, writing the systems in
-            Luau with the help of AI-assisted development tools and refining them through repeated playtesting. That
-            work included server-validated hit detection, an Elo-based ranking system where the top tier is reserved
-            for the top 10% of players, skill-based matchmaking between servers, a full in-game economy with disclosed
-            case odds, persistent player data, and touch controls for mobile. I also built a private developer
-            dashboard for live game settings, a cross-server lobby browser, player management, and gifting.
-          </p>
-          <div class="proj-tags">
-            <span>Roblox Studio</span><span>Luau</span><span>Multiplayer Networking</span><span>Game Design</span><span>Ranked Matchmaking</span><span>Live Operations</span>
-          </div>
-          <span class="proj-link">Play Altus on Roblox</span>
-        </div>
-      </a>
-      <a href="https://dinglebonglewongle.itch.io/tiny-henry" target="_blank" rel="noopener" class="proj chamfer reveal from-right">
-        <div class="proj-index">
-          <span class="fig">● itch.io</span>
-          <span class="num">Tiny<br>Henry</span>
-        </div>
-        <div class="proj-body">
-          <span class="proj-kicker"><span class="dot"></span> Game jam entry · Made with Noah Puckett</span>
-          <h3>Tiny Henry</h3>
-          <p>
-            A 3D adventure game made for the Jame Gam Game Jam. Henry has been shrunk by aliens, stuffed into a cereal
-            box, and left on a grocery store shelf. Players help him escape the store and find a way back to his
-            normal size, running, jumping, and picking up items along the way.
-          </p>
-          <p style="margin-top:10px">
-            I handled development and design, and my teammate Noah Puckett (NoahPuckett.me) did the level design and storyboarding. Music and
-            sound effects are by Leif Andresen. The game is free to download for Windows on itch.io.
-          </p>
-          <div class="proj-tags">
-            <span>Game Development</span><span>3D Adventure</span><span>Game Jam</span><span>Team Project</span><span>Windows</span>
-          </div>
-          <span class="proj-link">Play Tiny Henry on itch.io</span>
-        </div>
-      </a>
-      <a href="https://wezzet.com" target="_blank" rel="noopener" class="proj chamfer reveal from-left">
-        <div class="proj-index">
-          <span class="fig">● Live</span>
-          <span class="num">Wez<br>zet</span>
-        </div>
-        <div class="proj-body">
-          <span class="proj-kicker"><span class="dot"></span> AI chat · Agent chat room · Free tools</span>
-          <h3>Wezzet.com</h3>
-          <p>
-            A free site with AI chat that can search the web live, an open chat room where AI agents talk to each
-            other and split up work, and hundreds of free online tools. No sign-up needed.
-          </p>
-          <p style="margin-top:10px">
-            Wezzet also plugs straight into AI assistants, giving them everyday tools like notes that persist between
-            chats, a web page reader, a calculator, DNS and URL checks, and the AI Comms board.
-          </p>
-          <div class="proj-tags">
-            <span>AI</span><span>Web Development</span><span>Agent Chat Room</span><span>Online Tools</span>
-          </div>
-          <span class="proj-link">Visit Wezzet.com</span>
-        </div>
-      </a>
-      <!-- To add a project: copy the <a class="proj ..."> block above and change "01" to "02", the link, title, and text. -->
-    </div>
-  </section>
-
-  <!-- ================= ACTIVITIES ================= -->
-  <!-- To add an activity: copy one <details class="act-item"> block into the right group and change the text. -->
-  <section id="activities">
-    <div class="wrap reveal from-up">
-      <div class="sec-head">Activities</div>
-      <h2>Beyond the <span class="accent">classroom.</span></h2>
-      <p class="lead">Click any activity to open it.</p>
-      <h3 class="act-group">STEM &amp; Academics</h3>
-      <div class="act-list">
-        <details class="act-item">
-          <summary><span class="act-mark">TSA</span><span class="act-title">Technology Student Association</span><span class="act-when">Member</span></summary>
-          <div class="act-body">
-            <p>Through TSA, I take part in STEM-focused activities and competitive events that challenge me to apply engineering and technology concepts, work as part of a team, and present my work with confidence.</p>
-          </div>
-        </details>
-        <details class="act-item">
-          <summary><span class="act-mark">∑</span><span class="act-title">National Math Honors Society</span><span class="act-when">Member</span></summary>
-          <div class="act-body">
-            <p>Recognized for achievement in mathematics, with a commitment to academic excellence and sharing a love of math with others.</p>
-          </div>
-        </details>
-        <details class="act-item">
-          <summary><span class="act-mark">π</span><span class="act-title">Math Club</span><span class="act-when">Member</span></summary>
-          <div class="act-body">
-            <p>Working through challenging problems with peers and building the analytical foundation that engineering depends on.</p>
-          </div>
-        </details>
-        <details class="act-item">
-          <summary><span class="act-mark">♞</span><span class="act-title">Chess Club</span><span class="act-when">2023 – 2026 · Grades 8–10</span></summary>
-          <div class="act-body">
-            <p>Three years of strategic play, sharpening my ability to plan ahead, recognize patterns, and stay patient under pressure.</p>
-          </div>
-        </details>
-        <details class="act-item">
-          <summary><span class="act-mark">&lt;/&gt;</span><span class="act-title">Independent Building</span><span class="act-when">Ongoing</span></summary>
-          <div class="act-body">
-            <p>Teaching myself web development by building and maintaining my own sites, GAHSgames.com and Shortutorial.com, and developing the Roblox game Altus.</p>
-          </div>
-        </details>
-        <details class="act-item">
-          <summary><span class="act-mark">#</span><span class="act-title">Hack Club</span><span class="act-when">Member · Global nonprofit</span></summary>
-          <div class="act-body">
-            <p>A member of <a href="https://hackclub.com" target="_blank" rel="noopener">Hack Club</a>, a global nonprofit community of more than 50,000 teenagers who design and build technical projects, from software and hardware to games. Through Hack Club, I collaborate with young builders around the world, share my work for feedback, and take part in coding events and game jams.</p>
-          </div>
-        </details>
-        <details class="act-item">
-          <summary><span class="act-mark">JAM</span><span class="act-title">Game Jams</span><span class="act-when">Competitor · 2026 jams</span></summary>
-          <div class="act-body">
-            <p>I compete in game jams: time-limited challenges where developers design, build, and ship a complete game around a theme revealed at the start.</p>
-              <div class="jam-list">
-                <p><strong>Jame Gam Game Jam</strong> · Hack Club · October 22–25, 2026<br>A three-day online jam for teen developers worldwide, building solo or in teams around a surprise theme. My submission: <a href="https://dinglebonglewongle.itch.io/tiny-henry" target="_blank" rel="noopener">Tiny Henry</a>, a 3D adventure game made with <a href="https://noahpuckett.me" target="_blank" rel="noopener">Noah Puckett</a>.</p>
-                <p><strong>Hack Club Haven</strong> · November 14–15, 2026<br>Hack Club's official global game jam, held in more than 200 cities, where teams build a game over two days with workshops and mentors.</p>
+        <div class="tab-panel" role="tabpanel" id="panel-stem" aria-labelledby="tab-stem">
+          <h3 class="no-js-head">STEM &amp; Tech</h3>
+          <ul class="acts">
+            <li class="act"><span class="tile">TSA</span><div>
+              <div class="act-head"><h3>Technology Student Association</h3><span>Member</span></div>
+              <p>I compete in STEM events that ask me to apply engineering and technology concepts, work as part of a team, and present the finished work with confidence.</p>
+            </div></li>
+            <li class="act"><span class="tile">JAM</span><div>
+              <div class="act-head"><h3>Game Jams</h3><span>Developer · 2026</span></div>
+              <p>Time-limited challenges to design, build, and ship a complete game around a theme that's revealed at the start.</p>
+              <div class="jams">
+                <div class="jam"><b>Hack Club Haven</b><small>November 14–15, 2026</small><br>Hack Club's global game jam, held in more than 200 cities. Entry: <a href="https://dinglebonglewongle.itch.io/bouncingbulletbaby" target="_blank" rel="noopener">BouncingBulletBaby</a>, a wall-bouncing puzzle shooter made with <a href="https://noahpuckett.me" target="_blank" rel="noopener">Noah Puckett</a>.</div>
+                <div class="jam"><b>Jame Gam Game Jam</b><small>October 22–25, 2026</small><br>A three-day online jam for teen developers. Entry: <a href="https://dinglebonglewongle.itch.io/tiny-henry" target="_blank" rel="noopener">Tiny Henry</a>, a 3D adventure made with <a href="https://noahpuckett.me" target="_blank" rel="noopener">Noah Puckett</a>.</div>
               </div>
-          </div>
-        </details>
-      </div>
-      <h3 class="act-group">Speaking, Service &amp; Culture</h3>
-      <div class="act-list">
-        <details class="act-item">
-          <summary><span class="act-mark">“ ”</span><span class="act-title">Speech and Debate</span><span class="act-when">2025 – 2026</span></summary>
-          <div class="act-body">
-            <p>Competed for the full school year as a sophomore, researching topics, building arguments, and speaking with confidence under time pressure.</p>
-          </div>
-        </details>
-        <details class="act-item">
-          <summary><span class="act-mark">§</span><span class="act-title">Mock Trial</span><span class="act-when">Team member</span></summary>
-          <div class="act-body">
-            <p>Prepared and argued cases as part of a team, learning to think on my feet, analyze evidence, and present a clear, persuasive case.</p>
-          </div>
-        </details>
-        <details class="act-item">
-          <summary><span class="act-mark">K</span><span class="act-title">Key Club</span><span class="act-when">2025 – 2026</span></summary>
-          <div class="act-body">
-            <p>Gave back to my school and community through Key Club, a student-led service organization focused on volunteering and leadership.</p>
-          </div>
-        </details>
-        <details class="act-item">
-          <summary><span class="act-mark">Fr</span><span class="act-title">French Club</span><span class="act-when">Member</span></summary>
-          <div class="act-body">
-            <p>Exploring the French language and francophone culture. I speak French well, and alongside my near-fluent Spanish, it helps me connect with people beyond English.</p>
-          </div>
-        </details>
-      </div>
-      <h3 class="act-group">Athletics</h3>
-      <div class="act-list">
-        <details class="act-item">
-          <summary><span class="act-mark">15–0</span><span class="act-title">Varsity Tennis</span><span class="act-when">Gettysburg Area HS</span></summary>
-          <div class="act-body">
-            <p>Competing on the varsity team, building discipline, focus, and resilience through practice, matches, and supporting my teammates.</p>
-          </div>
-        </details>
-        <details class="act-item">
-          <summary><span class="act-mark">PICL</span><span class="act-title">Mountain Biking · PICL</span><span class="act-when">2020 – 2025 · Six seasons, ages 10–15</span></summary>
-          <div class="act-body">
-            <p>Raced in the Pennsylvania Interscholastic Cycling League, building endurance, grit, and the drive to push through demanding courses.</p>
-          </div>
-        </details>
-        <details class="act-item">
-          <summary><span class="act-mark">7v7</span><span class="act-title">Ultimate Frisbee Club</span><span class="act-when">2025 – Present</span></summary>
-          <div class="act-body">
-            <p>Playing a self-refereed sport built on teamwork, communication, and sportsmanship.</p>
-          </div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= TRAVEL ================= -->
-  <section id="travel">
-    <div class="wrap">
-      <div class="reveal from-up">
-        <div class="sec-head">Travel</div>
-        <h2>Learning from <span class="accent">the world.</span></h2>
-      </div>
-      <div class="travel-grid">
-        <div class="travel-copy reveal from-left">
-          <p>
-            Travel is one of the most valuable ways I learn. Wherever I go, I try to engage with a place on its own
-            terms: understanding its history and traditions, trying the local food, and using the language whenever
-            I can. My Spanish and French have made that easier, and every trip adds to it.
-          </p>
-          <p>
-            Experiencing different cultures firsthand has shaped how I see the world. It has made me more adaptable,
-            more open-minded, and better at connecting with people whose backgrounds differ from my own, qualities
-            I bring to every team I'm part of.
-          </p>
-          <div class="travel-count"><b id="travel-num">13</b><span>Countries &amp; territories visited</span></div>
-          <ul class="visited-list" id="visited-list"></ul>
+            </div></li>
+            <li class="act"><span class="tile">#</span><div>
+              <div class="act-head"><h3>Hack Club</h3><span>Member · Global nonprofit</span></div>
+              <p>Part of <a href="https://hackclub.com" target="_blank" rel="noopener">Hack Club</a>, a community of more than 50,000 teenagers who build software, hardware, and games. I share projects for feedback, work with builders around the world, and join its coding events and game jams.</p>
+            </div></li>
+            <li class="act"><span class="tile">∑</span><div>
+              <div class="act-head"><h3>National Math Honors Society</h3><span>Member</span></div>
+              <p>An honor society for students with strong achievement in math, built around academic excellence and sharing a love of math with others.</p>
+            </div></li>
+            <li class="act"><span class="tile">SN</span><div>
+              <div class="act-head"><h3>Science National Honor Society</h3><span>Member</span></div>
+              <p>Recognized for achievement in science, with a commitment to scientific inquiry, research, and sharing science with others.</p>
+            </div></li>
+            <li class="act"><span class="tile">π</span><div>
+              <div class="act-head"><h3>Math Club</h3><span>Member</span></div>
+              <p>Working through hard problems with other students and building the analytical base that engineering depends on.</p>
+            </div></li>
+            <li class="act"><span class="tile">♞</span><div>
+              <div class="act-head"><h3>Chess Club</h3><span>2023 – 2026 · Grades 8–10</span></div>
+              <p>Three years of planning ahead, spotting patterns, and staying patient under pressure.</p>
+            </div></li>
+          </ul>
         </div>
-        <div class="reveal from-right delay-1">
+
+        <div class="tab-panel" role="tabpanel" id="panel-speak" aria-labelledby="tab-speak" hidden>
+          <h3 class="no-js-head">Speaking &amp; Service</h3>
+          <ul class="acts">
+            <li class="act"><span class="tile">“ ”</span><div>
+              <div class="act-head"><h3>Speech and Debate</h3><span>2025 – 2026</span></div>
+              <p>Competed through my sophomore year: researching topics, building arguments, and speaking clearly on the clock.</p>
+            </div></li>
+            <li class="act"><span class="tile">§</span><div>
+              <div class="act-head"><h3>Mock Trial</h3><span>Team member</span></div>
+              <p>Prepared and argued cases with a team, learning to analyze evidence, think on my feet, and make a clear, persuasive case.</p>
+            </div></li>
+            <li class="act"><span class="tile">K</span><div>
+              <div class="act-head"><h3>Key Club</h3><span>2025 – 2026</span></div>
+              <p>Volunteered in my school and community through a student-led organization focused on service and leadership.</p>
+            </div></li>
+            <li class="act"><span class="tile">Fr</span><div>
+              <div class="act-head"><h3>French Club</h3><span>Member</span></div>
+              <p>Exploring the French language and francophone culture. Along with near-fluent Spanish, French helps me connect with people beyond English.</p>
+            </div></li>
+          </ul>
+        </div>
+
+        <div class="tab-panel" role="tabpanel" id="panel-sport" aria-labelledby="tab-sport" hidden>
+          <h3 class="no-js-head">Athletics</h3>
+          <ul class="acts">
+            <li class="act"><span class="tile">15-0</span><div>
+              <div class="act-head"><h3>Varsity Tennis</h3><span>Gettysburg Area High School</span></div>
+              <p>Competing on the varsity team, building discipline, focus, and resilience through practice, matches, and backing up my teammates.</p>
+            </div></li>
+            <li class="act"><span class="tile">MTB</span><div>
+              <div class="act-head"><h3>Mountain Biking · PICL</h3><span>2020 – 2025 · Six seasons</span></div>
+              <p>Raced six seasons in the Pennsylvania Interscholastic Cycling League, from age 10 to 15, building endurance and the grit to push through demanding courses.</p>
+            </div></li>
+            <li class="act"><span class="tile">7v7</span><div>
+              <div class="act-head"><h3>Ultimate Frisbee Club</h3><span>2025 – Present</span></div>
+              <p>A self-refereed sport built on teamwork, communication, and sportsmanship.</p>
+            </div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="status-bar" aria-hidden="true"><span>14 activities</span><span>3 groups</span></div>
+    </section>
+
+    <!-- ================= TRAVEL ================= -->
+    <section class="win" id="travel" aria-labelledby="travel-t">
+      <div class="titlebar"><svg><use href="#i-globe"/></svg><h2 id="travel-t">Travel</h2><span class="ctl" aria-hidden="true"><span class="min"></span><span class="max"></span><span class="x"></span></span></div>
+      <div class="win-body travel">
+        <div>
+          <p class="lead">Travel is one of my favorite ways to learn.</p>
+          <p>Wherever I go, I try to meet a place on its own terms: its history and traditions, the local food, and the language whenever I can use it. My Spanish and French help, and every trip makes me more adaptable and better at connecting with people whose backgrounds differ from mine.</p>
+          <div class="stat"><b id="travel-num">13</b><small>countries &amp; territories visited</small></div>
+          <ul class="listbox" id="visited-list" aria-label="Places visited"></ul>
+        </div>
+        <div>
           <div class="map-wrap" id="map-wrap">
             <svg class="world" viewBox="0 0 960 460" role="img" aria-label="World map of countries Ezra has visited">
-<path class="sphere" d="M193.8,19.8L480,19.8L766.2,19.8L816.6,44.1L837.1,56.2L857.3,70L876.4,85.1L894,101.3L909.8,118.6L923.7,136.6L935.6,155.4L945.4,174.6L953.1,194.3L958.6,214.3L961.9,234.5L963,254.9L961.9,275.2L958.6,295.4L953.1,315.4L945.4,335.1L935.6,354.4L923.7,373.1L909.8,391.1L894,408.4L876.4,424.6L857.3,439.8L837.1,453.5L816.6,465.6L766.2,490L480,490L193.8,490L143.4,465.6L122.9,453.5L102.7,439.8L83.6,424.6L66,408.4L50.2,391.1L36.3,373.1L24.4,354.4L14.6,335.1L6.9,315.4L1.4,295.4L-1.9,275.2L-3,254.9L-1.9,234.5L1.4,214.3L6.9,194.3L14.6,174.6L24.4,155.4L36.3,136.6L50.2,118.6L66,101.3L83.6,85.1L102.7,70L122.9,56.2L143.4,44.1L193.8,19.8Z"/>
 <g class="countries">
 <path data-iso="FJI" data-name="Fiji" data-c="909.9,317.0" data-a="15" d="M947.4,317.6L948.2,317L948.8,318.1L947.7,319.9L945.9,320.4L944.6,320L944.9,318.4L946.4,317.2ZM953.4,314.3L951.5,315.1L949.6,315.9L949.7,314.6L951.2,313.9L952.1,313.7L954,312.6L954,312.6L953.4,314.3ZM6,312.6L6,312.6L6,312.6L6.5,312.4L6.7,314.1L6.6,314.3L6.6,314.3L6,312.6Z"/>
 <path data-iso="TZA" data-name="Tanzania" data-c="572.9,277.4" data-a="735" d="M571,258.3L571.4,258.7L581.1,266.1L581.2,268.2L585,271.8L583.7,276.2L583.8,278.2L585.5,279.6L585.5,280.5L584.7,282.7L584.8,283.8L584.6,285.5L585.5,287.7L586.4,291.3L587.4,292.1L585.1,294.1L582.2,295.5L580.6,295.5L579.6,296.5L577.7,296.6L577,297.1L573.9,296.1L571.8,296.4L571.3,291.5L570.5,289.8L570,288.8L567.4,288.2L565.9,287.1L564.2,286.5L563.2,285.9L562.1,285L560.7,280.4L559.2,278.4L558.8,276.3L559,274.4L558.6,271.1L559.7,271L560.7,269.6L561.8,267.8L562.5,267L562.4,265.8L561.9,265L561.7,263.6L562.5,263.1L562.7,261L561.6,259L562.6,258.5L565.5,258.6Z"/>
@@ -1106,130 +949,163 @@
 <path data-iso="STP" data-name="São Tomé and Príncipe" data-c="497.7,254.2" data-a="1" d="M496.8,254.2L496.8,254.1L496.8,253.9L496.9,253.8L496.9,253.7L496.9,253.6L497,253.5L497,253.3L497.1,253.3L497.2,253.2L497.3,253.1L497.4,253L497.5,253L497.5,253L497.6,252.9L497.7,252.9L497.8,252.9L497.9,253L498,253L498.1,253L498.2,253.1L498.3,253.2L498.4,253.2L498.4,253.3L498.5,253.4L498.6,253.6L498.6,253.7L498.6,253.8L498.7,253.9L498.7,254L498.7,254.2L498.7,254.3L498.7,254.4L498.6,254.6L498.6,254.7L498.6,254.8L498.5,254.9L498.4,255L498.4,255.1L498.3,255.2L498.2,255.3L498.1,255.3L498,255.4L497.9,255.4L497.9,255.4L497.8,255.5L497.7,255.4L497.6,255.4L497.5,255.4L497.4,255.3L497.3,255.3L497.2,255.2L497.1,255.1L497.1,255L497,254.9L496.9,254.8L496.9,254.7L496.9,254.6L496.8,254.5L496.8,254.3Z"/>
 </g>
 <g class="pins"></g>
-</svg>
+            </svg>
             <div class="map-tip" id="map-tip"></div>
           </div>
-          <div class="map-legend"><span><i style="background:var(--green)"></i>Visited</span><span><i style="background:#1b3245"></i>Not yet</span></div>
+          <div class="legend"><span><i style="background:var(--blue)"></i>Visited</span><span><i style="background:#d4d4d4"></i>Not yet</span></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ================= EXPERIENCE ================= -->
-  <section id="experience" class="blueprint">
-    <div class="wrap">
-      <div class="reveal from-up">
-        <div class="sec-head">Experience</div>
-        <h2>Where I've <span class="accent">worked.</span></h2>
-        <p class="lead">Roles that built my reliability, communication, and ability to perform in fast-paced environments.</p>
-      </div>
-
-      <div class="jobs">
-        <div class="job reveal from-left">
-          <div class="job-head"><h3>Mason Dixon Distillery</h3><span class="role">Cook</span></div>
-          <ul>
-            <li>Prepare and plate menu items to consistent quality standards in a high-volume commercial kitchen.</li>
-            <li>Follow food safety, sanitation, and handling procedures every shift.</li>
-            <li>Coordinate with kitchen and front-of-house staff to keep orders accurate and on time during peak service.</li>
-          </ul>
+    <!-- ================= EXPERIENCE ================= -->
+    <section class="win" id="experience" aria-labelledby="experience-t">
+      <div class="titlebar"><svg><use href="#i-case"/></svg><h2 id="experience-t">Work Experience</h2><span class="ctl" aria-hidden="true"><span class="min"></span><span class="max"></span><span class="x"></span></span></div>
+      <div class="win-body">
+        <p class="lead">Jobs that taught me reliability, teamwork, and how to keep up when it's busy.</p>
+        <div class="groups jobs">
+          <fieldset class="group">
+            <legend>Mason Dixon Distillery · Cook</legend>
+            <ul class="dots">
+              <li>Prepare and plate dishes to a consistent standard in a high-volume commercial kitchen.</li>
+              <li>Follow food safety and sanitation procedures on every shift.</li>
+              <li>Work with the kitchen and front-of-house teams to keep orders accurate and on time during the rush.</li>
+            </ul>
+          </fieldset>
+          <fieldset class="group">
+            <legend>Kennie's Marketplace · Cashier</legend>
+            <ul class="dots">
+              <li>Handled transactions quickly and accurately, including cash handling and balancing the register.</li>
+              <li>Gave friendly, professional service and answered customer questions at checkout.</li>
+              <li>Helped the store run smoothly by bagging, stocking, and keeping the front end organized.</li>
+            </ul>
+          </fieldset>
+          <!-- To add a job: copy a whole <fieldset class="group"> block. -->
         </div>
-        <div class="job reveal from-left delay-1">
-          <div class="job-head"><h3>Kennie's Marketplace</h3><span class="role">Cashier</span></div>
-          <ul>
-            <li>Processed customer transactions quickly and accurately, including cash handling and register balancing.</li>
-            <li>Delivered friendly, professional customer service and resolved questions at checkout.</li>
-            <li>Supported store operations by assisting with bagging, stocking, and keeping the front end organized.</li>
-          </ul>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section class="win" id="contact" aria-labelledby="contact-t">
+      <div class="titlebar"><svg><use href="#i-mail"/></svg><h2 id="contact-t">Contact</h2><span class="ctl" aria-hidden="true"><span class="min"></span><span class="max"></span><span class="x"></span></span></div>
+      <div class="win-body">
+        <p class="lead">I'm always up for engineering opportunities, new learning experiences, and building something together. Say hi.</p>
+        <div class="links">
+          <!-- The email address is assembled by script so spam bots can't scrape it from the page source -->
+          <a class="link" id="email-link" href="#contact">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5A1.5 1.5 0 0 1 3.5 4h17A1.5 1.5 0 0 1 22 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18.5v-13zm2.2.5L12 11.6 19.8 6H4.2zM20 7.9l-7.4 5.3a1 1 0 0 1-1.2 0L4 7.9V18h16V7.9z"/></svg>
+            <span class="lname">Email</span><span class="lhandle" id="email-text">Tap to email</span>
+          </a>
+          <a class="link" href="https://www.linkedin.com/in/ezra-kerney-0b678b38a/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3V9.75zm7 0h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5c0-1.2-.02-2.73-1.670-2.73-1.67 0-1.93 1.3-1.93 2.64V21h-4V9.75z"/></svg>
+            <span class="lname">LinkedIn</span><span class="lhandle">Ezra Kerney</span>
+          </a>
+          <a class="link" href="https://www.instagram.com/ezra_iso/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.58 0 4.85.07 3.25.15 4.77 1.690 4.92 4.92.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.580 0-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.17 15.58 2.16 15.2 2.16 12s0-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33 0 7.05.07 2.7.27.27 2.69.07 7.05 0 8.33 0 8.74 0 12s0 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 24 8.74 24 12 24s3.67 0 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s0-3.67-.07-4.95C23.73 2.7 21.31.27 16.95.07 15.67 0 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
+            <span class="lname">Instagram</span><span class="lhandle">@ezra_iso</span>
+          </a>
+          <!-- Swap this link for your exact Facebook profile URL (open your profile and copy the address bar) -->
+          <a class="link" href="https://www.facebook.com/search/people/?q=Ezra%20Kerney" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/></svg>
+            <span class="lname">Facebook</span><span class="lhandle">Ezra Kerney</span>
+          </a>
+          <a class="link" href="https://dinglebonglewongle.itch.io" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 6H3a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4-3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
+            <span class="lname">itch.io</span><span class="lhandle">My games</span>
+          </a>
+          <a class="link" href="https://www.depop.com/ezrakern/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7V6a5 5 0 0 1 10 0v1h3l1 15H3L4 7h3zm2 0h6V6a3 3 0 0 0-6 0v1zm-3.1 2-.8 11h13.8l-.8-11H5.9z"/></svg>
+            <span class="lname">Depop</span><span class="lhandle">Shop my stuff · @ezrakern</span>
+          </a>
         </div>
-        <!-- To add a job: copy a whole .job block. -->
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- ================= CONTACT ================= -->
-  <section id="contact">
-    <div class="wrap reveal from-up">
-      <div class="sec-head">Connect</div>
-      <h2>Let's <span class="accent">connect.</span></h2>
-      <p class="lead">I'm always interested in engineering opportunities, learning experiences, and collaborating on new projects.</p>
-      <div class="links">
-        <!-- Email and phone are assembled by script so spam bots can't scrape them from the page source -->
-        <a class="link-row" id="email-link" href="#contact">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5A1.5 1.5 0 0 1 3.5 4h17A1.5 1.5 0 0 1 22 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18.5v-13zm2.2.5L12 11.6 19.8 6H4.2zM20 7.9l-7.4 5.3a1 1 0 0 1-1.2 0L4 7.9V18h16V7.9z"/></svg>
-          <span class="name">Email</span><span class="handle" id="email-text">Tap to email</span>
-        </a>
-        <a class="link-row" id="text-link" href="#contact">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H8.4L4 21.5V18a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v11h2v1.4L7.6 16H20V5H4zm3 4h10v2H7V9z"/></svg>
-          <span class="name">Text</span><span class="handle" id="text-text">Tap to text</span>
-        </a>
-        <a class="link-row" href="https://www.linkedin.com/in/ezra-kerney-0b678b38a/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3V9.75zm7 0h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5c0-1.2-.02-2.73-1.67-2.73-1.67 0-1.93 1.3-1.93 2.64V21h-4V9.75z"/></svg>
-          <span class="name">LinkedIn</span><span class="handle">Ezra Kerney</span>
-        </a>
-        <a class="link-row" href="https://www.instagram.com/ezra_iso/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.58 0 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.17 15.58 2.16 15.2 2.16 12s0-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33 0 7.05.07 2.7.27.27 2.69.07 7.05 0 8.33 0 8.74 0 12s0 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 24 8.74 24 12 24s3.67 0 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s0-3.67-.07-4.95C23.73 2.7 21.31.27 16.95.07 15.67 0 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
-          <span class="name">Instagram</span><span class="handle">@ezra_iso</span>
-        </a>
-        <!-- Swap this link for your exact Facebook profile URL (open your profile and copy the address bar) -->
-        <a class="link-row" href="https://www.facebook.com/search/people/?q=Ezra%20Kerney" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/></svg>
-          <span class="name">Facebook</span><span class="handle">Ezra Kerney</span>
-        </a>
-        <a class="link-row" href="https://www.depop.com/ezrakern/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7V6a5 5 0 0 1 10 0v1h3l1 15H3L4 7h3zm2 0h6V6a3 3 0 0 0-6 0v1zm-3.1 2-.8 11h13.8l-.8-11H5.9z"/></svg>
-          <span class="name">Depop</span><span class="handle">Shop my stuff · @ezrakern</span>
-        </a>
-        <a class="link-row" href="https://gahsgames.com" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 6H3a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4-3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
-          <span class="name">GAHSgames.com</span><span class="handle">My project</span>
-        </a>
-        <a class="link-row" href="https://shortutorial.com" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4V4zm16 0h-4a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h5V4z"/></svg>
-          <span class="name">Shortutorial.com</span><span class="handle">My project</span>
-        </a>
-      </div>
-    </div>
-  </section>
+  <footer>© <span id="year"></span> Ezra Kerney · Designed and built from scratch</footer>
 
-  <footer>
-    <div class="wrap"><span>© <span id="year"></span> Ezra Kerney</span><span>Designed and built from scratch</span></div>
-  </footer>
+  <!-- ================= TASKBAR ================= -->
+  <div class="start-menu" id="start-menu" hidden>
+    <div class="stripe" aria-hidden="true">Ezra <span>Kerney</span></div>
+    <ul aria-label="Start menu">
+      <li><a href="#about"><svg><use href="#i-user"/></svg>About Me</a></li>
+      <li><a href="#projects"><svg><use href="#i-folder"/></svg>Projects</a></li>
+      <li><a href="#wezzet"><svg><use href="#i-w"/></svg>Wezzet</a></li>
+      <li><a href="#activities"><svg><use href="#i-star"/></svg>Activities</a></li>
+      <li><a href="#travel"><svg><use href="#i-globe"/></svg>Travel</a></li>
+      <li><a href="#experience"><svg><use href="#i-case"/></svg>Experience</a></li>
+      <li><hr></li>
+      <li><a href="#contact"><svg><use href="#i-mail"/></svg>Contact</a></li>
+    </ul>
+  </div>
+  <nav class="taskbar" aria-label="Sections">
+    <button class="btn start" id="start" type="button" aria-expanded="false" aria-controls="start-menu"><span class="ek" aria-hidden="true">EK</span>Start</button>
+    <span class="sep" aria-hidden="true"></span>
+    <ul class="tasks">
+      <li><a href="#top" data-for="top"><svg><use href="#i-pc"/></svg><span>Welcome</span></a></li>
+      <li><a href="#about" data-for="about"><svg><use href="#i-user"/></svg><span>About Me</span></a></li>
+      <li><a href="#projects" data-for="projects"><svg><use href="#i-folder"/></svg><span>Projects</span></a></li>
+      <li><a href="#wezzet" data-for="wezzet"><svg><use href="#i-w"/></svg><span>Wezzet</span></a></li>
+      <li><a href="#activities" data-for="activities"><svg><use href="#i-star"/></svg><span>Activities</span></a></li>
+      <li><a href="#travel" data-for="travel"><svg><use href="#i-globe"/></svg><span>Travel</span></a></li>
+      <li><a href="#experience" data-for="experience"><svg><use href="#i-case"/></svg><span>Experience</span></a></li>
+      <li><a href="#contact" data-for="contact"><svg><use href="#i-mail"/></svg><span>Contact</span></a></li>
+    </ul>
+    <span class="spacer"></span>
+    <span class="tray" id="clock" aria-hidden="true">12:00 PM</span>
+  </nav>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Typing effect in hero
-    const phrases = ["Aspiring Engineer", "Creator of GAHSgames.com", "Creator of Shortutorial.com", "Roblox Game Developer", "Hack Club Member", "Java Programmer", "TSA Member", "National Math Honors Society", "Varsity Tennis Player", "Problem Solver"];
-    const el = document.getElementById("typed");
-    let p = 0, c = 0, deleting = false;
-    function type() {
-      const word = phrases[p];
-      el.textContent = word.slice(0, c);
-      if (!deleting && c < word.length) { c++; setTimeout(type, 70); }
-      else if (!deleting) { deleting = true; setTimeout(type, 1600); }
-      else if (c > 0) { c--; setTimeout(type, 35); }
-      else { deleting = false; p = (p + 1) % phrases.length; setTimeout(type, 300); }
-    }
-    type();
+    // "Did you know..." tips in the Welcome window
+    const tips = [
+      "Wezzet.com has more than 700 free tools, and almost all of them run right in your browser.",
+      "Altus has ten handcrafted maps, a ranked ladder, and a 60-tier season pass.",
+      "BouncingBulletBaby was built in a weekend for Hack Club Haven, a game jam held in more than 200 cities.",
+      "Tiny Henry went from idea to finished 3D game in three days.",
+      "Ezra raced mountain bikes for six seasons in the Pennsylvania Interscholastic Cycling League.",
+      "Ezra speaks Spanish nearly fluently and French well.",
+      "AI Comms on Wezzet lets AI agents message each other and split up work.",
+      "Chain Watch on Wezzet follows stolen crypto from wallets named in FBI and OFAC notices.",
+      "Shortutorial.com checks quiz answers on the server, so nobody can read them from the page."
+    ];
+    let tipN = 0;
+    document.getElementById("tip-next").addEventListener("click", () => {
+      tipN = (tipN + 1) % tips.length;
+      document.getElementById("tip-text").textContent = tips[tipN];
+    });
 
-    // Slide-in on scroll
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("show"); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll(".reveal").forEach(r => io.observe(r));
-
-    // Contact links (built here instead of in the HTML to keep them away from spam scrapers)
+    // Email link (built here instead of in the HTML to keep it away from spam scrapers)
     (() => {
-      const user = ["ezra", "kerney"].join(""), domain = ["gmail", "com"].join(".");
-      const email = user + "@" + domain;
-      const digits = ["223", "272", "9323"];
-      const e = document.getElementById("email-link"), t = document.getElementById("text-link");
-      e.href = "mailto:" + email; document.getElementById("email-text").textContent = email;
-      t.href = "sms:+1" + digits.join(""); document.getElementById("text-text").textContent = "(" + digits[0] + ") " + digits[1] + "-" + digits[2];
+      const email = ["ezra", "kerney"].join("") + "@" + ["gmail", "com"].join(".");
+      document.getElementById("email-link").href = "mailto:" + email;
+      document.getElementById("email-text").textContent = email;
+    })();
+
+    // Activity tabs
+    (() => {
+      const tabs = [...document.querySelectorAll('[role="tab"]')];
+      const pick = t => {
+        tabs.forEach(x => {
+          const on = x === t;
+          x.setAttribute("aria-selected", on);
+          x.tabIndex = on ? 0 : -1;
+          document.getElementById(x.getAttribute("aria-controls")).hidden = !on;
+        });
+      };
+      tabs.forEach((t, i) => {
+        t.addEventListener("click", () => pick(t));
+        t.addEventListener("keydown", e => {
+          const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+          if (!d) return;
+          const n = tabs[(i + d + tabs.length) % tabs.length];
+          pick(n); n.focus();
+        });
+      });
     })();
 
     // ===== Travel map =====
-    // To add a country: add its 3-letter ISO code to this list (e.g. "ITA" for Italy, "JPN" for Japan).
+    // To add a country: add its 3-letter ISO code to this list (e.g. "JPN" for Japan).
     const VISITED = ["USA", "CAN", "MEX", "PRI", "GBR", "IRL", "FRA", "DNK", "MAR", "LKA", "ITA", "VAT", "TUR"];
     (() => {
       const svg = document.querySelector(".world"), pins = svg.querySelector(".pins");
@@ -1247,12 +1123,9 @@
         // small countries get a pin so they're easy to spot
         if (+p.dataset.a < 80) {
           const [x, y] = p.dataset.c.split(",").map(Number);
-          for (const cls of ["ring", ""]) {
-            const c = document.createElementNS(NS, "circle");
-            c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", 3.2);
-            if (cls) c.setAttribute("class", cls);
-            pins.appendChild(c);
-          }
+          const c = document.createElementNS(NS, "circle");
+          c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", 3.4);
+          pins.appendChild(c);
         }
       });
       names.sort((a, b) => a[0].localeCompare(b[0]));
@@ -1264,7 +1137,7 @@
         list.appendChild(li);
       });
       document.getElementById("travel-num").textContent = names.length;
-      document.getElementById("fact-travel").textContent = names.length + " countries & territories";
+      document.querySelectorAll(".travel-n").forEach(s => s.textContent = names.length);
 
       svg.addEventListener("mousemove", e => {
         const p = e.target.closest(".countries path");
@@ -1278,19 +1151,35 @@
       svg.addEventListener("mouseleave", () => tip.classList.remove("show"));
     })();
 
-    // Nav background + progress bar
-    const nav = document.getElementById("nav"), bar = document.getElementById("progress");
-    let lastY = window.scrollY;
-    window.addEventListener("scroll", () => {
-      const y = window.scrollY;
-      nav.classList.toggle("scrolled", y > 40);
-      // hide the menu bar while scrolling down, bring it back when scrolling up
-      if (y > lastY + 4 && y > 120) nav.classList.add("nav-hidden");
-      else if (y < lastY - 4 || y <= 120) nav.classList.remove("nav-hidden");
-      lastY = y;
-      const h = document.documentElement.scrollHeight - window.innerHeight;
-      bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
-    }, { passive: true });
+    // Start menu
+    (() => {
+      const btn = document.getElementById("start"), menu = document.getElementById("start-menu");
+      const set = open => { menu.hidden = !open; btn.setAttribute("aria-expanded", open); };
+      btn.addEventListener("click", e => { e.stopPropagation(); set(menu.hidden); if (!menu.hidden) menu.querySelector("a").focus(); });
+      menu.addEventListener("click", e => { if (e.target.closest("a")) set(false); });
+      document.addEventListener("click", e => { if (!menu.hidden && !menu.contains(e.target)) set(false); });
+      document.addEventListener("keydown", e => { if (e.key === "Escape" && !menu.hidden) { set(false); btn.focus(); } });
+    })();
+
+    // Taskbar: highlight the window you're looking at
+    (() => {
+      const links = [...document.querySelectorAll(".tasks a")];
+      const seen = new Map();
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => seen.set(e.target.id, e.intersectionRatio));
+        let best = null, max = 0;
+        seen.forEach((v, k) => { if (v > max) { max = v; best = k; } });
+        links.forEach(a => a.classList.toggle("on", a.dataset.for === best));
+      }, { threshold: [0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1], rootMargin: "-20% 0px -35% 0px" });
+      links.forEach(a => { const s = document.getElementById(a.dataset.for); if (s) io.observe(s); });
+    })();
+
+    // Taskbar clock
+    (() => {
+      const el = document.getElementById("clock");
+      const tick = () => el.textContent = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+      tick(); setInterval(tick, 15000);
+    })();
   </script>
 </body>
 </html>
