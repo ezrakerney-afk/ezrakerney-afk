@@ -1,0 +1,13 @@
+tahoma.woff2 is the Tahoma replacement font from the
+Wine project (https://www.winehq.org/), subset to Latin and converted to WOFF2.
+It is used only when a visitor's device doesn't have Tahoma installed.
+
+Copyright (c) 2004 Larry Snyder, based on Bitstream Vera Sans
+Copyright (c) 2003 by Bitstream, Inc.
+
+This font is free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as published by the
+Free Software Foundation; either version 2.1 of the License, or (at your
+option) any later version. See https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+
+Original source: https://gitlab.winehq.org/wine/wine/-/tree/wine-9.0/fonts

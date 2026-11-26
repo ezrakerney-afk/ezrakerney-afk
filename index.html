@@ -6,9 +6,9 @@
   <title>Ezra Kerney — Portfolio</title>
   <meta name="description" content="Portfolio of Ezra Kerney, a junior at Gettysburg Area High School focused on engineering. Co-creator of Wezzet.com, creator of GAHSgames.com, Shortutorial.com and the Roblox game Altus, game jam developer, TSA member, and varsity tennis player.">
   <!-- Tab icon -->
-  <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="icon" href="favicon-48.png?v=2" sizes="48x48" type="image/png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+  <link rel="icon" href="favicon.svg?v=3" type="image/svg+xml">
+  <link rel="icon" href="favicon-48.png?v=3" sizes="48x48" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
   <meta name="theme-color" content="#000080">
 
   <!-- Search engines and link previews -->
@@ -18,7 +18,7 @@
   <meta property="og:title" content="Ezra Kerney — Portfolio">
   <meta property="og:description" content="Aspiring engineer at Gettysburg Area High School. Co-creator of Wezzet.com, creator of GAHSgames.com, Shortutorial.com and the Roblox game Altus.">
   <meta property="og:url" content="https://ezrakerney.com/">
-  <meta property="og:image" content="https://ezrakerney.com/icon-192.png?v=2">
+  <meta property="og:image" content="https://ezrakerney.com/icon-192.png?v=3">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -39,18 +39,17 @@
     ]
   }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Pixelify+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="fonts/tahoma.woff2" as="font" type="font/woff2" crossorigin>
 
   <style>
     /* ============================================================
        Retro desktop. Sections are windows on a desktop: click an
        icon to open one, drag it by the title bar, close it with X.
        One blue (#000080 to #1084d0) plus the classic UI grays.
-       Fonts: Pixelify Sans for the window chrome and headings,
-       Open Sans for reading text. Both load from Google Fonts so
-       the site looks the same on every computer and phone.
+       Font: Tahoma, the classic Windows UI font. Computers that
+       don't have it (most phones) get a free Tahoma clone from the
+       Wine project (fonts/, LGPL), so it looks the same everywhere.
+       Icons are 16x16 pixel art, drawn at 2x on the desktop.
        ============================================================ */
     :root {
       --desk: #2e6fc4;          /* shown while the wallpaper loads */
@@ -63,20 +62,20 @@
       --paper: #ffffff;
       --ink: #000000;
       --muted: #3d3d3d;
-      --text: "Open Sans", "Segoe UI", Arial, sans-serif;
-      --pixel: "Pixelify Sans", "Courier New", monospace;
+      --ui: Tahoma, "Wine Tahoma", Verdana, "Segoe UI", sans-serif;
       --raised: inset -1px -1px var(--dark), inset 1px 1px var(--paper), inset -2px -2px var(--shade), inset 2px 2px var(--lite);
       --sunken: inset -1px -1px var(--paper), inset 1px 1px var(--shade), inset -2px -2px var(--lite), inset 2px 2px var(--dark);
       --taskbar-h: 40px;
     }
 
+    /* The Wine clone's bold outlines are barely bold, so bold text uses the browser's synthetic bold of the regular face */
+    @font-face { font-family: "Wine Tahoma"; src: url("fonts/tahoma.woff2") format("woff2"); font-weight: 400; font-display: swap; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font: 14.5px/1.6 var(--text); color: var(--ink);
+      font: 14px/1.55 var(--ui); color: var(--ink);
       background: var(--desk) url("wallpaper.jpg") center / cover no-repeat fixed;
       padding-bottom: calc(var(--taskbar-h) + 8px);
       overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
     }
     a { color: var(--blue); }
     a:hover { color: var(--blue2); }
@@ -86,11 +85,7 @@
     :focus-visible { outline: 1px dotted var(--ink); outline-offset: 2px; }
     .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-    /* Chrome text (title bars, buttons, menus, labels) uses the pixel font */
-    .titlebar, .btn, .tasks, .tray, .start-menu, .desk-icons, .tabs, .bar, .status-bar,
-    .group > legend, .sub, h1, h2, h3, .tile, .stat b, .count b, .proj-name {
-      font-family: var(--pixel);
-    }
+    b, strong, h1, h2, h3, legend, dd { font-weight: 700; }
 
     /* ---------- Windows ---------- */
     .win { background: var(--face); box-shadow: var(--raised); padding: 3px; display: flex; flex-direction: column; }
@@ -102,7 +97,7 @@
     .win:not(.active) .titlebar { background: linear-gradient(90deg, #7b7b7b, #b4b4b4); color: #e8e8e8; }
     html:not(.js) .win .titlebar { background: linear-gradient(90deg, var(--blue), var(--blue2)); color: #fff; }
     .titlebar svg { width: 16px; height: 16px; flex: none; }
-    .titlebar h2, .titlebar .t { flex: 1; min-width: 0; font-size: 15px; font-weight: 600; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: .02em; }
+    .titlebar h2, .titlebar .t { flex: 1; min-width: 0; font-size: 13px; font-weight: 700; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .ctl { display: flex; gap: 2px; flex: none; }
     .ctl button { width: 20px; height: 18px; background: var(--face); box-shadow: var(--raised); position: relative; border: 0; cursor: pointer; padding: 0; }
     .ctl button:active { box-shadow: var(--sunken); }
@@ -113,26 +108,26 @@
     .ctl .x::after { transform: rotate(-45deg); }
     html:not(.js) .ctl { display: none; }
 
-    .bar { display: flex; align-items: center; gap: 8px; padding: 4px 6px 3px; font-size: 14px; border-bottom: 1px solid var(--shade); box-shadow: 0 1px var(--paper); flex: none; }
+    .bar { display: flex; align-items: center; gap: 8px; padding: 4px 6px 3px; font-size: 13px; border-bottom: 1px solid var(--shade); box-shadow: 0 1px var(--paper); flex: none; }
     .bar .field { flex: 1; min-width: 0; background: var(--paper); box-shadow: var(--sunken); padding: 2px 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .win-body { padding: 18px 20px 20px; }
-    .status-bar { display: flex; gap: 3px; padding: 2px 0 0; font-size: 13.5px; color: var(--muted); flex: none; }
+    .status-bar { display: flex; gap: 3px; padding: 2px 0 0; font-size: 12px; color: var(--muted); flex: none; }
     .status-bar span { box-shadow: inset 1px 1px var(--shade), inset -1px -1px var(--paper); padding: 1px 8px; }
     .status-bar span:first-child { flex: 1; }
 
-    .lead { font-size: 15.5px; max-width: 68ch; margin-bottom: 16px; }
+    .lead { font-size: 15px; max-width: 68ch; margin-bottom: 16px; }
     p + p { margin-top: 10px; }
-    h3 { font-size: 18px; line-height: 1.25; font-weight: 600; }
+    h3 { font-size: 15px; line-height: 1.3; }
     ul.dots { margin: 8px 0 0 18px; }
     ul.dots li { margin: 3px 0; padding-left: 2px; }
     ul.dots li::marker { color: var(--blue); }
 
     /* Group boxes (etched frame with a label) */
     .group { border: 1px solid var(--shade); box-shadow: inset 1px 1px var(--paper), 1px 1px var(--paper); padding: 14px 16px 16px; margin: 0; min-width: 0; }
-    .group > legend { padding: 0 5px; margin-left: -2px; font-weight: 600; font-size: 16px; display: flex; align-items: center; gap: 6px; }
+    .group > legend { padding: 0 5px; margin-left: -2px; font-size: 13.5px; display: flex; align-items: center; gap: 6px; }
     .group > legend svg { width: 16px; height: 16px; }
-    .group p, .group ul.dots { font-size: 14px; }
-    .group .go { display: inline-block; margin-top: 10px; font-size: 14px; font-weight: 600; }
+    .group p, .group ul.dots { font-size: 13.5px; }
+    .group .go { display: inline-block; margin-top: 10px; font-size: 13.5px; font-weight: 700; }
     .groups { display: grid; gap: 20px 16px; }
     .groups.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
@@ -140,7 +135,7 @@
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       min-width: 96px; padding: 5px 16px; background: var(--face); color: var(--ink);
-      font-size: 15px; text-decoration: none; box-shadow: var(--raised); border: 0; cursor: pointer;
+      font-size: 13px; text-decoration: none; box-shadow: var(--raised); border: 0; cursor: pointer;
     }
     .btn:hover { color: var(--ink); }
     .btn:active { box-shadow: var(--sunken); transform: translate(1px, 1px); }
@@ -151,12 +146,12 @@
     .tile {
       width: 52px; height: 52px; flex: none; display: grid; place-items: center;
       background: var(--paper); box-shadow: var(--sunken);
-      font-size: 22px; line-height: 1; font-weight: 600; color: var(--blue); text-align: center;
+      font-size: 15px; line-height: 1; font-weight: 700; color: var(--blue); text-align: center;
     }
 
     .stat { background: var(--paper); box-shadow: var(--sunken); padding: 8px 12px; }
-    .stat b { display: block; font-size: 32px; line-height: 1.1; font-weight: 600; color: var(--blue); }
-    .stat small { font-size: 13px; color: var(--muted); }
+    .stat b { display: block; font-size: 26px; line-height: 1.15; color: var(--blue); letter-spacing: -.5px; }
+    .stat small { font-size: 12px; color: var(--muted); }
 
     /* ---------- Desktop + desktop icons ---------- */
     .desk-icons {
@@ -164,10 +159,10 @@
     }
     .desk-icons a {
       display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 2px;
-      color: #fff; text-decoration: none; font-size: 15px; line-height: 1.15; text-align: center;
+      color: #fff; text-decoration: none; font-size: 12.5px; line-height: 1.2; text-align: center;
     }
-    .desk-icons svg { width: 40px; height: 40px; filter: drop-shadow(1px 1px 0 rgba(0,0,0,.35)); }
-    .desk-icons span { padding: 1px 4px; text-shadow: 1px 1px 0 #000, 0 0 3px rgba(0,0,0,.6); }
+    .desk-icons svg { width: 32px; height: 32px; filter: drop-shadow(1px 1px 0 rgba(0,0,0,.3)); }
+    .desk-icons span { padding: 0 3px; text-shadow: 1px 1px 0 #000, 0 0 3px rgba(0,0,0,.7); }
     .desk-icons a:hover span, .desk-icons a:focus-visible span, .desk-icons a.sel span { background: var(--blue); text-shadow: none; outline: 1px dotted #fff; }
     .desk-icons a:focus-visible { outline: none; }
 
@@ -191,59 +186,58 @@
 
     /* ---------- Welcome ---------- */
     .welcome { display: grid; grid-template-columns: 1fr 170px; gap: 22px; }
-    .hello { font-size: 16px; color: var(--muted); }
-    .name { font-size: clamp(40px, 7vw, 60px); white-space: nowrap; line-height: 1; font-weight: 700; color: var(--blue); margin: 4px 0 8px; letter-spacing: .01em; }
-    .tagline { font-weight: 700; font-size: 15px; margin-bottom: 12px; }
+    .hello { font-size: 14px; color: var(--muted); }
+    .name { font-size: clamp(36px, 6.4vw, 52px); white-space: nowrap; line-height: 1.05; color: var(--blue); margin: 2px 0 10px; letter-spacing: -1.5px; text-shadow: 2px 2px 0 #fff; }
+    .tagline { font-weight: 700; font-size: 14px; margin-bottom: 12px; }
     .tip { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; margin-top: 18px; padding: 12px 14px; background: #ffffe1; box-shadow: var(--sunken); }
-    .tip svg { width: 34px; height: 34px; }
-    .tip b { display: block; font-size: 14.5px; margin-bottom: 2px; }
-    .tip p { min-height: 3.2em; font-size: 14px; }
+    .tip svg { width: 32px; height: 32px; }
+    .tip b { display: block; font-size: 13.5px; margin-bottom: 2px; }
+    .tip p { min-height: 3.2em; font-size: 13.5px; }
     .side-btns { display: flex; flex-direction: column; gap: 8px; justify-content: flex-end; }
     .side-btns .btn { width: 100%; }
-    .side-btns .hint { font-size: 13px; color: var(--muted); }
+    .side-btns .hint { font-size: 12px; color: var(--muted); }
 
     /* ---------- About ---------- */
     .about { display: grid; grid-template-columns: 1fr 320px; gap: 24px; align-items: start; }
     .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; }
-    .props { background: var(--paper); box-shadow: var(--sunken); padding: 3px; font-size: 13.5px; }
+    .props { background: var(--paper); box-shadow: var(--sunken); padding: 3px; font-size: 13px; }
     .props div { display: grid; grid-template-columns: 88px 1fr; gap: 10px; padding: 5px 8px; }
     .props div:nth-child(odd) { background: #f1f1f1; }
     .props dt { color: var(--muted); }
-    .props dd { font-weight: 600; }
-
+    
     /* ---------- Projects (icon buttons) ---------- */
-    .sub { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; margin: 4px 0 10px; }
+    .sub { display: flex; align-items: center; gap: 10px; font-size: 13.5px; font-weight: 700; margin: 4px 0 10px; }
     .sub::after { content: ""; flex: 1; height: 1px; background: var(--shade); box-shadow: 0 1px var(--paper); }
     .proj-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; margin-bottom: 22px; }
     .proj-list:last-child { margin-bottom: 0; }
     .proj-btn {
-      display: grid; grid-template-columns: 52px 1fr; gap: 12px; align-items: center; padding: 10px 12px;
+      display: grid; grid-template-columns: 32px 1fr; gap: 12px; align-items: center; padding: 10px 12px;
       background: var(--face); box-shadow: var(--raised); color: var(--ink); text-decoration: none;
     }
     .proj-btn:hover { color: var(--ink); }
     .proj-btn:active { box-shadow: var(--sunken); }
-    .proj-name { display: inline; font-size: 17px; font-weight: 600; padding: 0 3px; margin-left: -3px; }
+    .proj-btn svg { width: 32px; height: 32px; }
+    .proj-name { display: inline; font-size: 14px; font-weight: 700; padding: 0 3px; margin-left: -3px; }
     .proj-btn:hover .proj-name, .proj-btn:focus-visible .proj-name { background: var(--blue); color: #fff; }
-    .meta { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.4; margin-top: 2px; }
+    .meta { display: block; font-size: 12px; color: var(--muted); line-height: 1.4; margin-top: 2px; }
 
     /* ---------- Project detail windows (same layout as Wezzet) ---------- */
     .pd-intro { display: grid; grid-template-columns: 1fr 250px; gap: 22px; align-items: start; margin-bottom: 22px; }
     .pd-stats { display: grid; gap: 8px; }
     .pd-stats .stat { display: flex; align-items: baseline; gap: 12px; }
-    .pd-stats .stat b { font-size: 28px; min-width: 58px; }
+    .pd-stats .stat b { font-size: 24px; min-width: 58px; }
     .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-    .count { display: inline-flex; align-items: baseline; gap: 8px; }
-    .built { font-size: 13.5px; color: var(--muted); }
-    .built b { color: var(--ink); font-weight: 600; }
+    .built { font-size: 13px; color: var(--muted); }
+    .built b { color: var(--ink); }
 
     /* ---------- Activities (tabs) ---------- */
     .tabs { display: flex; flex-wrap: wrap; gap: 0; position: relative; z-index: 1; padding-left: 4px; }
     .tabs button {
-      font-size: 15px; color: var(--ink); background: var(--face); border: 0; cursor: pointer;
-      padding: 4px 14px 3px; margin-top: 3px; font-family: var(--pixel);
+      font-size: 13px; color: var(--ink); background: var(--face); border: 0; cursor: pointer;
+      padding: 4px 14px 3px; margin-top: 3px;
       box-shadow: inset 1px 1px var(--paper), inset -1px 0 var(--dark), inset -2px 0 var(--shade), inset 2px 2px var(--lite);
     }
-    .tabs button[aria-selected="true"] { margin-top: 0; padding: 5px 16px 6px; margin-bottom: -2px; font-weight: 600; position: relative; }
+    .tabs button[aria-selected="true"] { margin-top: 0; padding: 5px 16px 6px; margin-bottom: -2px; font-weight: 700; position: relative; }
     .tab-panel { background: var(--face); box-shadow: var(--raised); padding: 6px 16px 8px; }
     .js .tab-panel[hidden] { display: none; }
     .no-js-head { display: none; }
@@ -252,11 +246,11 @@
     .acts { list-style: none; }
     .act { display: grid; grid-template-columns: 52px 1fr; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--shade); box-shadow: 0 1px var(--paper); }
     .act:last-child { border-bottom: 0; box-shadow: none; }
-    .act .tile { font-size: 19px; }
+    .act .tile { font-size: 15px; }
     .act-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 14px; margin-bottom: 3px; }
-    .act-head h3 { font-size: 17px; }
-    .act-head span { font-size: 12.5px; color: var(--muted); }
-    .act p { font-size: 14px; max-width: 76ch; }
+    .act-head h3 { font-size: 14.5px; }
+    .act-head span { font-size: 12px; color: var(--muted); }
+    .act p { font-size: 13.5px; max-width: 76ch; }
     .jams { display: grid; gap: 8px; margin-top: 10px; }
     .jam { background: var(--paper); box-shadow: var(--sunken); padding: 8px 12px; font-size: 13.5px; }
     .jam b { display: block; }
@@ -265,7 +259,7 @@
     /* ---------- Travel ---------- */
     .travel { display: grid; grid-template-columns: 290px 1fr; gap: 22px; align-items: start; }
     .travel .stat { margin: 14px 0 12px; display: flex; align-items: baseline; gap: 12px; }
-    .travel .stat b { font-size: 40px; }
+    .travel .stat b { font-size: 34px; }
     .listbox { background: var(--paper); box-shadow: var(--sunken); padding: 4px; list-style: none; max-height: 220px; overflow: auto; font-size: 13.5px; }
     .listbox li { padding: 2px 8px; cursor: default; }
     .listbox li:hover, .listbox li.hl { background: var(--blue); color: #fff; }
@@ -291,7 +285,7 @@
     .link:hover .lname, .link:focus-visible .lname { background: var(--blue); color: #fff; }
     .link:active { box-shadow: var(--sunken); }
     .link svg { width: 24px; height: 24px; grid-row: span 2; fill: var(--blue); }
-    .lname { font-weight: 600; justify-self: start; padding: 0 3px; margin-left: -3px; }
+    .lname { font-weight: 700; justify-self: start; padding: 0 3px; margin-left: -3px; }
     .lhandle { font-size: 12.5px; color: var(--muted); overflow-wrap: anywhere; }
 
 
@@ -301,25 +295,24 @@
       display: flex; align-items: center; gap: 4px; padding: 4px 4px 3px;
       background: var(--face); box-shadow: inset 0 1px var(--lite), inset 0 2px var(--paper);
     }
-    .start { font-weight: 700; min-width: 0; padding: 3px 10px 3px 6px; height: 31px; gap: 6px; flex: none; font-size: 16px; }
+    .start { font-weight: 700; min-width: 0; padding: 3px 10px 3px 5px; height: 31px; gap: 5px; flex: none; font-size: 13px; }
     .start[aria-expanded="true"] { box-shadow: var(--sunken); }
-    .start .ek { font-size: 18px; font-weight: 700; color: var(--blue); letter-spacing: .02em; }
     .sep { width: 2px; height: 30px; margin: 0 2px; box-shadow: inset 1px 0 var(--shade), inset -1px 0 var(--paper); flex: none; }
     .tasks { display: flex; gap: 3px; flex: 1; min-width: 0; overflow: hidden; list-style: none; }
     .tasks li { display: flex; flex: 0 1 160px; min-width: 0; }
     .tasks button {
       display: flex; align-items: center; gap: 6px; height: 31px; min-width: 0; flex: 1;
-      padding: 0 8px; background: var(--face); box-shadow: var(--raised); color: var(--ink); border: 0; cursor: pointer; font-size: 14.5px; text-align: left;
+      padding: 0 8px; background: var(--face); box-shadow: var(--raised); color: var(--ink); border: 0; cursor: pointer; font-size: 13px; text-align: left;
     }
     .tasks button span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .tasks button svg { width: 16px; height: 16px; flex: none; }
     .tasks button.on {
-      box-shadow: var(--sunken); font-weight: 600;
+      box-shadow: var(--sunken); font-weight: 700;
       background-color: #e8e8e8;
       background-image: repeating-conic-gradient(var(--paper) 0 25%, transparent 0 50%);
       background-size: 2px 2px;
     }
-    .tray { flex: none; height: 31px; display: flex; align-items: center; padding: 0 12px; font-size: 14.5px; box-shadow: inset 1px 1px var(--shade), inset -1px -1px var(--paper); }
+    .tray { flex: none; height: 31px; display: flex; align-items: center; padding: 0 12px; font-size: 13px; box-shadow: inset 1px 1px var(--shade), inset -1px -1px var(--paper); }
     html:not(.js) .tasks { visibility: hidden; }
 
     .start-menu {
@@ -329,12 +322,12 @@
     .start-menu[hidden] { display: none; }
     .start-menu .stripe {
       width: 28px; background: linear-gradient(0deg, var(--blue), var(--blue2)); color: #fff;
-      writing-mode: vertical-rl; transform: rotate(180deg); font-weight: 700; font-size: 17px; padding: 10px 0 0; letter-spacing: .03em;
+      writing-mode: vertical-rl; transform: rotate(180deg); font-weight: 700; font-size: 18px; padding: 10px 0 0; letter-spacing: -.5px;
     }
     .start-menu .stripe span { font-weight: 400; }
     .start-menu ul { list-style: none; flex: 1; padding: 2px 0; }
-    .start-menu a { display: flex; align-items: center; gap: 12px; padding: 6px 18px 6px 10px; color: var(--ink); text-decoration: none; font-size: 15.5px; }
-    .start-menu a svg { width: 22px; height: 22px; }
+    .start-menu a { display: flex; align-items: center; gap: 12px; padding: 5px 22px 5px 8px; color: var(--ink); text-decoration: none; font-size: 13.5px; }
+    .start-menu a svg { width: 32px; height: 32px; }
     .start-menu a:hover, .start-menu a:focus-visible { background: var(--blue); color: #fff; outline: none; }
     .start-menu hr { border: 0; height: 2px; margin: 3px 4px; box-shadow: inset 0 1px var(--shade), inset 0 -1px var(--paper); }
 
@@ -356,13 +349,13 @@
       .win-body { padding: 14px 14px 16px; }
       .stats { gap: 6px; }
       .stat { padding: 8px; }
-      .stat b { font-size: 28px; }
+      .stat b { font-size: 24px; }
       .stat small { font-size: 12px; }
-      .tabs button { padding: 4px 9px 3px; font-size: 14px; }
+      .tabs button { padding: 4px 9px 3px; font-size: 12.5px; }
       .tabs button[aria-selected="true"] { padding: 5px 10px 6px; }
       .tab-panel { padding: 4px 12px 8px; }
       .act { grid-template-columns: 44px 1fr; gap: 12px; }
-      .act .tile { width: 44px; height: 44px; font-size: 17px; }
+      .act .tile { width: 44px; height: 44px; font-size: 13px; }
       .props div { grid-template-columns: 80px 1fr; }
       .bar .lbl { display: none; }
       .tray { padding: 0 8px; }
@@ -379,19 +372,21 @@
 </head>
 <body>
 
-  <!-- Icon set (16x16 pixel-style, blue and gray only) -->
+  <!-- Icon set: 16x16 pixel art (generated; one <path> per color) -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
-      <symbol id="i-pc" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="1" width="14" height="10" fill="#c0c0c0" stroke="#000" stroke-width="1"/><rect x="3" y="3" width="10" height="6" fill="#000080"/><rect x="4" y="4" width="4" height="1" fill="#1084d0"/><rect x="5" y="12" width="6" height="2" fill="#808080"/><rect x="3" y="14" width="10" height="1" fill="#000"/></symbol>
-      <symbol id="i-user" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="5" y="1" width="6" height="6" fill="#dfdfdf" stroke="#000"/><rect x="2" y="9" width="12" height="6" fill="#000080" stroke="#000"/><rect x="6" y="9" width="4" height="2" fill="#fff"/></symbol>
-      <symbol id="i-folder" viewBox="0 0 16 16" shape-rendering="crispEdges"><path d="M1 3h5l1 2h8v9H1z" fill="#dfdfdf" stroke="#000"/><rect x="1" y="6" width="14" height="8" fill="#c0c0c0" stroke="#000"/><rect x="2" y="7" width="12" height="1" fill="#fff"/></symbol>
-      <symbol id="i-globe" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="#1084d0" stroke="#000"/><path d="M8 1.5v13M1.5 8h13M3 4.5h10M3 11.5h10" stroke="#fff" stroke-width="1" fill="none"/><ellipse cx="8" cy="8" rx="3" ry="6.5" fill="none" stroke="#fff"/></symbol>
-      <symbol id="i-w" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="1" width="14" height="14" fill="#000080" stroke="#000"/><path d="M3 4h2l1 7 2-5 2 5 1-7h2l-2 9h-2l-1-3-1 3H5z" fill="#fff"/></symbol>
-      <symbol id="i-star" viewBox="0 0 16 16"><path d="M8 1l2.1 4.5 4.9.6-3.6 3.4.9 4.9L8 12l-4.3 2.4.9-4.9L1 6.1l4.9-.6z" fill="#1084d0" stroke="#000" stroke-linejoin="round"/></symbol>
-      <symbol id="i-case" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="5" y="2" width="6" height="3" fill="none" stroke="#000"/><rect x="1" y="5" width="14" height="9" fill="#c0c0c0" stroke="#000"/><rect x="1" y="8" width="14" height="1" fill="#000080"/><rect x="7" y="7" width="2" height="3" fill="#000"/></symbol>
-      <symbol id="i-mail" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="3" width="14" height="10" fill="#fff" stroke="#000"/><path d="M1.5 3.5L8 9l6.5-5.5" fill="none" stroke="#000080" stroke-width="1.2"/></symbol>
-      <symbol id="i-game" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="1" y="4" width="14" height="8" fill="#c0c0c0" stroke="#000"/><rect x="3" y="7" width="4" height="2" fill="#000080"/><rect x="4" y="6" width="2" height="4" fill="#000080"/><rect x="10" y="6" width="2" height="2" fill="#000080"/><rect x="12" y="8" width="2" height="2" fill="#1084d0"/></symbol>
-      <symbol id="i-bulb" viewBox="0 0 34 34"><circle cx="17" cy="13" r="9" fill="#fff" stroke="#000" stroke-width="1.5"/><path d="M13 22h8v4h-8z" fill="#c0c0c0" stroke="#000" stroke-width="1.5"/><path d="M14 28h6" stroke="#000" stroke-width="2"/><path d="M17 8v9M14 12l3 3 3-3" fill="none" stroke="#000080" stroke-width="1.5"/></symbol>
+      <symbol id="i-pc" viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#000000" d="M1 1h14v1h-14zM1 2h1v1h-1zM14 2h1v1h-1zM1 3h1v1h-1zM3 3h9v1h-9zM14 3h1v1h-1zM1 4h1v1h-1zM3 4h1v1h-1zM14 4h1v1h-1zM1 5h1v1h-1zM3 5h1v1h-1zM14 5h1v1h-1zM1 6h1v1h-1zM3 6h1v1h-1zM14 6h1v1h-1zM1 7h1v1h-1zM3 7h1v1h-1zM14 7h1v1h-1zM1 8h1v1h-1zM3 8h1v1h-1zM14 8h1v1h-1zM1 9h1v1h-1zM14 9h1v1h-1zM1 10h1v1h-1zM14 10h1v1h-1zM1 11h14v1h-14zM5 12h1v1h-1zM11 12h1v1h-1zM3 13h2v1h-2zM12 13h2v1h-2zM3 14h1v1h-1zM13 14h1v1h-1zM3 15h11v1h-11z"/><path fill="#dfdfdf" d="M2 2h11v1h-11zM2 3h1v1h-1zM2 4h1v1h-1zM2 5h1v1h-1zM2 6h1v1h-1zM2 7h1v1h-1zM2 8h1v1h-1zM2 9h1v1h-1zM5 13h7v1h-7z"/><path fill="#c0c0c0" d="M13 2h1v1h-1zM13 3h1v1h-1zM13 4h1v1h-1zM13 5h1v1h-1zM13 6h1v1h-1zM13 7h1v1h-1zM13 8h1v1h-1zM13 9h1v1h-1zM2 10h11v1h-11zM6 12h5v1h-5zM4 14h8v1h-8z"/><path fill="#ffffff" d="M12 3h1v1h-1zM12 4h1v1h-1zM5 5h2v1h-2zM12 5h1v1h-1zM12 6h1v1h-1zM12 7h1v1h-1zM12 8h1v1h-1zM3 9h10v1h-10z"/><path fill="#008080" d="M4 4h8v1h-8zM4 5h1v1h-1zM7 5h5v1h-5zM4 6h8v1h-8zM4 7h8v1h-8zM4 8h8v1h-8z"/><path fill="#808080" d="M13 10h1v1h-1zM12 14h1v1h-1z"/></symbol>
+      <symbol id="i-ek" viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#000000" d="M1 1h14v1h-14zM1 2h1v1h-1zM14 2h1v1h-1zM1 3h1v1h-1zM3 3h9v1h-9zM14 3h1v1h-1zM1 4h1v1h-1zM3 4h1v1h-1zM14 4h1v1h-1zM1 5h1v1h-1zM3 5h1v1h-1zM14 5h1v1h-1zM1 6h1v1h-1zM3 6h1v1h-1zM14 6h1v1h-1zM1 7h1v1h-1zM3 7h1v1h-1zM14 7h1v1h-1zM1 8h1v1h-1zM3 8h1v1h-1zM14 8h1v1h-1zM1 9h1v1h-1zM14 9h1v1h-1zM1 10h1v1h-1zM14 10h1v1h-1zM1 11h14v1h-14zM5 12h1v1h-1zM11 12h1v1h-1zM3 13h2v1h-2zM12 13h2v1h-2zM3 14h1v1h-1zM13 14h1v1h-1zM3 15h11v1h-11z"/><path fill="#dfdfdf" d="M2 2h11v1h-11zM2 3h1v1h-1zM2 4h1v1h-1zM2 5h1v1h-1zM2 6h1v1h-1zM2 7h1v1h-1zM2 8h1v1h-1zM2 9h1v1h-1zM5 13h7v1h-7z"/><path fill="#c0c0c0" d="M13 2h1v1h-1zM13 3h1v1h-1zM13 4h1v1h-1zM13 5h1v1h-1zM13 6h1v1h-1zM13 7h1v1h-1zM13 8h1v1h-1zM13 9h1v1h-1zM2 10h11v1h-11zM6 12h5v1h-5zM4 14h8v1h-8z"/><path fill="#ffffff" d="M12 3h1v1h-1zM4 4h3v1h-3zM8 4h1v1h-1zM10 4h1v1h-1zM12 4h1v1h-1zM4 5h1v1h-1zM8 5h2v1h-2zM12 5h1v1h-1zM4 6h2v1h-2zM8 6h1v1h-1zM12 6h1v1h-1zM4 7h1v1h-1zM8 7h2v1h-2zM12 7h1v1h-1zM4 8h3v1h-3zM8 8h1v1h-1zM10 8h1v1h-1zM12 8h1v1h-1zM3 9h10v1h-10z"/><path fill="#000080" d="M7 4h1v1h-1zM9 4h1v1h-1zM11 4h1v1h-1zM5 5h3v1h-3zM10 5h2v1h-2zM6 6h2v1h-2zM9 6h3v1h-3zM5 7h3v1h-3zM10 7h2v1h-2zM7 8h1v1h-1zM9 8h1v1h-1zM11 8h1v1h-1z"/><path fill="#808080" d="M13 10h1v1h-1zM12 14h1v1h-1z"/></symbol>
+      <symbol id="i-folder" viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#000000" d="M1 3h5v1h-5zM0 4h1v1h-1zM6 4h1v1h-1zM0 5h1v1h-1zM7 5h8v1h-8zM0 6h1v1h-1zM15 6h1v1h-1zM0 7h1v1h-1zM2 7h14v1h-14zM0 8h1v1h-1zM2 8h1v1h-1zM15 8h1v1h-1zM0 9h1v1h-1zM2 9h1v1h-1zM15 9h1v1h-1zM0 10h1v1h-1zM2 10h1v1h-1zM15 10h1v1h-1zM0 11h1v1h-1zM2 11h1v1h-1zM15 11h1v1h-1zM0 12h1v1h-1zM2 12h1v1h-1zM15 12h1v1h-1zM0 13h1v1h-1zM2 13h1v1h-1zM15 13h1v1h-1zM0 14h16v1h-16z"/><path fill="#ffff00" d="M1 4h1v1h-1zM3 4h1v1h-1zM5 4h1v1h-1zM2 5h5v1h-5zM1 6h13v1h-13zM1 7h1v1h-1zM1 8h1v1h-1zM1 9h1v1h-1zM4 9h10v1h-10zM1 10h1v1h-1zM4 10h10v1h-10zM1 11h1v1h-1zM4 11h10v1h-10zM1 12h1v1h-1zM4 12h10v1h-10zM1 13h1v1h-1z"/><path fill="#ffffff" d="M2 4h1v1h-1zM4 4h1v1h-1zM1 5h1v1h-1zM3 8h12v1h-12zM3 9h1v1h-1zM3 10h1v1h-1zM3 11h1v1h-1zM3 12h1v1h-1z"/><path fill="#c0a000" d="M14 6h1v1h-1zM14 9h1v1h-1zM14 10h1v1h-1zM14 11h1v1h-1zM14 12h1v1h-1zM3 13h12v1h-12z"/></symbol>
+      <symbol id="i-user" viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#000000" d="M6 1h4v1h-4zM5 2h1v1h-1zM10 2h1v1h-1zM4 3h1v1h-1zM11 3h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM9 4h1v1h-1zM11 4h1v1h-1zM4 5h1v1h-1zM11 5h1v1h-1zM4 6h1v1h-1zM7 6h2v1h-2zM11 6h1v1h-1zM5 7h1v1h-1zM10 7h1v1h-1zM6 8h1v1h-1zM9 8h1v1h-1zM3 9h3v1h-3zM10 9h3v1h-3zM2 10h1v1h-1zM13 10h1v1h-1zM1 11h1v1h-1zM14 11h1v1h-1zM1 12h1v1h-1zM14 12h1v1h-1zM1 13h1v1h-1zM14 13h1v1h-1zM1 14h14v1h-14z"/><path fill="#7a4a12" d="M6 2h4v1h-4zM5 3h1v1h-1zM10 3h1v1h-1z"/><path fill="#ffd8a8" d="M6 3h4v1h-4zM5 4h1v1h-1zM7 4h2v1h-2zM10 4h1v1h-1zM5 5h6v1h-6zM5 6h2v1h-2zM9 6h2v1h-2zM6 7h4v1h-4zM7 8h2v1h-2z"/><path fill="#000080" d="M6 9h1v1h-1zM9 9h1v1h-1zM3 10h4v1h-4zM9 10h4v1h-4zM2 11h1v1h-1zM4 11h8v1h-8zM13 11h1v1h-1zM2 12h1v1h-1zM4 12h8v1h-8zM13 12h1v1h-1zM2 13h1v1h-1zM4 13h8v1h-8zM13 13h1v1h-1z"/><path fill="#ffffff" d="M7 9h2v1h-2zM7 10h2v1h-2z"/><path fill="#1084d0" d="M3 11h1v1h-1zM12 11h1v1h-1zM3 12h1v1h-1zM12 12h1v1h-1zM3 13h1v1h-1zM12 13h1v1h-1z"/></symbol>
+      <symbol id="i-star" viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#000000" d="M2 1h12v1h-12zM0 2h3v1h-3zM13 2h3v1h-3zM0 3h1v1h-1zM3 3h1v1h-1zM12 3h1v1h-1zM15 3h1v1h-1zM0 4h1v1h-1zM3 4h1v1h-1zM12 4h1v1h-1zM15 4h1v1h-1zM1 5h1v1h-1zM3 5h1v1h-1zM12 5h1v1h-1zM14 5h1v1h-1zM2 6h3v1h-3zM11 6h3v1h-3zM4 7h1v1h-1zM11 7h1v1h-1zM5 8h1v1h-1zM10 8h1v1h-1zM6 9h1v1h-1zM9 9h1v1h-1zM6 10h1v1h-1zM9 10h1v1h-1zM5 11h1v1h-1zM10 11h1v1h-1zM4 12h8v1h-8zM4 13h1v1h-1zM11 13h1v1h-1zM4 14h1v1h-1zM11 14h1v1h-1zM4 15h8v1h-8z"/><path fill="#ffffff" d="M3 2h1v1h-1zM4 3h1v1h-1zM4 4h1v1h-1zM4 5h1v1h-1zM5 6h1v1h-1zM5 7h1v1h-1zM6 8h1v1h-1zM6 11h1v1h-1z"/><path fill="#ffff00" d="M4 2h8v1h-8zM1 3h1v1h-1zM5 3h6v1h-6zM14 3h1v1h-1zM1 4h1v1h-1zM5 4h6v1h-6zM14 4h1v1h-1zM2 5h1v1h-1zM5 5h6v1h-6zM13 5h1v1h-1zM6 6h4v1h-4zM6 7h4v1h-4zM7 8h2v1h-2zM7 9h1v1h-1zM7 10h1v1h-1zM7 11h2v1h-2z"/><path fill="#c0a000" d="M12 2h1v1h-1zM11 3h1v1h-1zM11 4h1v1h-1zM11 5h1v1h-1zM10 6h1v1h-1zM10 7h1v1h-1zM9 8h1v1h-1zM8 9h1v1h-1zM8 10h1v1h-1zM9 11h1v1h-1z"/><path fill="#b0742c" d="M5 13h6v1h-6z"/><path fill="#7a4a12" d="M5 14h6v1h-6z"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#000000" d="M5 1h6v1h-6zM3 2h2v1h-2zM11 2h2v1h-2zM2 3h1v1h-1zM13 3h1v1h-1zM2 4h1v1h-1zM13 4h1v1h-1zM1 5h1v1h-1zM14 5h1v1h-1zM1 6h1v1h-1zM14 6h1v1h-1zM1 7h1v1h-1zM14 7h1v1h-1zM1 8h1v1h-1zM14 8h1v1h-1zM1 9h1v1h-1zM14 9h1v1h-1zM2 10h1v1h-1zM13 10h1v1h-1zM2 11h1v1h-1zM13 11h1v1h-1zM3 12h2v1h-2zM11 12h2v1h-2zM5 13h6v1h-6zM6 14h1v1h-1zM9 14h1v1h-1zM4 15h8v1h-8z"/><path fill="#1084d0" d="M5 2h2v1h-2zM9 2h2v1h-2zM3 3h2v1h-2zM9 3h4v1h-4zM3 4h1v1h-1zM8 4h3v1h-3zM2 5h3v1h-3zM7 5h3v1h-3zM13 5h1v1h-1zM2 6h4v1h-4zM7 6h3v1h-3zM13 6h1v1h-1zM2 7h7v1h-7zM12 7h2v1h-2zM2 8h1v1h-1zM5 8h5v1h-5zM12 8h2v1h-2zM2 9h1v1h-1zM6 9h8v1h-8zM3 10h1v1h-1zM7 10h6v1h-6zM3 11h2v1h-2zM7 11h6v1h-6zM5 12h6v1h-6z"/><path fill="#008000" d="M7 2h2v1h-2zM5 3h4v1h-4zM4 4h4v1h-4zM11 4h2v1h-2zM5 5h2v1h-2zM10 5h3v1h-3zM6 6h1v1h-1zM10 6h3v1h-3zM9 7h3v1h-3zM3 8h2v1h-2zM10 8h2v1h-2zM3 9h3v1h-3zM4 10h3v1h-3zM5 11h2v1h-2z"/><path fill="#808080" d="M7 14h2v1h-2z"/></symbol>
+      <symbol id="i-case" viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#000000" d="M6 2h4v1h-4zM5 3h1v1h-1zM10 3h1v1h-1zM5 4h1v1h-1zM10 4h1v1h-1zM1 5h14v1h-14zM1 6h1v1h-1zM14 6h1v1h-1zM1 7h1v1h-1zM14 7h1v1h-1zM1 8h1v1h-1zM14 8h1v1h-1zM1 9h6v1h-6zM9 9h6v1h-6zM1 10h1v1h-1zM14 10h1v1h-1zM1 11h1v1h-1zM14 11h1v1h-1zM1 12h1v1h-1zM14 12h1v1h-1zM1 13h14v1h-14z"/><path fill="#b0742c" d="M2 6h11v1h-11zM2 7h11v1h-11zM2 8h11v1h-11zM2 10h5v1h-5zM9 10h4v1h-4zM2 11h11v1h-11z"/><path fill="#7a4a12" d="M13 6h1v1h-1zM13 7h1v1h-1zM13 8h1v1h-1zM13 10h1v1h-1zM13 11h1v1h-1zM2 12h12v1h-12z"/><path fill="#ffff00" d="M7 9h2v1h-2zM7 10h2v1h-2z"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#000000" d="M0 3h16v1h-16zM0 4h1v1h-1zM15 4h1v1h-1zM0 5h1v1h-1zM15 5h1v1h-1zM0 6h1v1h-1zM15 6h1v1h-1zM0 7h1v1h-1zM15 7h1v1h-1zM0 8h1v1h-1zM15 8h1v1h-1zM0 9h1v1h-1zM15 9h1v1h-1zM0 10h1v1h-1zM15 10h1v1h-1zM0 11h1v1h-1zM15 11h1v1h-1zM0 12h1v1h-1zM15 12h1v1h-1zM0 13h16v1h-16z"/><path fill="#808080" d="M1 4h1v1h-1zM14 4h1v1h-1zM2 5h1v1h-1zM13 5h1v1h-1zM3 6h1v1h-1zM12 6h1v1h-1zM4 7h1v1h-1zM11 7h1v1h-1zM5 8h1v1h-1zM10 8h1v1h-1zM6 9h1v1h-1zM9 9h1v1h-1zM7 10h2v1h-2z"/><path fill="#ffffff" d="M2 4h12v1h-12zM1 5h1v1h-1zM3 5h10v1h-10zM1 6h2v1h-2zM4 6h8v1h-8zM13 6h1v1h-1zM1 7h3v1h-3zM5 7h6v1h-6zM12 7h2v1h-2zM1 8h4v1h-4zM6 8h4v1h-4zM11 8h3v1h-3zM1 9h5v1h-5zM7 9h2v1h-2zM10 9h4v1h-4zM1 10h6v1h-6zM9 10h5v1h-5zM1 11h13v1h-13z"/><path fill="#dfdfdf" d="M14 5h1v1h-1zM14 6h1v1h-1zM14 7h1v1h-1zM14 8h1v1h-1zM14 9h1v1h-1zM14 10h1v1h-1zM14 11h1v1h-1zM1 12h14v1h-14z"/></symbol>
+      <symbol id="i-w" viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#000000" d="M1 1h14v1h-14zM1 2h1v1h-1zM14 2h1v1h-1zM1 3h1v1h-1zM14 3h1v1h-1zM1 4h1v1h-1zM14 4h1v1h-1zM1 5h1v1h-1zM14 5h1v1h-1zM1 6h1v1h-1zM14 6h1v1h-1zM1 7h1v1h-1zM14 7h1v1h-1zM1 8h1v1h-1zM14 8h1v1h-1zM1 9h1v1h-1zM14 9h1v1h-1zM1 10h1v1h-1zM14 10h1v1h-1zM1 11h1v1h-1zM14 11h1v1h-1zM1 12h1v1h-1zM14 12h1v1h-1zM1 13h1v1h-1zM14 13h1v1h-1zM1 14h14v1h-14z"/><path fill="#1084d0" d="M2 2h12v1h-12zM2 3h1v1h-1zM2 4h1v1h-1zM2 5h1v1h-1zM2 6h1v1h-1zM2 7h1v1h-1zM2 8h1v1h-1zM2 9h1v1h-1zM2 10h1v1h-1zM2 11h1v1h-1zM2 12h1v1h-1zM2 13h1v1h-1z"/><path fill="#000080" d="M3 3h11v1h-11zM4 4h9v1h-9zM4 5h9v1h-9zM4 6h4v1h-4zM9 6h4v1h-4zM4 7h4v1h-4zM9 7h4v1h-4zM3 8h1v1h-1zM5 8h2v1h-2zM8 8h1v1h-1zM10 8h2v1h-2zM13 8h1v1h-1zM3 9h1v1h-1zM5 9h2v1h-2zM8 9h1v1h-1zM10 9h2v1h-2zM13 9h1v1h-1zM3 10h1v1h-1zM5 10h1v1h-1zM7 10h3v1h-3zM11 10h1v1h-1zM13 10h1v1h-1zM3 11h2v1h-2zM6 11h5v1h-5zM12 11h2v1h-2zM3 12h11v1h-11zM3 13h11v1h-11z"/><path fill="#ffffff" d="M3 4h1v1h-1zM13 4h1v1h-1zM3 5h1v1h-1zM13 5h1v1h-1zM3 6h1v1h-1zM8 6h1v1h-1zM13 6h1v1h-1zM3 7h1v1h-1zM8 7h1v1h-1zM13 7h1v1h-1zM4 8h1v1h-1zM7 8h1v1h-1zM9 8h1v1h-1zM12 8h1v1h-1zM4 9h1v1h-1zM7 9h1v1h-1zM9 9h1v1h-1zM12 9h1v1h-1zM4 10h1v1h-1zM6 10h1v1h-1zM10 10h1v1h-1zM12 10h1v1h-1zM5 11h1v1h-1zM11 11h1v1h-1z"/></symbol>
+      <symbol id="i-game" viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#000000" d="M2 5h12v1h-12zM1 6h1v1h-1zM14 6h1v1h-1zM0 7h1v1h-1zM15 7h1v1h-1zM0 8h1v1h-1zM15 8h1v1h-1zM0 9h1v1h-1zM15 9h1v1h-1zM0 10h1v1h-1zM6 10h4v1h-4zM15 10h1v1h-1zM1 11h1v1h-1zM5 11h1v1h-1zM10 11h1v1h-1zM14 11h1v1h-1zM2 12h3v1h-3zM11 12h3v1h-3z"/><path fill="#dfdfdf" d="M2 6h12v1h-12zM1 7h1v1h-1zM1 8h1v1h-1zM1 9h1v1h-1z"/><path fill="#c0c0c0" d="M2 7h2v1h-2zM5 7h7v1h-7zM13 7h2v1h-2zM2 8h1v1h-1zM6 8h5v1h-5zM12 8h1v1h-1zM14 8h1v1h-1zM2 9h2v1h-2zM5 9h7v1h-7zM13 9h2v1h-2zM1 10h5v1h-5zM10 10h5v1h-5zM2 11h3v1h-3zM11 11h3v1h-3z"/><path fill="#000080" d="M4 7h1v1h-1zM3 8h3v1h-3zM4 9h1v1h-1z"/><path fill="#e00000" d="M12 7h1v1h-1zM11 8h1v1h-1zM13 8h1v1h-1zM12 9h1v1h-1z"/></symbol>
+      <symbol id="i-web" viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#000000" d="M1 0h10v1h-10zM1 1h1v1h-1zM10 1h2v1h-2zM1 2h1v1h-1zM10 2h1v1h-1zM12 2h1v1h-1zM1 3h1v1h-1zM10 3h4v1h-4zM1 4h1v1h-1zM13 4h1v1h-1zM1 5h1v1h-1zM13 5h1v1h-1zM1 6h1v1h-1zM13 6h1v1h-1zM1 7h1v1h-1zM13 7h1v1h-1zM1 8h1v1h-1zM9 8h4v1h-4zM1 9h1v1h-1zM8 9h1v1h-1zM13 9h1v1h-1zM1 10h1v1h-1zM7 10h1v1h-1zM14 10h1v1h-1zM1 11h1v1h-1zM7 11h1v1h-1zM14 11h1v1h-1zM1 12h1v1h-1zM7 12h1v1h-1zM14 12h1v1h-1zM1 13h1v1h-1zM8 13h1v1h-1zM12 13h1v1h-1zM1 14h12v1h-12z"/><path fill="#ffffff" d="M2 1h8v1h-8zM2 2h8v1h-8zM2 3h8v1h-8zM2 4h11v1h-11zM2 5h1v1h-1zM11 5h2v1h-2zM2 6h11v1h-11zM2 7h1v1h-1zM9 7h4v1h-4zM2 8h7v1h-7zM2 9h1v1h-1zM2 10h5v1h-5zM2 11h1v1h-1zM6 11h1v1h-1zM2 12h5v1h-5zM2 13h6v1h-6z"/><path fill="#dfdfdf" d="M11 2h1v1h-1z"/><path fill="#808080" d="M3 5h8v1h-8zM3 7h6v1h-6zM3 9h5v1h-5zM3 11h3v1h-3z"/><path fill="#1084d0" d="M9 9h1v1h-1zM11 9h2v1h-2zM8 10h1v1h-1zM11 10h1v1h-1zM13 10h1v1h-1zM8 11h2v1h-2zM11 11h1v1h-1zM8 12h3v1h-3zM13 12h1v1h-1zM9 13h3v1h-3z"/><path fill="#008000" d="M10 9h1v1h-1zM9 10h2v1h-2zM12 10h1v1h-1zM10 11h1v1h-1zM12 11h2v1h-2zM11 12h2v1h-2z"/></symbol>
+      <symbol id="i-bulb" viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#000000" d="M5 0h5v1h-5zM4 1h1v1h-1zM10 1h1v1h-1zM3 2h1v1h-1zM11 2h1v1h-1zM3 3h1v1h-1zM11 3h1v1h-1zM3 4h1v1h-1zM11 4h1v1h-1zM3 5h1v1h-1zM11 5h1v1h-1zM4 6h1v1h-1zM10 6h1v1h-1zM5 7h1v1h-1zM9 7h1v1h-1zM5 8h1v1h-1zM9 8h1v1h-1zM5 9h1v1h-1zM9 9h1v1h-1zM5 10h1v1h-1zM9 10h1v1h-1zM6 11h3v1h-3z"/><path fill="#ffffff" d="M5 1h4v1h-4zM4 2h2v1h-2zM4 3h1v1h-1zM4 4h1v1h-1z"/><path fill="#ffff00" d="M9 1h1v1h-1zM6 2h5v1h-5zM5 3h6v1h-6zM5 4h6v1h-6zM4 5h6v1h-6zM5 6h4v1h-4zM6 7h2v1h-2z"/><path fill="#c0a000" d="M10 5h1v1h-1zM9 6h1v1h-1zM8 7h1v1h-1z"/><path fill="#808080" d="M6 8h3v1h-3zM6 10h3v1h-3z"/><path fill="#c0c0c0" d="M6 9h3v1h-3z"/></symbol>
     </defs>
   </svg>
 
@@ -493,16 +488,16 @@
 
         <h3 class="sub">Websites &amp; web apps</h3>
         <div class="proj-list">
-          <a href="#wezzet" class="proj-btn"><span class="tile">WZ</span><span><span class="proj-name">Wezzet.com</span><span class="meta">700+ free tools, AI chat and AI Comms · with Noah Puckett</span></span></a>
-          <a href="#proj-gahs" class="proj-btn"><span class="tile">GG</span><span><span class="proj-name">GAHSgames.com</span><span class="meta">Games made by students at my school · Solo</span></span></a>
-          <a href="#proj-shortutorial" class="proj-btn"><span class="tile">ST</span><span><span class="proj-name">Shortutorial.com</span><span class="meta">Short tutorials with quizzes and certifications · Solo</span></span></a>
+          <a href="#wezzet" class="proj-btn"><svg aria-hidden="true"><use href="#i-w"/></svg><span><span class="proj-name">Wezzet.com</span><span class="meta">700+ free tools, AI chat and AI Comms · with Noah Puckett</span></span></a>
+          <a href="#proj-gahs" class="proj-btn"><svg aria-hidden="true"><use href="#i-web"/></svg><span><span class="proj-name">GAHSgames.com</span><span class="meta">Games made by students at my school · Solo</span></span></a>
+          <a href="#proj-shortutorial" class="proj-btn"><svg aria-hidden="true"><use href="#i-web"/></svg><span><span class="proj-name">Shortutorial.com</span><span class="meta">Short tutorials with quizzes and certifications · Solo</span></span></a>
         </div>
 
         <h3 class="sub">Games</h3>
         <div class="proj-list">
-          <a href="#proj-altus" class="proj-btn"><span class="tile">AL</span><span><span class="proj-name">Altus</span><span class="meta">4v4 shooter on Roblox · Lead designer &amp; developer</span></span></a>
-          <a href="#proj-bbb" class="proj-btn"><span class="tile">BB</span><span><span class="proj-name">BouncingBulletBaby</span><span class="meta">Puzzle shooter · Hack Club Haven game jam</span></span></a>
-          <a href="#proj-henry" class="proj-btn"><span class="tile">TH</span><span><span class="proj-name">Tiny Henry</span><span class="meta">3D adventure · Jame Gam game jam</span></span></a>
+          <a href="#proj-altus" class="proj-btn"><svg aria-hidden="true"><use href="#i-game"/></svg><span><span class="proj-name">Altus</span><span class="meta">4v4 shooter on Roblox · Lead designer &amp; developer</span></span></a>
+          <a href="#proj-bbb" class="proj-btn"><svg aria-hidden="true"><use href="#i-game"/></svg><span><span class="proj-name">BouncingBulletBaby</span><span class="meta">Puzzle shooter · Hack Club Haven game jam</span></span></a>
+          <a href="#proj-henry" class="proj-btn"><svg aria-hidden="true"><use href="#i-game"/></svg><span><span class="proj-name">Tiny Henry</span><span class="meta">3D adventure · Jame Gam game jam</span></span></a>
         </div>
       </div>
       <div class="status-bar" aria-hidden="true"><span>6 projects</span><span>3 websites · 3 games</span></div>
@@ -602,8 +597,8 @@
     </section>
 
     <!-- ================= PROJECT: GAHSGAMES ================= -->
-    <section class="win" id="proj-gahs" aria-labelledby="proj-gahs-t" data-icon="i-globe" data-title="GAHSgames.com" style="--w:760px">
-      <div class="titlebar"><svg><use href="#i-globe"/></svg><h2 id="proj-gahs-t">GAHSgames.com</h2><span class="ctl"><button type="button" class="min" aria-label="Minimize"></button><button type="button" class="max" aria-label="Maximize"></button><button type="button" class="x" aria-label="Close"></button></span></div>
+    <section class="win" id="proj-gahs" aria-labelledby="proj-gahs-t" data-icon="i-web" data-title="GAHSgames.com" style="--w:760px">
+      <div class="titlebar"><svg><use href="#i-web"/></svg><h2 id="proj-gahs-t">GAHSgames.com</h2><span class="ctl"><button type="button" class="min" aria-label="Minimize"></button><button type="button" class="max" aria-label="Maximize"></button><button type="button" class="x" aria-label="Close"></button></span></div>
       <div class="bar" aria-hidden="true"><span class="lbl">Address</span><span class="field">https://gahsgames.com</span></div>
       <div class="win-body">
         <div class="pd-intro">
@@ -643,8 +638,8 @@
     </section>
 
     <!-- ================= PROJECT: SHORTUTORIAL ================= -->
-    <section class="win" id="proj-shortutorial" aria-labelledby="proj-shortutorial-t" data-icon="i-globe" data-title="Shortutorial.com" style="--w:780px">
-      <div class="titlebar"><svg><use href="#i-globe"/></svg><h2 id="proj-shortutorial-t">Shortutorial.com</h2><span class="ctl"><button type="button" class="min" aria-label="Minimize"></button><button type="button" class="max" aria-label="Maximize"></button><button type="button" class="x" aria-label="Close"></button></span></div>
+    <section class="win" id="proj-shortutorial" aria-labelledby="proj-shortutorial-t" data-icon="i-web" data-title="Shortutorial.com" style="--w:780px">
+      <div class="titlebar"><svg><use href="#i-web"/></svg><h2 id="proj-shortutorial-t">Shortutorial.com</h2><span class="ctl"><button type="button" class="min" aria-label="Minimize"></button><button type="button" class="max" aria-label="Maximize"></button><button type="button" class="x" aria-label="Close"></button></span></div>
       <div class="bar" aria-hidden="true"><span class="lbl">Address</span><span class="field">https://shortutorial.com</span></div>
       <div class="win-body">
         <div class="pd-intro">
@@ -653,8 +648,6 @@
             <p>It's a full-stack web app I built on my own: the tutorials, the quizzes, user accounts, and a world leaderboard.</p>
           </div>
           <div class="pd-stats">
-            <!-- Visit count from Cloudflare analytics (shortutorial.com, last 30 days). Updated weekly. -->
-            <div class="stat count"><b id="shortutorial-visits">4.55k</b><small>visits in the last 30 days</small></div>
             <div class="stat"><b>1</b><small>person built it: me</small></div>
           </div>
         </div>
@@ -1234,7 +1227,7 @@
     </ul>
   </div>
   <nav class="taskbar" aria-label="Taskbar">
-    <button class="btn start" id="start" type="button" aria-expanded="false" aria-controls="start-menu"><span class="ek" aria-hidden="true">EK</span>Start</button>
+    <button class="btn start" id="start" type="button" aria-expanded="false" aria-controls="start-menu"><svg aria-hidden="true"><use href="#i-ek"/></svg>Start</button>
     <span class="sep" aria-hidden="true"></span>
     <ul class="tasks" id="tasks" aria-label="Open windows"></ul>
     <span class="spacer"></span>
