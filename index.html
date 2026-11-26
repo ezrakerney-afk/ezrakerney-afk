@@ -41,15 +41,19 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Pixelify+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     /* ============================================================
-       Classic desktop theme. One blue (#000080 to #1084d0, the
-       classic title-bar blue), plus the grays of the classic UI.
+       Retro desktop. Sections are windows on a desktop: click an
+       icon to open one, drag it by the title bar, close it with X.
+       One blue (#000080 to #1084d0) plus the classic UI grays.
+       Fonts: Pixelify Sans for the window chrome and headings,
+       Open Sans for reading text. Both load from Google Fonts so
+       the site looks the same on every computer and phone.
        ============================================================ */
     :root {
-      --desk: #2e5f94;          /* desktop */
+      --desk: #2e6fc4;          /* shown while the wallpaper loads */
       --blue: #000080;          /* main color */
       --blue2: #1084d0;         /* title-bar fade */
       --face: #c0c0c0;          /* window gray */
@@ -59,72 +63,84 @@
       --paper: #ffffff;
       --ink: #000000;
       --muted: #3d3d3d;
-      --ui: Tahoma, Verdana, "Segoe UI", system-ui, sans-serif;
-      --pixel: "VT323", "Courier New", monospace;
+      --text: "Open Sans", "Segoe UI", Arial, sans-serif;
+      --pixel: "Pixelify Sans", "Courier New", monospace;
       --raised: inset -1px -1px var(--dark), inset 1px 1px var(--paper), inset -2px -2px var(--shade), inset 2px 2px var(--lite);
       --sunken: inset -1px -1px var(--paper), inset 1px 1px var(--shade), inset -2px -2px var(--lite), inset 2px 2px var(--dark);
-      --taskbar-h: 42px;
+      --taskbar-h: 40px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     body {
-      font: 15px/1.6 var(--ui); color: var(--ink);
-      background: var(--desk);
+      font: 14.5px/1.6 var(--text); color: var(--ink);
+      background: var(--desk) url("wallpaper.jpg") center / cover no-repeat fixed;
       padding-bottom: calc(var(--taskbar-h) + 8px);
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
     a { color: var(--blue); }
     a:hover { color: var(--blue2); }
     img, svg { display: block; }
+    button { font: inherit; }
     ::selection { background: var(--blue); color: #fff; }
     :focus-visible { outline: 1px dotted var(--ink); outline-offset: 2px; }
     .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-    main { max-width: 1060px; margin: 0 auto; padding: 28px 16px 8px; }
+    /* Chrome text (title bars, buttons, menus, labels) uses the pixel font */
+    .titlebar, .btn, .tasks, .tray, .start-menu, .desk-icons, .tabs, .bar, .status-bar,
+    .group > legend, .sub, h1, h2, h3, .tile, .stat b, .count b, .proj-name {
+      font-family: var(--pixel);
+    }
 
     /* ---------- Windows ---------- */
-    .win { background: var(--face); box-shadow: var(--raised); padding: 3px; margin-bottom: 28px; scroll-margin-top: 16px; }
+    .win { background: var(--face); box-shadow: var(--raised); padding: 3px; display: flex; flex-direction: column; }
     .titlebar {
-      display: flex; align-items: center; gap: 6px; min-height: 26px; padding: 3px 3px 3px 5px;
+      display: flex; align-items: center; gap: 6px; min-height: 26px; padding: 3px 3px 3px 5px; flex: none;
       background: linear-gradient(90deg, var(--blue), var(--blue2)); color: #fff;
+      user-select: none; -webkit-user-select: none;
     }
+    .win:not(.active) .titlebar { background: linear-gradient(90deg, #7b7b7b, #b4b4b4); color: #e8e8e8; }
+    html:not(.js) .win .titlebar { background: linear-gradient(90deg, var(--blue), var(--blue2)); color: #fff; }
     .titlebar svg { width: 16px; height: 16px; flex: none; }
-    .titlebar h2, .titlebar .t { flex: 1; min-width: 0; font-size: 14px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: .01em; }
+    .titlebar h2, .titlebar .t { flex: 1; min-width: 0; font-size: 15px; font-weight: 600; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: .02em; }
     .ctl { display: flex; gap: 2px; flex: none; }
-    .ctl span { width: 18px; height: 16px; background: var(--face); box-shadow: var(--raised); position: relative; }
-    .ctl span:last-child { margin-left: 2px; }
-    .ctl .min::after { content: ""; position: absolute; left: 4px; bottom: 4px; width: 7px; height: 2px; background: var(--ink); }
-    .ctl .max::after { content: ""; position: absolute; left: 4px; top: 3px; width: 9px; height: 8px; border: 1px solid var(--ink); border-top-width: 2px; }
-    .ctl .x::before, .ctl .x::after { content: ""; position: absolute; left: 4px; top: 7px; width: 9px; height: 2px; background: var(--ink); transform: rotate(45deg); }
+    .ctl button { width: 20px; height: 18px; background: var(--face); box-shadow: var(--raised); position: relative; border: 0; cursor: pointer; padding: 0; }
+    .ctl button:active { box-shadow: var(--sunken); }
+    .ctl .x { margin-left: 2px; }
+    .ctl .min::after { content: ""; position: absolute; left: 5px; bottom: 4px; width: 7px; height: 2px; background: var(--ink); }
+    .ctl .max::after { content: ""; position: absolute; left: 5px; top: 3px; width: 9px; height: 8px; border: 1px solid var(--ink); border-top-width: 2px; }
+    .ctl .x::before, .ctl .x::after { content: ""; position: absolute; left: 5px; top: 8px; width: 10px; height: 2px; background: var(--ink); transform: rotate(45deg); }
     .ctl .x::after { transform: rotate(-45deg); }
+    html:not(.js) .ctl { display: none; }
 
-    .bar { display: flex; align-items: center; gap: 8px; padding: 4px 6px 3px; font-size: 13px; border-bottom: 1px solid var(--shade); box-shadow: 0 1px var(--paper); }
-    .bar .field { flex: 1; min-width: 0; background: var(--paper); box-shadow: var(--sunken); padding: 3px 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .win-body { padding: 20px 22px 22px; }
-    .status-bar { display: flex; gap: 3px; padding: 2px 0 0; font-size: 12.5px; color: var(--muted); }
-    .status-bar span { box-shadow: inset 1px 1px var(--shade), inset -1px -1px var(--paper); padding: 2px 8px; }
+    .bar { display: flex; align-items: center; gap: 8px; padding: 4px 6px 3px; font-size: 14px; border-bottom: 1px solid var(--shade); box-shadow: 0 1px var(--paper); flex: none; }
+    .bar .field { flex: 1; min-width: 0; background: var(--paper); box-shadow: var(--sunken); padding: 2px 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .win-body { padding: 18px 20px 20px; }
+    .status-bar { display: flex; gap: 3px; padding: 2px 0 0; font-size: 13.5px; color: var(--muted); flex: none; }
+    .status-bar span { box-shadow: inset 1px 1px var(--shade), inset -1px -1px var(--paper); padding: 1px 8px; }
     .status-bar span:first-child { flex: 1; }
 
-    .lead { font-size: 16.5px; max-width: 68ch; margin-bottom: 18px; }
+    .lead { font-size: 15.5px; max-width: 68ch; margin-bottom: 16px; }
     p + p { margin-top: 10px; }
-    h3 { font-size: 17px; line-height: 1.3; }
+    h3 { font-size: 18px; line-height: 1.25; font-weight: 600; }
     ul.dots { margin: 8px 0 0 18px; }
     ul.dots li { margin: 3px 0; padding-left: 2px; }
     ul.dots li::marker { color: var(--blue); }
 
     /* Group boxes (etched frame with a label) */
-    .group { border: 1px solid var(--shade); box-shadow: inset 1px 1px var(--paper), 1px 1px var(--paper); padding: 16px 16px 16px; margin: 0; min-width: 0; }
-    .group > legend { padding: 0 5px; margin-left: -2px; font-weight: bold; font-size: 15px; display: flex; align-items: center; gap: 6px; }
+    .group { border: 1px solid var(--shade); box-shadow: inset 1px 1px var(--paper), 1px 1px var(--paper); padding: 14px 16px 16px; margin: 0; min-width: 0; }
+    .group > legend { padding: 0 5px; margin-left: -2px; font-weight: 600; font-size: 16px; display: flex; align-items: center; gap: 6px; }
     .group > legend svg { width: 16px; height: 16px; }
-    .groups { display: grid; gap: 22px 18px; }
+    .group p, .group ul.dots { font-size: 14px; }
+    .group .go { display: inline-block; margin-top: 10px; font-size: 14px; font-weight: 600; }
+    .groups { display: grid; gap: 20px 16px; }
+    .groups.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
     /* Buttons */
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      min-width: 96px; padding: 6px 16px; background: var(--face); color: var(--ink);
-      font: 14px var(--ui); text-decoration: none; box-shadow: var(--raised); border: 0; cursor: pointer;
+      min-width: 96px; padding: 5px 16px; background: var(--face); color: var(--ink);
+      font-size: 15px; text-decoration: none; box-shadow: var(--raised); border: 0; cursor: pointer;
     }
     .btn:hover { color: var(--ink); }
     .btn:active { box-shadow: var(--sunken); transform: translate(1px, 1px); }
@@ -135,111 +151,122 @@
     .tile {
       width: 52px; height: 52px; flex: none; display: grid; place-items: center;
       background: var(--paper); box-shadow: var(--sunken);
-      font: 26px/1 var(--pixel); color: var(--blue); text-align: center;
+      font-size: 22px; line-height: 1; font-weight: 600; color: var(--blue); text-align: center;
     }
 
-    /* ---------- Desktop icons (wide screens) ---------- */
-    .desk-icons { display: none; }
-    @media (min-width: 1320px) {
-      .desk-icons { display: flex; flex-direction: column; gap: 14px; position: fixed; left: 14px; top: 22px; z-index: 5; }
-      .desk-icons a { width: 84px; display: flex; flex-direction: column; align-items: center; gap: 4px; color: #fff; text-decoration: none; font-size: 13px; text-align: center; }
-      .desk-icons svg { width: 34px; height: 34px; }
-      .desk-icons span { padding: 0 3px; text-shadow: 1px 1px 0 rgba(0,0,0,.45); }
-      .desk-icons a:hover span, .desk-icons a:focus-visible span { background: var(--blue); text-shadow: none; outline: 1px dotted #fff; }
+    .stat { background: var(--paper); box-shadow: var(--sunken); padding: 8px 12px; }
+    .stat b { display: block; font-size: 32px; line-height: 1.1; font-weight: 600; color: var(--blue); }
+    .stat small { font-size: 13px; color: var(--muted); }
+
+    /* ---------- Desktop + desktop icons ---------- */
+    .desk-icons {
+      display: grid; grid-template-columns: repeat(auto-fill, 92px); gap: 6px; padding: 14px 10px; list-style: none;
     }
+    .desk-icons a {
+      display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 2px;
+      color: #fff; text-decoration: none; font-size: 15px; line-height: 1.15; text-align: center;
+    }
+    .desk-icons svg { width: 40px; height: 40px; filter: drop-shadow(1px 1px 0 rgba(0,0,0,.35)); }
+    .desk-icons span { padding: 1px 4px; text-shadow: 1px 1px 0 #000, 0 0 3px rgba(0,0,0,.6); }
+    .desk-icons a:hover span, .desk-icons a:focus-visible span, .desk-icons a.sel span { background: var(--blue); text-shadow: none; outline: 1px dotted #fff; }
+    .desk-icons a:focus-visible { outline: none; }
+
+    /* With JavaScript: windows float on the desktop and open from the icons.
+       Without it: windows are stacked in a column so everything is readable. */
+    main { max-width: 1060px; margin: 0 auto; padding: 8px 16px; }
+    main .win { margin-bottom: 24px; }
+    .js main { max-width: none; margin: 0; padding: 0; }
+    .js .desktop { position: fixed; inset: 0 0 var(--taskbar-h) 0; overflow: hidden; }
+    .js .desk-icons { position: absolute; inset: 0; grid-template-columns: none; grid-auto-flow: column; grid-template-rows: repeat(auto-fill, 92px); grid-auto-columns: 92px; align-content: start; }
+    .js main .win {
+      position: absolute; margin: 0; display: none;
+      width: min(var(--w, 760px), calc(100% - 16px)); max-height: calc(100% - 16px);
+    }
+    .js main .win.open { display: flex; }
+    .js main .win.minimized { display: none; }
+    .js main .win > .win-body { align-content: start; overflow: auto; flex: 1 1 auto; min-height: 0; overscroll-behavior: contain; }
+    .js main .win.maxed { left: 0 !important; top: 0 !important; width: 100%; height: 100%; max-height: none; }
+    .js main .win.maxed .titlebar { cursor: default; }
+    .js main .titlebar { cursor: move; touch-action: none; }
 
     /* ---------- Welcome ---------- */
-    .welcome { display: grid; grid-template-columns: 1fr 190px; gap: 24px; }
-    .hello { font-size: 18px; color: var(--muted); }
-    .name { font: clamp(56px, 11vw, 96px)/.9 var(--pixel); color: var(--blue); margin: 2px 0 8px; letter-spacing: .01em; }
-    .name span { color: var(--ink); }
-    .tagline { font-weight: bold; font-size: 16px; margin-bottom: 12px; }
-    .tip { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; margin-top: 20px; padding: 14px 16px; background: #ffffe1; box-shadow: var(--sunken); }
+    .welcome { display: grid; grid-template-columns: 1fr 170px; gap: 22px; }
+    .hello { font-size: 16px; color: var(--muted); }
+    .name { font-size: clamp(40px, 7vw, 60px); white-space: nowrap; line-height: 1; font-weight: 700; color: var(--blue); margin: 4px 0 8px; letter-spacing: .01em; }
+    .tagline { font-weight: 700; font-size: 15px; margin-bottom: 12px; }
+    .tip { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; margin-top: 18px; padding: 12px 14px; background: #ffffe1; box-shadow: var(--sunken); }
     .tip svg { width: 34px; height: 34px; }
-    .tip b { display: block; font-size: 15px; margin-bottom: 2px; }
-    .tip p { min-height: 3.2em; }
-    .side-btns { display: flex; flex-direction: column; gap: 8px; }
-    .side-btns .btn { justify-content: flex-start; width: 100%; }
-    .side-btns .tip-next { margin-top: auto; }
+    .tip b { display: block; font-size: 14.5px; margin-bottom: 2px; }
+    .tip p { min-height: 3.2em; font-size: 14px; }
+    .side-btns { display: flex; flex-direction: column; gap: 8px; justify-content: flex-end; }
+    .side-btns .btn { width: 100%; }
+    .side-btns .hint { font-size: 13px; color: var(--muted); }
 
     /* ---------- About ---------- */
-    .about { display: grid; grid-template-columns: 1fr 340px; gap: 28px; align-items: start; }
-    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
-    .stat { background: var(--paper); box-shadow: var(--sunken); padding: 10px 12px; }
-    .stat b { display: block; font: 40px/1 var(--pixel); color: var(--blue); }
-    .stat small { font-size: 13px; color: var(--muted); }
-    .props { background: var(--paper); box-shadow: var(--sunken); padding: 3px; font-size: 14px; }
-    .props div { display: grid; grid-template-columns: 96px 1fr; gap: 10px; padding: 5px 8px; }
+    .about { display: grid; grid-template-columns: 1fr 320px; gap: 24px; align-items: start; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; }
+    .props { background: var(--paper); box-shadow: var(--sunken); padding: 3px; font-size: 13.5px; }
+    .props div { display: grid; grid-template-columns: 88px 1fr; gap: 10px; padding: 5px 8px; }
     .props div:nth-child(odd) { background: #f1f1f1; }
     .props dt { color: var(--muted); }
-    .props dd { font-weight: bold; }
+    .props dd { font-weight: 600; }
 
-    /* ---------- Projects ---------- */
-    .sub { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: bold; margin: 6px 0 12px; }
+    /* ---------- Projects (icon buttons) ---------- */
+    .sub { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; margin: 4px 0 10px; }
     .sub::after { content: ""; flex: 1; height: 1px; background: var(--shade); box-shadow: 0 1px var(--paper); }
-    .sub + .projects { margin-bottom: 26px; }
-    .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-    .proj {
-      display: flex; flex-direction: column; gap: 10px; padding: 16px; color: var(--ink); text-decoration: none;
-      background: var(--face); box-shadow: var(--raised);
+    .proj-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; margin-bottom: 22px; }
+    .proj-list:last-child { margin-bottom: 0; }
+    .proj-btn {
+      display: grid; grid-template-columns: 52px 1fr; gap: 12px; align-items: center; padding: 10px 12px;
+      background: var(--face); box-shadow: var(--raised); color: var(--ink); text-decoration: none;
     }
-    .proj:hover { color: var(--ink); }
-    .proj.wide { grid-column: 1 / -1; }
-    .proj-top { display: flex; gap: 14px; align-items: center; }
-    .proj h3 { display: inline; padding: 0 3px; margin-left: -3px; }
-    .proj:hover h3, .proj:focus-visible h3 { background: var(--blue); color: #fff; }
-    .meta { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; }
-    .proj p { font-size: 14.5px; }
-    .proj ul.dots { font-size: 14px; margin-top: 0; }
-    .built { font-size: 13px; color: var(--muted); }
-    .built b { color: var(--ink); font-weight: normal; }
-    .count { display: inline-flex; align-items: baseline; gap: 8px; align-self: flex-start; background: var(--paper); box-shadow: var(--sunken); padding: 4px 12px; font-size: 13px; }
-    .count b { font: 26px/1 var(--pixel); color: var(--blue); }
-    .proj .open { margin-top: auto; align-self: flex-start; pointer-events: none; }
-    .proj:active .open { box-shadow: var(--sunken); }
+    .proj-btn:hover { color: var(--ink); }
+    .proj-btn:active { box-shadow: var(--sunken); }
+    .proj-name { display: inline; font-size: 17px; font-weight: 600; padding: 0 3px; margin-left: -3px; }
+    .proj-btn:hover .proj-name, .proj-btn:focus-visible .proj-name { background: var(--blue); color: #fff; }
+    .meta { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.4; margin-top: 2px; }
 
-    /* ---------- Wezzet ---------- */
-    .wz-intro { display: grid; grid-template-columns: 1fr 300px; gap: 26px; align-items: start; margin-bottom: 24px; }
-    .wz-stats { display: grid; gap: 8px; }
-    .wz-stats .stat { display: flex; align-items: baseline; gap: 12px; }
-    .wz-stats .stat b { font-size: 34px; min-width: 64px; }
-    .wz-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .wz-grid .group p { font-size: 14.5px; }
-    .wz-grid .group ul.dots { font-size: 14px; }
-    .wz-grid .go { display: inline-block; margin-top: 10px; font-size: 14px; font-weight: bold; }
-    .wz-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    /* ---------- Project detail windows (same layout as Wezzet) ---------- */
+    .pd-intro { display: grid; grid-template-columns: 1fr 250px; gap: 22px; align-items: start; margin-bottom: 22px; }
+    .pd-stats { display: grid; gap: 8px; }
+    .pd-stats .stat { display: flex; align-items: baseline; gap: 12px; }
+    .pd-stats .stat b { font-size: 28px; min-width: 58px; }
+    .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .count { display: inline-flex; align-items: baseline; gap: 8px; }
+    .built { font-size: 13.5px; color: var(--muted); }
+    .built b { color: var(--ink); font-weight: 600; }
 
     /* ---------- Activities (tabs) ---------- */
     .tabs { display: flex; flex-wrap: wrap; gap: 0; position: relative; z-index: 1; padding-left: 4px; }
     .tabs button {
-      font: 14px var(--ui); color: var(--ink); background: var(--face); border: 0; cursor: pointer;
-      padding: 5px 14px 4px; margin-top: 3px;
+      font-size: 15px; color: var(--ink); background: var(--face); border: 0; cursor: pointer;
+      padding: 4px 14px 3px; margin-top: 3px; font-family: var(--pixel);
       box-shadow: inset 1px 1px var(--paper), inset -1px 0 var(--dark), inset -2px 0 var(--shade), inset 2px 2px var(--lite);
     }
-    .tabs button[aria-selected="true"] { margin-top: 0; padding: 6px 16px 7px; margin-bottom: -2px; font-weight: bold; position: relative; }
-    .tab-panel { background: var(--face); box-shadow: var(--raised); padding: 8px 18px 10px; }
+    .tabs button[aria-selected="true"] { margin-top: 0; padding: 5px 16px 6px; margin-bottom: -2px; font-weight: 600; position: relative; }
+    .tab-panel { background: var(--face); box-shadow: var(--raised); padding: 6px 16px 8px; }
     .js .tab-panel[hidden] { display: none; }
     .no-js-head { display: none; }
     html:not(.js) .tabs { display: none; }
-    html:not(.js) .no-js-head { display: block; font-weight: bold; padding-top: 12px; }
+    html:not(.js) .no-js-head { display: block; padding-top: 12px; }
     .acts { list-style: none; }
-    .act { display: grid; grid-template-columns: 52px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--shade); box-shadow: 0 1px var(--paper); }
+    .act { display: grid; grid-template-columns: 52px 1fr; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--shade); box-shadow: 0 1px var(--paper); }
     .act:last-child { border-bottom: 0; box-shadow: none; }
-    .act .tile { font-size: 22px; }
+    .act .tile { font-size: 19px; }
     .act-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 14px; margin-bottom: 3px; }
-    .act-head h3 { font-size: 16px; }
-    .act-head span { font-size: 13px; color: var(--muted); }
-    .act p { font-size: 14.5px; max-width: 76ch; }
+    .act-head h3 { font-size: 17px; }
+    .act-head span { font-size: 12.5px; color: var(--muted); }
+    .act p { font-size: 14px; max-width: 76ch; }
     .jams { display: grid; gap: 8px; margin-top: 10px; }
-    .jam { background: var(--paper); box-shadow: var(--sunken); padding: 9px 12px; font-size: 14px; }
+    .jam { background: var(--paper); box-shadow: var(--sunken); padding: 8px 12px; font-size: 13.5px; }
     .jam b { display: block; }
-    .jam small { color: var(--muted); font-size: 13px; }
+    .jam small { color: var(--muted); font-size: 12.5px; }
 
     /* ---------- Travel ---------- */
-    .travel { display: grid; grid-template-columns: 330px 1fr; gap: 26px; align-items: start; }
-    .travel .stat { margin: 16px 0 12px; display: flex; align-items: baseline; gap: 12px; }
-    .travel .stat b { font-size: 46px; }
-    .listbox { background: var(--paper); box-shadow: var(--sunken); padding: 4px; list-style: none; max-height: 240px; overflow: auto; font-size: 14px; }
+    .travel { display: grid; grid-template-columns: 290px 1fr; gap: 22px; align-items: start; }
+    .travel .stat { margin: 14px 0 12px; display: flex; align-items: baseline; gap: 12px; }
+    .travel .stat b { font-size: 40px; }
+    .listbox { background: var(--paper); box-shadow: var(--sunken); padding: 4px; list-style: none; max-height: 220px; overflow: auto; font-size: 13.5px; }
     .listbox li { padding: 2px 8px; cursor: default; }
     .listbox li:hover, .listbox li.hl { background: var(--blue); color: #fff; }
     .map-wrap { position: relative; background: var(--paper); box-shadow: var(--sunken); padding: 10px; }
@@ -254,97 +281,97 @@
     .legend { display: flex; gap: 18px; margin-top: 8px; font-size: 13px; color: var(--muted); }
     .legend i { display: inline-block; width: 11px; height: 11px; margin-right: 6px; vertical-align: -1px; border: 1px solid var(--shade); }
 
-    /* ---------- Experience ---------- */
-    .jobs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .jobs ul.dots { font-size: 14.5px; margin-top: 0; }
-
     /* ---------- Contact ---------- */
-    .links { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+    .links { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
     .link {
       display: grid; grid-template-columns: 28px 1fr; gap: 0 12px; align-items: center;
-      padding: 10px 14px; background: var(--face); box-shadow: var(--raised); color: var(--ink); text-decoration: none;
+      padding: 9px 14px; background: var(--face); box-shadow: var(--raised); color: var(--ink); text-decoration: none;
     }
     .link:hover { color: var(--ink); }
     .link:hover .lname, .link:focus-visible .lname { background: var(--blue); color: #fff; }
     .link:active { box-shadow: var(--sunken); }
     .link svg { width: 24px; height: 24px; grid-row: span 2; fill: var(--blue); }
-    .lname { font-weight: bold; justify-self: start; padding: 0 3px; margin-left: -3px; }
-    .lhandle { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+    .lname { font-weight: 600; justify-self: start; padding: 0 3px; margin-left: -3px; }
+    .lhandle { font-size: 12.5px; color: var(--muted); overflow-wrap: anywhere; }
 
-    footer { text-align: center; color: #fff; font-size: 13px; padding: 4px 16px 18px; text-shadow: 1px 1px 0 rgba(0,0,0,.35); }
 
     /* ---------- Taskbar + Start menu ---------- */
     .taskbar {
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; height: var(--taskbar-h);
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 9000; height: var(--taskbar-h);
       display: flex; align-items: center; gap: 4px; padding: 4px 4px 3px;
       background: var(--face); box-shadow: inset 0 1px var(--lite), inset 0 2px var(--paper);
     }
-    .start { font-weight: bold; min-width: 0; padding: 4px 10px 4px 6px; height: 32px; gap: 6px; flex: none; }
+    .start { font-weight: 700; min-width: 0; padding: 3px 10px 3px 6px; height: 31px; gap: 6px; flex: none; font-size: 16px; }
     .start[aria-expanded="true"] { box-shadow: var(--sunken); }
-    .start .ek { font: 24px/1 var(--pixel); color: var(--blue); letter-spacing: .02em; margin-top: -2px; }
+    .start .ek { font-size: 18px; font-weight: 700; color: var(--blue); letter-spacing: .02em; }
     .sep { width: 2px; height: 30px; margin: 0 2px; box-shadow: inset 1px 0 var(--shade), inset -1px 0 var(--paper); flex: none; }
     .tasks { display: flex; gap: 3px; flex: 1; min-width: 0; overflow: hidden; list-style: none; }
-    .tasks a {
-      display: flex; align-items: center; gap: 6px; height: 32px; min-width: 0; max-width: 150px; flex: 1 1 0;
-      padding: 0 8px; background: var(--face); box-shadow: var(--raised); color: var(--ink); text-decoration: none; font-size: 13px;
+    .tasks li { display: flex; flex: 0 1 160px; min-width: 0; }
+    .tasks button {
+      display: flex; align-items: center; gap: 6px; height: 31px; min-width: 0; flex: 1;
+      padding: 0 8px; background: var(--face); box-shadow: var(--raised); color: var(--ink); border: 0; cursor: pointer; font-size: 14.5px; text-align: left;
     }
-    .tasks a span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .tasks a svg { width: 16px; height: 16px; flex: none; }
-    .tasks a.on {
-      box-shadow: var(--sunken); font-weight: bold;
+    .tasks button span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .tasks button svg { width: 16px; height: 16px; flex: none; }
+    .tasks button.on {
+      box-shadow: var(--sunken); font-weight: 600;
       background-color: #e8e8e8;
       background-image: repeating-conic-gradient(var(--paper) 0 25%, transparent 0 50%);
       background-size: 2px 2px;
     }
-    .tasks li { display: flex; flex: 1 1 0; min-width: 0; max-width: 150px; }
-    .tasks li a { flex: 1; }
-    .tray { flex: none; height: 32px; display: flex; align-items: center; padding: 0 12px; font-size: 13px; box-shadow: inset 1px 1px var(--shade), inset -1px -1px var(--paper); }
+    .tray { flex: none; height: 31px; display: flex; align-items: center; padding: 0 12px; font-size: 14.5px; box-shadow: inset 1px 1px var(--shade), inset -1px -1px var(--paper); }
+    html:not(.js) .tasks { visibility: hidden; }
 
     .start-menu {
-      position: fixed; left: 4px; bottom: calc(var(--taskbar-h) - 2px); z-index: 60;
+      position: fixed; left: 4px; bottom: calc(var(--taskbar-h) - 2px); z-index: 9001;
       display: flex; background: var(--face); box-shadow: var(--raised); padding: 3px; min-width: 230px;
     }
     .start-menu[hidden] { display: none; }
     .start-menu .stripe {
       width: 28px; background: linear-gradient(0deg, var(--blue), var(--blue2)); color: #fff;
-      writing-mode: vertical-rl; transform: rotate(180deg); font-weight: bold; font-size: 15px; padding: 10px 0 0; letter-spacing: .02em;
+      writing-mode: vertical-rl; transform: rotate(180deg); font-weight: 700; font-size: 17px; padding: 10px 0 0; letter-spacing: .03em;
     }
-    .start-menu .stripe span { font-weight: normal; }
+    .start-menu .stripe span { font-weight: 400; }
     .start-menu ul { list-style: none; flex: 1; padding: 2px 0; }
-    .start-menu a { display: flex; align-items: center; gap: 12px; padding: 7px 18px 7px 10px; color: var(--ink); text-decoration: none; font-size: 14px; }
+    .start-menu a { display: flex; align-items: center; gap: 12px; padding: 6px 18px 6px 10px; color: var(--ink); text-decoration: none; font-size: 15.5px; }
     .start-menu a svg { width: 22px; height: 22px; }
     .start-menu a:hover, .start-menu a:focus-visible { background: var(--blue); color: #fff; outline: none; }
     .start-menu hr { border: 0; height: 2px; margin: 3px 4px; box-shadow: inset 0 1px var(--shade), inset 0 -1px var(--paper); }
 
     /* ---------- Responsive ---------- */
     @media (max-width: 900px) {
-      .welcome, .about, .wz-intro, .travel { grid-template-columns: 1fr; }
-      .side-btns { flex-direction: row; flex-wrap: wrap; }
-      .side-btns .btn { width: auto; flex: 1 1 140px; }
-      .side-btns .tip-next { margin-top: 0; }
-      .projects, .wz-grid, .jobs { grid-template-columns: 1fr; }
-      .tasks { display: none; }
-      .taskbar .spacer { flex: 1; }
+      .welcome, .about, .pd-intro, .travel { grid-template-columns: 1fr; }
+      .side-btns { flex-direction: row; flex-wrap: wrap; align-items: center; }
+      .side-btns .btn { width: auto; }
+      .groups.two { grid-template-columns: 1fr; }
     }
-    @media (min-width: 901px) { .taskbar .spacer { display: none; } }
-    @media (max-width: 560px) {
-      main { padding: 16px 10px 4px; }
-      .win-body { padding: 16px 14px 18px; }
-      .stats { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+    /* Phones: every window opens full screen and can't be dragged */
+    @media (max-width: 640px) {
+      .js main .win { left: 0 !important; top: 0 !important; width: 100%; height: 100%; max-height: none; }
+      .js main .titlebar { cursor: default; }
+      .ctl .min, .ctl .max { display: none; }
+      .js .desk-icons { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: repeat(auto-fill, minmax(86px, 1fr)); grid-auto-columns: auto; }
+      .tasks li { flex-basis: 120px; }
+      main { padding: 8px 10px; }
+      .win-body { padding: 14px 14px 16px; }
+      .stats { gap: 6px; }
       .stat { padding: 8px; }
-      .stat b { font-size: 32px; }
+      .stat b { font-size: 28px; }
       .stat small { font-size: 12px; }
-      .tabs button { padding: 5px 9px 4px; font-size: 13px; }
-      .tabs button[aria-selected="true"] { padding: 6px 10px 7px; }
+      .tabs button { padding: 4px 9px 3px; font-size: 14px; }
+      .tabs button[aria-selected="true"] { padding: 5px 10px 6px; }
       .tab-panel { padding: 4px 12px 8px; }
       .act { grid-template-columns: 44px 1fr; gap: 12px; }
-      .act .tile { width: 44px; height: 44px; font-size: 19px; }
-      .props div { grid-template-columns: 84px 1fr; }
+      .act .tile { width: 44px; height: 44px; font-size: 17px; }
+      .props div { grid-template-columns: 80px 1fr; }
       .bar .lbl { display: none; }
+      .tray { padding: 0 8px; }
     }
     @media print {
       body { background: #fff; padding: 0; }
       .taskbar, .start-menu, .desk-icons, .ctl, .side-btns { display: none !important; }
+      .js .desktop { position: static; }
+      .js main .win { position: static; display: flex; width: auto; max-height: none; margin-bottom: 20px; }
       .tab-panel[hidden] { display: block !important; }
     }
   </style>
@@ -368,11 +395,12 @@
     </defs>
   </svg>
 
-  <!-- Desktop shortcuts (only on wide screens) -->
-  <nav class="desk-icons" aria-label="Desktop shortcuts">
+  <div class="desktop" id="desktop">
+  <!-- Desktop icons: each one opens the window with that id -->
+  <nav class="desk-icons" aria-label="Desktop">
+    <a href="#top"><svg><use href="#i-pc"/></svg><span>Welcome</span></a>
     <a href="#about"><svg><use href="#i-user"/></svg><span>About Me</span></a>
     <a href="#projects"><svg><use href="#i-folder"/></svg><span>Projects</span></a>
-    <a href="#wezzet"><svg><use href="#i-w"/></svg><span>Wezzet</span></a>
     <a href="#activities"><svg><use href="#i-star"/></svg><span>Activities</span></a>
     <a href="#travel"><svg><use href="#i-globe"/></svg><span>Travel</span></a>
     <a href="#experience"><svg><use href="#i-case"/></svg><span>Experience</span></a>
@@ -382,8 +410,8 @@
   <main>
 
     <!-- ================= WELCOME ================= -->
-    <header class="win" id="top">
-      <div class="titlebar"><svg><use href="#i-pc"/></svg><span class="t">Welcome</span><span class="ctl" aria-hidden="true"><span class="min"></span><span class="max"></span><span class="x"></span></span></div>
+    <header class="win" id="top" data-icon="i-pc" data-title="Welcome" style="--w:760px">
+      <div class="titlebar"><svg><use href="#i-pc"/></svg><span class="t">Welcome</span><span class="ctl"><button type="button" class="min" aria-label="Minimize"></button><button type="button" class="max" aria-label="Maximize"></button><button type="button" class="x" aria-label="Close"></button></span></div>
       <div class="win-body welcome">
         <div>
           <div class="hello">Welcome to the portfolio of</div>
@@ -402,18 +430,16 @@
           </div>
         </div>
         <div class="side-btns">
-          <a class="btn default" href="#projects"><svg><use href="#i-folder"/></svg>Projects</a>
-          <a class="btn" href="#wezzet"><svg><use href="#i-w"/></svg>Wezzet</a>
-          <a class="btn" href="#activities"><svg><use href="#i-star"/></svg>Activities</a>
-          <a class="btn" href="#contact"><svg><use href="#i-mail"/></svg>Contact</a>
+          <p class="hint">Click an icon on the desktop to open it. Drag windows by their title bar.</p>
           <button class="btn tip-next" id="tip-next" type="button">Next Tip</button>
         </div>
       </div>
+      <div class="status-bar"><span>© <time id="year"></time> Ezra Kerney · Designed and built from scratch</span></div>
     </header>
 
     <!-- ================= ABOUT ================= -->
-    <section class="win" id="about" aria-labelledby="about-t">
-      <div class="titlebar"><svg><use href="#i-user"/></svg><h2 id="about-t">About Me</h2><span class="ctl" aria-hidden="true"><span class="min"></span><span class="max"></span><span class="x"></span></span></div>
+    <section class="win" id="about" aria-labelledby="about-t" data-icon="i-user" data-title="About Me" style="--w:880px">
+      <div class="titlebar"><svg><use href="#i-user"/></svg><h2 id="about-t">About Me</h2><span class="ctl"><button type="button" class="min" aria-label="Minimize"></button><button type="button" class="max" aria-label="Maximize"></button><button type="button" class="x" aria-label="Close"></button></span></div>
       <div class="win-body about">
         <div>
           <p class="lead">I'm a 16-year-old junior who wants to be an engineer. What I love is the process: spot a problem, design a fix, and keep refining it until it works.</p>
@@ -446,7 +472,6 @@
             <div><dt>Grade</dt><dd>Junior · Age 16</dd></div>
             <div><dt>Focus</dt><dd>Engineering</dd></div>
             <div><dt>Also into</dt><dd>Computer science · Math · Design</dd></div>
-            <div><dt>Code</dt><dd>Java · JavaScript · Luau</dd></div>
             <div><dt>Languages</dt><dd>English · Spanish (near-fluent) · French</dd></div>
             <div><dt>Built</dt><dd>Wezzet · GAHSgames · Shortutorial · Altus</dd></div>
             <div><dt>Honors</dt><dd>NMHS · SNHS</dd></div>
@@ -458,94 +483,49 @@
     </section>
 
     <!-- ================= PROJECTS ================= -->
-    <!-- Each project is one <a class="proj"> card. Cards are whole links, so never put another <a> inside one. -->
-    <section class="win" id="projects" aria-labelledby="projects-t">
-      <div class="titlebar"><svg><use href="#i-folder"/></svg><h2 id="projects-t">Projects</h2><span class="ctl" aria-hidden="true"><span class="min"></span><span class="max"></span><span class="x"></span></span></div>
+    <!-- Each button opens that project's own window (the windows are below, after Wezzet).
+         To add a project: copy a <a class="proj-btn"> here, copy a project window below with a new id, and update the counts. -->
+    <section class="win" id="projects" aria-labelledby="projects-t" data-icon="i-folder" data-title="Projects" style="--w:680px">
+      <div class="titlebar"><svg><use href="#i-folder"/></svg><h2 id="projects-t">Projects</h2><span class="ctl"><button type="button" class="min" aria-label="Minimize"></button><button type="button" class="max" aria-label="Maximize"></button><button type="button" class="x" aria-label="Close"></button></span></div>
       <div class="bar" aria-hidden="true"><span class="lbl">Address</span><span class="field">C:\Ezra\Projects</span></div>
       <div class="win-body">
-        <p class="lead">Websites and games I've designed, built, and launched. Click any project to open it.</p>
+        <p class="lead">Websites and games I've designed, built, and launched. Open one to read more about it.</p>
 
         <h3 class="sub">Websites &amp; web apps</h3>
-        <div class="projects">
-          <a href="#wezzet" class="proj wide">
-            <div class="proj-top"><span class="tile">WZ</span><div><h3>Wezzet.com</h3><span class="meta">Co-creator with Noah Puckett · Live</span></div></div>
-            <p>A free toolbox for the internet: more than 700 tools that run in your browser, an AI assistant that searches the web live, and AI Comms, a chat network where AI agents talk to each other and split up work.</p>
-            <p class="built">Wezzet has a lot going on, so it gets <b>its own section below</b>.</p>
-            <span class="btn open">See Wezzet ↓</span>
-          </a>
-          <a href="https://gahsgames.com" target="_blank" rel="noopener" class="proj">
-            <div class="proj-top"><span class="tile">GG</span><div><h3>GAHSgames.com</h3><span class="meta">Solo project · Live</span></div></div>
-            <p>A place for students at my school to share the games they make, whether for a class or just for fun. Student developers get an audience, and everyone else gets games to play and ideas for their own.</p>
-            <p>I planned, built, and launched the whole site myself: the game catalog, a highscores page, feedback and contact pages, and site policies.</p>
-            <p class="built">Built with <b>HTML, CSS and JavaScript</b></p>
-            <span class="btn open">Visit site</span>
-          </a>
-          <a href="https://shortutorial.com" target="_blank" rel="noopener" class="proj">
-            <div class="proj-top"><span class="tile">ST</span><div><h3>Shortutorial.com</h3><span class="meta">Solo project · Full-stack web app · Live</span></div></div>
-            <!-- Visit count from Cloudflare analytics (shortutorial.com, last 30 days). Updated weekly. -->
-            <span class="count"><b id="shortutorial-visits">4.55k</b> visits in the last 30 days</span>
-            <p>Short, clear tutorials for everyday problems. Every tutorial ends with a quiz that earns a certification.</p>
-            <ul class="dots">
-              <li>Step-by-step fixes for common computer problems, like Wi-Fi with no internet, an offline printer, or a second monitor that isn't detected, with a Windows/Mac switch and a built-in troubleshooter</li>
-              <li>A crash course on JCurses for building colorful terminal programs in Java</li>
-              <li>Accounts, certifications, and a world leaderboard, with quiz answers checked on the server so they can't be read from the page</li>
-            </ul>
-            <p class="built">Built with <b>JavaScript, Cloudflare Workers and a D1 database</b></p>
-            <span class="btn open">Visit site</span>
-          </a>
+        <div class="proj-list">
+          <a href="#wezzet" class="proj-btn"><span class="tile">WZ</span><span><span class="proj-name">Wezzet.com</span><span class="meta">700+ free tools, AI chat and AI Comms · with Noah Puckett</span></span></a>
+          <a href="#proj-gahs" class="proj-btn"><span class="tile">GG</span><span><span class="proj-name">GAHSgames.com</span><span class="meta">Games made by students at my school · Solo</span></span></a>
+          <a href="#proj-shortutorial" class="proj-btn"><span class="tile">ST</span><span><span class="proj-name">Shortutorial.com</span><span class="meta">Short tutorials with quizzes and certifications · Solo</span></span></a>
         </div>
 
         <h3 class="sub">Games</h3>
-        <div class="projects">
-          <a href="https://www.roblox.com/games/127799712646377" target="_blank" rel="noopener" class="proj">
-            <div class="proj-top"><span class="tile">AL</span><div><h3>Altus</h3><span class="meta">4v4 shooter on Roblox · Lead designer &amp; developer</span></div></div>
-            <p>A fast-paced first-person shooter with Capture the Flag and Deathmatch across ten handcrafted maps, from a Japanese town to a storm-swept harbor and jungle ruins. Bots fill empty slots, so every match is a full 4v4.</p>
-            <ul class="dots">
-              <li>Elo-based ranked ladder, with the top tier reserved for the top 10% of players, and skill-based matchmaking across servers</li>
-              <li>Server-validated hit detection and saved player progress</li>
-              <li>Unlockable abilities, weapon skins and knives, a 60-tier season pass, and an in-game economy with disclosed case odds</li>
-              <li>Mobile touch controls, a cross-server lobby browser, and a private dashboard for live settings and player management</li>
-            </ul>
-            <p class="built">Built with <b>Roblox Studio and Luau</b>, using AI-assisted tools and lots of playtesting</p>
-            <span class="btn open">Play on Roblox</span>
-          </a>
-          <div class="groups" style="gap:16px">
-            <a href="https://dinglebonglewongle.itch.io/bouncingbulletbaby" target="_blank" rel="noopener" class="proj">
-              <div class="proj-top"><span class="tile">BB</span><div><h3>BouncingBulletBaby</h3><span class="meta">Hack Club Haven game jam · Made with Noah Puckett</span></div></div>
-              <p>A puzzle game starring a cowboy baby with only a few bullets. Walls stand between you and every target, so you aim with the mouse and bank each shot off the walls to land the hit.</p>
-              <p class="built">Built in a weekend with <b>Unity</b> and hand-drawn pixel art · Free to play in the browser</p>
-              <span class="btn open">Play on itch.io</span>
-            </a>
-            <a href="https://dinglebonglewongle.itch.io/tiny-henry" target="_blank" rel="noopener" class="proj">
-              <div class="proj-top"><span class="tile">TH</span><div><h3>Tiny Henry</h3><span class="meta">Jame Gam game jam · Made with Noah Puckett</span></div></div>
-              <p>A 3D adventure built in three days. Aliens have shrunk Henry, stuffed him in a cereal box, and left him on a grocery store shelf. Run, jump, and grab items to escape the store and get back to normal size.</p>
-              <p class="built">I did development and design, Noah did level design and storyboarding, and Leif Andresen made the music and sound · Free for Windows</p>
-              <span class="btn open">Get it on itch.io</span>
-            </a>
-          </div>
+        <div class="proj-list">
+          <a href="#proj-altus" class="proj-btn"><span class="tile">AL</span><span><span class="proj-name">Altus</span><span class="meta">4v4 shooter on Roblox · Lead designer &amp; developer</span></span></a>
+          <a href="#proj-bbb" class="proj-btn"><span class="tile">BB</span><span><span class="proj-name">BouncingBulletBaby</span><span class="meta">Puzzle shooter · Hack Club Haven game jam</span></span></a>
+          <a href="#proj-henry" class="proj-btn"><span class="tile">TH</span><span><span class="proj-name">Tiny Henry</span><span class="meta">3D adventure · Jame Gam game jam</span></span></a>
         </div>
       </div>
       <div class="status-bar" aria-hidden="true"><span>6 projects</span><span>3 websites · 3 games</span></div>
     </section>
 
     <!-- ================= WEZZET ================= -->
-    <section class="win" id="wezzet" aria-labelledby="wezzet-t">
-      <div class="titlebar"><svg><use href="#i-w"/></svg><h2 id="wezzet-t">Wezzet.com</h2><span class="ctl" aria-hidden="true"><span class="min"></span><span class="max"></span><span class="x"></span></span></div>
+    <section class="win" id="wezzet" aria-labelledby="wezzet-t" data-icon="i-w" data-title="Wezzet.com" style="--w:840px">
+      <div class="titlebar"><svg><use href="#i-w"/></svg><h2 id="wezzet-t">Wezzet.com</h2><span class="ctl"><button type="button" class="min" aria-label="Minimize"></button><button type="button" class="max" aria-label="Maximize"></button><button type="button" class="x" aria-label="Close"></button></span></div>
       <div class="bar" aria-hidden="true"><span class="lbl">Address</span><span class="field">https://wezzet.com</span></div>
       <div class="win-body">
-        <div class="wz-intro">
+        <div class="pd-intro">
           <div>
             <p class="lead"><strong>Wezzet</strong> is a free website for getting everyday jobs done online. Noah Puckett and I build and run all of it ourselves: we design the site, write the tools, and answer the support email.</p>
             <p>There's nothing to install and no account needed. Most tools run entirely in your browser, so the files you convert never leave your device. Ads on some pages pay for hosting, and we don't sell anyone's files or data.</p>
           </div>
-          <div class="wz-stats">
+          <div class="pd-stats">
             <div class="stat"><b>700+</b><small>free online tools</small></div>
             <div class="stat"><b>Free</b><small>no account needed for the tools</small></div>
             <div class="stat"><b>2</b><small>people build and run it</small></div>
           </div>
         </div>
 
-        <div class="groups wz-grid">
+        <div class="groups two">
           <fieldset class="group">
             <legend><svg><use href="#i-pc"/></svg>Web Tools</legend>
             <p>The heart of Wezzet: hundreds of converters, calculators, and utilities, sorted by task.</p>
@@ -613,7 +593,7 @@
           </fieldset>
         </div>
 
-        <div class="wz-cta">
+        <div class="cta">
           <a class="btn default" href="https://wezzet.com" target="_blank" rel="noopener"><svg><use href="#i-w"/></svg>Visit Wezzet.com</a>
           <a class="btn" href="https://wezzet.com/about" target="_blank" rel="noopener">About Wezzet</a>
         </div>
@@ -621,10 +601,226 @@
       <div class="status-bar" aria-hidden="true"><span>8 parts</span><span>Free · No sign-up</span></div>
     </section>
 
+    <!-- ================= PROJECT: GAHSGAMES ================= -->
+    <section class="win" id="proj-gahs" aria-labelledby="proj-gahs-t" data-icon="i-globe" data-title="GAHSgames.com" style="--w:760px">
+      <div class="titlebar"><svg><use href="#i-globe"/></svg><h2 id="proj-gahs-t">GAHSgames.com</h2><span class="ctl"><button type="button" class="min" aria-label="Minimize"></button><button type="button" class="max" aria-label="Maximize"></button><button type="button" class="x" aria-label="Close"></button></span></div>
+      <div class="bar" aria-hidden="true"><span class="lbl">Address</span><span class="field">https://gahsgames.com</span></div>
+      <div class="win-body">
+        <div class="pd-intro">
+          <div>
+            <p class="lead"><strong>GAHSgames.com</strong> is a place for students at Gettysburg Area High School to share the games they make, whether for a class or just for fun.</p>
+            <p>I planned, built, and launched the whole site myself, from the game catalog to the highscores page.</p>
+          </div>
+          <div class="pd-stats">
+            <div class="stat"><b>1</b><small>person built it: me</small></div>
+            <div class="stat"><b>Live</b><small>open to every student</small></div>
+          </div>
+        </div>
+        <div class="groups two">
+          <fieldset class="group">
+            <legend><svg><use href="#i-game"/></svg>What's on the site</legend>
+            <ul class="dots">
+              <li>A catalog of games made by students</li>
+              <li>A highscores page</li>
+              <li>Feedback and contact pages</li>
+              <li>Site policies</li>
+            </ul>
+          </fieldset>
+          <fieldset class="group">
+            <legend><svg><use href="#i-user"/></svg>Why I built it</legend>
+            <p>Student developers at my school get an audience for the games they make, and everyone else gets games to play and ideas for their own.</p>
+          </fieldset>
+          <fieldset class="group">
+            <legend><svg><use href="#i-pc"/></svg>How it's built</legend>
+            <p>Built with <b>HTML, CSS and JavaScript</b>. I did the planning, design, and code.</p>
+          </fieldset>
+        </div>
+        <div class="cta">
+          <a class="btn default" href="https://gahsgames.com" target="_blank" rel="noopener"><svg><use href="#i-globe"/></svg>Visit GAHSgames.com</a>
+        </div>
+      </div>
+      <div class="status-bar" aria-hidden="true"><span>Website</span><span>Solo project</span></div>
+    </section>
+
+    <!-- ================= PROJECT: SHORTUTORIAL ================= -->
+    <section class="win" id="proj-shortutorial" aria-labelledby="proj-shortutorial-t" data-icon="i-globe" data-title="Shortutorial.com" style="--w:780px">
+      <div class="titlebar"><svg><use href="#i-globe"/></svg><h2 id="proj-shortutorial-t">Shortutorial.com</h2><span class="ctl"><button type="button" class="min" aria-label="Minimize"></button><button type="button" class="max" aria-label="Maximize"></button><button type="button" class="x" aria-label="Close"></button></span></div>
+      <div class="bar" aria-hidden="true"><span class="lbl">Address</span><span class="field">https://shortutorial.com</span></div>
+      <div class="win-body">
+        <div class="pd-intro">
+          <div>
+            <p class="lead"><strong>Shortutorial</strong> has short, clear tutorials for everyday problems. Every tutorial ends with a quiz that earns a certification.</p>
+            <p>It's a full-stack web app I built on my own: the tutorials, the quizzes, user accounts, and a world leaderboard.</p>
+          </div>
+          <div class="pd-stats">
+            <!-- Visit count from Cloudflare analytics (shortutorial.com, last 30 days). Updated weekly. -->
+            <div class="stat count"><b id="shortutorial-visits">4.55k</b><small>visits in the last 30 days</small></div>
+            <div class="stat"><b>1</b><small>person built it: me</small></div>
+          </div>
+        </div>
+        <div class="groups two">
+          <fieldset class="group">
+            <legend><svg><use href="#i-pc"/></svg>Computer fixes</legend>
+            <p>Step-by-step fixes for common computer problems, like Wi-Fi with no internet, an offline printer, or a second monitor that isn't detected.</p>
+            <ul class="dots">
+              <li>A Windows/Mac switch so you only see the steps for your computer</li>
+              <li>A built-in troubleshooter</li>
+            </ul>
+          </fieldset>
+          <fieldset class="group">
+            <legend><svg><use href="#i-case"/></svg>JCurses crash course</legend>
+            <p>A crash course on JCurses for building colorful terminal programs in Java.</p>
+          </fieldset>
+          <fieldset class="group">
+            <legend><svg><use href="#i-star"/></svg>Quizzes &amp; certifications</legend>
+            <ul class="dots">
+              <li>Accounts and certifications</li>
+              <li>A world leaderboard</li>
+              <li>Quiz answers are checked on the server, so they can't be read from the page</li>
+            </ul>
+          </fieldset>
+          <fieldset class="group">
+            <legend><svg><use href="#i-globe"/></svg>How it's built</legend>
+            <p>Built with <b>JavaScript, Cloudflare Workers and a D1 database</b>.</p>
+          </fieldset>
+        </div>
+        <div class="cta">
+          <a class="btn default" href="https://shortutorial.com" target="_blank" rel="noopener"><svg><use href="#i-globe"/></svg>Visit Shortutorial.com</a>
+        </div>
+      </div>
+      <div class="status-bar" aria-hidden="true"><span>Full-stack web app</span><span>Solo project</span></div>
+    </section>
+
+    <!-- ================= PROJECT: ALTUS ================= -->
+    <section class="win" id="proj-altus" aria-labelledby="proj-altus-t" data-icon="i-game" data-title="Altus" style="--w:800px">
+      <div class="titlebar"><svg><use href="#i-game"/></svg><h2 id="proj-altus-t">Altus</h2><span class="ctl"><button type="button" class="min" aria-label="Minimize"></button><button type="button" class="max" aria-label="Maximize"></button><button type="button" class="x" aria-label="Close"></button></span></div>
+      <div class="bar" aria-hidden="true"><span class="lbl">Address</span><span class="field">roblox.com/games/127799712646377</span></div>
+      <div class="win-body">
+        <div class="pd-intro">
+          <div>
+            <p class="lead"><strong>Altus</strong> is a fast-paced 4v4 first-person shooter on Roblox. I'm its lead designer and developer.</p>
+            <p>Play Capture the Flag and Deathmatch across ten handcrafted maps, from a Japanese town to a storm-swept harbor and jungle ruins. Bots fill empty slots, so every match is a full 4v4.</p>
+          </div>
+          <div class="pd-stats">
+            <div class="stat"><b>4v4</b><small>every match, with bots</small></div>
+            <div class="stat"><b>10</b><small>handcrafted maps</small></div>
+            <div class="stat"><b>60</b><small>season pass tiers</small></div>
+          </div>
+        </div>
+        <div class="groups two">
+          <fieldset class="group">
+            <legend><svg><use href="#i-star"/></svg>Ranked play</legend>
+            <ul class="dots">
+              <li>Elo-based ranked ladder, with the top tier reserved for the top 10% of players</li>
+              <li>Skill-based matchmaking across servers</li>
+              <li>Server-validated hit detection</li>
+            </ul>
+          </fieldset>
+          <fieldset class="group">
+            <legend><svg><use href="#i-case"/></svg>Progression</legend>
+            <ul class="dots">
+              <li>Unlockable abilities, weapon skins and knives</li>
+              <li>A 60-tier season pass</li>
+              <li>An in-game economy with disclosed case odds</li>
+              <li>Saved player progress</li>
+            </ul>
+          </fieldset>
+          <fieldset class="group">
+            <legend><svg><use href="#i-game"/></svg>Play anywhere</legend>
+            <ul class="dots">
+              <li>Mobile touch controls</li>
+              <li>A cross-server lobby browser</li>
+              <li>A private dashboard for live settings and player management</li>
+            </ul>
+          </fieldset>
+          <fieldset class="group">
+            <legend><svg><use href="#i-pc"/></svg>How it's built</legend>
+            <p>Built with <b>Roblox Studio and Luau</b>, using AI-assisted tools and lots of playtesting.</p>
+          </fieldset>
+        </div>
+        <div class="cta">
+          <a class="btn default" href="https://www.roblox.com/games/127799712646377" target="_blank" rel="noopener"><svg><use href="#i-game"/></svg>Play on Roblox</a>
+        </div>
+      </div>
+      <div class="status-bar" aria-hidden="true"><span>Roblox game</span><span>Lead designer &amp; developer</span></div>
+    </section>
+
+    <!-- ================= PROJECT: BOUNCINGBULLETBABY ================= -->
+    <section class="win" id="proj-bbb" aria-labelledby="proj-bbb-t" data-icon="i-game" data-title="BouncingBulletBaby" style="--w:740px">
+      <div class="titlebar"><svg><use href="#i-game"/></svg><h2 id="proj-bbb-t">BouncingBulletBaby</h2><span class="ctl"><button type="button" class="min" aria-label="Minimize"></button><button type="button" class="max" aria-label="Maximize"></button><button type="button" class="x" aria-label="Close"></button></span></div>
+      <div class="bar" aria-hidden="true"><span class="lbl">Address</span><span class="field">dinglebonglewongle.itch.io/bouncingbulletbaby</span></div>
+      <div class="win-body">
+        <div class="pd-intro">
+          <div>
+            <p class="lead"><strong>BouncingBulletBaby</strong> is a puzzle game starring a cowboy baby with only a few bullets.</p>
+            <p>Walls stand between you and every target, so you aim with the mouse and bank each shot off the walls to land the hit.</p>
+          </div>
+          <div class="pd-stats">
+            <div class="stat"><b>1</b><small>weekend to build it</small></div>
+            <div class="stat"><b>Free</b><small>play in your browser</small></div>
+          </div>
+        </div>
+        <div class="groups two">
+          <fieldset class="group">
+            <legend><svg><use href="#i-star"/></svg>The game jam</legend>
+            <p>Made for <b>Hack Club Haven</b> (November 14–15, 2026), Hack Club's global game jam, held in more than 200 cities.</p>
+          </fieldset>
+          <fieldset class="group">
+            <legend><svg><use href="#i-user"/></svg>The team</legend>
+            <p>Made with my friend <a href="https://noahpuckett.me" target="_blank" rel="noopener">Noah Puckett</a>.</p>
+          </fieldset>
+          <fieldset class="group">
+            <legend><svg><use href="#i-pc"/></svg>How it's built</legend>
+            <p>Built in a weekend with <b>Unity</b> and hand-drawn pixel art.</p>
+          </fieldset>
+        </div>
+        <div class="cta">
+          <a class="btn default" href="https://dinglebonglewongle.itch.io/bouncingbulletbaby" target="_blank" rel="noopener"><svg><use href="#i-game"/></svg>Play on itch.io</a>
+        </div>
+      </div>
+      <div class="status-bar" aria-hidden="true"><span>Game jam entry</span><span>Hack Club Haven</span></div>
+    </section>
+
+    <!-- ================= PROJECT: TINY HENRY ================= -->
+    <section class="win" id="proj-henry" aria-labelledby="proj-henry-t" data-icon="i-game" data-title="Tiny Henry" style="--w:740px">
+      <div class="titlebar"><svg><use href="#i-game"/></svg><h2 id="proj-henry-t">Tiny Henry</h2><span class="ctl"><button type="button" class="min" aria-label="Minimize"></button><button type="button" class="max" aria-label="Maximize"></button><button type="button" class="x" aria-label="Close"></button></span></div>
+      <div class="bar" aria-hidden="true"><span class="lbl">Address</span><span class="field">dinglebonglewongle.itch.io/tiny-henry</span></div>
+      <div class="win-body">
+        <div class="pd-intro">
+          <div>
+            <p class="lead"><strong>Tiny Henry</strong> is a 3D adventure game we built in three days.</p>
+            <p>Aliens have shrunk Henry, stuffed him in a cereal box, and left him on a grocery store shelf. Run, jump, and grab items to escape the store and get back to normal size.</p>
+          </div>
+          <div class="pd-stats">
+            <div class="stat"><b>3</b><small>days to build it</small></div>
+            <div class="stat"><b>Free</b><small>for Windows</small></div>
+          </div>
+        </div>
+        <div class="groups two">
+          <fieldset class="group">
+            <legend><svg><use href="#i-star"/></svg>The game jam</legend>
+            <p>Made for the <b>Jame Gam Game Jam</b> (October 22–25, 2026), a three-day online jam for teen developers.</p>
+          </fieldset>
+          <fieldset class="group">
+            <legend><svg><use href="#i-user"/></svg>The team</legend>
+            <ul class="dots">
+              <li><b>Me:</b> development and design</li>
+              <li><b><a href="https://noahpuckett.me" target="_blank" rel="noopener">Noah Puckett</a>:</b> level design and storyboarding</li>
+              <li><b>Leif Andresen:</b> music and sound</li>
+            </ul>
+          </fieldset>
+        </div>
+        <div class="cta">
+          <a class="btn default" href="https://dinglebonglewongle.itch.io/tiny-henry" target="_blank" rel="noopener"><svg><use href="#i-game"/></svg>Get it on itch.io</a>
+        </div>
+      </div>
+      <div class="status-bar" aria-hidden="true"><span>Game jam entry</span><span>Jame Gam</span></div>
+    </section>
+
     <!-- ================= ACTIVITIES ================= -->
     <!-- To add an activity: copy one <li class="act"> into the right tab and update the count in About. -->
-    <section class="win" id="activities" aria-labelledby="activities-t">
-      <div class="titlebar"><svg><use href="#i-star"/></svg><h2 id="activities-t">Activities</h2><span class="ctl" aria-hidden="true"><span class="min"></span><span class="max"></span><span class="x"></span></span></div>
+    <section class="win" id="activities" aria-labelledby="activities-t" data-icon="i-star" data-title="Activities" style="--w:760px">
+      <div class="titlebar"><svg><use href="#i-star"/></svg><h2 id="activities-t">Activities</h2><span class="ctl"><button type="button" class="min" aria-label="Minimize"></button><button type="button" class="max" aria-label="Maximize"></button><button type="button" class="x" aria-label="Close"></button></span></div>
       <div class="win-body">
         <p class="lead">Clubs, competitions, and teams outside the classroom. Pick a tab to switch groups.</p>
         <div class="tabs" role="tablist" aria-label="Activity groups">
@@ -715,8 +911,8 @@
     </section>
 
     <!-- ================= TRAVEL ================= -->
-    <section class="win" id="travel" aria-labelledby="travel-t">
-      <div class="titlebar"><svg><use href="#i-globe"/></svg><h2 id="travel-t">Travel</h2><span class="ctl" aria-hidden="true"><span class="min"></span><span class="max"></span><span class="x"></span></span></div>
+    <section class="win" id="travel" aria-labelledby="travel-t" data-icon="i-globe" data-title="Travel" style="--w:1000px">
+      <div class="titlebar"><svg><use href="#i-globe"/></svg><h2 id="travel-t">Travel</h2><span class="ctl"><button type="button" class="min" aria-label="Minimize"></button><button type="button" class="max" aria-label="Maximize"></button><button type="button" class="x" aria-label="Close"></button></span></div>
       <div class="win-body travel">
         <div>
           <p class="lead">Travel is one of my favorite ways to learn.</p>
@@ -958,11 +1154,11 @@
     </section>
 
     <!-- ================= EXPERIENCE ================= -->
-    <section class="win" id="experience" aria-labelledby="experience-t">
-      <div class="titlebar"><svg><use href="#i-case"/></svg><h2 id="experience-t">Work Experience</h2><span class="ctl" aria-hidden="true"><span class="min"></span><span class="max"></span><span class="x"></span></span></div>
+    <section class="win" id="experience" aria-labelledby="experience-t" data-icon="i-case" data-title="Work Experience" style="--w:760px">
+      <div class="titlebar"><svg><use href="#i-case"/></svg><h2 id="experience-t">Work Experience</h2><span class="ctl"><button type="button" class="min" aria-label="Minimize"></button><button type="button" class="max" aria-label="Maximize"></button><button type="button" class="x" aria-label="Close"></button></span></div>
       <div class="win-body">
         <p class="lead">Jobs that taught me reliability, teamwork, and how to keep up when it's busy.</p>
-        <div class="groups jobs">
+        <div class="groups two">
           <fieldset class="group">
             <legend>Mason Dixon Distillery · Cook</legend>
             <ul class="dots">
@@ -985,8 +1181,8 @@
     </section>
 
     <!-- ================= CONTACT ================= -->
-    <section class="win" id="contact" aria-labelledby="contact-t">
-      <div class="titlebar"><svg><use href="#i-mail"/></svg><h2 id="contact-t">Contact</h2><span class="ctl" aria-hidden="true"><span class="min"></span><span class="max"></span><span class="x"></span></span></div>
+    <section class="win" id="contact" aria-labelledby="contact-t" data-icon="i-mail" data-title="Contact" style="--w:640px">
+      <div class="titlebar"><svg><use href="#i-mail"/></svg><h2 id="contact-t">Contact</h2><span class="ctl"><button type="button" class="min" aria-label="Minimize"></button><button type="button" class="max" aria-label="Maximize"></button><button type="button" class="x" aria-label="Close"></button></span></div>
       <div class="win-body">
         <p class="lead">I'm always up for engineering opportunities, new learning experiences, and building something together. Say hi.</p>
         <div class="links">
@@ -1020,16 +1216,16 @@
       </div>
     </section>
   </main>
+  </div>
 
-  <footer>© <span id="year"></span> Ezra Kerney · Designed and built from scratch</footer>
 
   <!-- ================= TASKBAR ================= -->
   <div class="start-menu" id="start-menu" hidden>
     <div class="stripe" aria-hidden="true">Ezra <span>Kerney</span></div>
     <ul aria-label="Start menu">
+      <li><a href="#top"><svg><use href="#i-pc"/></svg>Welcome</a></li>
       <li><a href="#about"><svg><use href="#i-user"/></svg>About Me</a></li>
       <li><a href="#projects"><svg><use href="#i-folder"/></svg>Projects</a></li>
-      <li><a href="#wezzet"><svg><use href="#i-w"/></svg>Wezzet</a></li>
       <li><a href="#activities"><svg><use href="#i-star"/></svg>Activities</a></li>
       <li><a href="#travel"><svg><use href="#i-globe"/></svg>Travel</a></li>
       <li><a href="#experience"><svg><use href="#i-case"/></svg>Experience</a></li>
@@ -1037,19 +1233,10 @@
       <li><a href="#contact"><svg><use href="#i-mail"/></svg>Contact</a></li>
     </ul>
   </div>
-  <nav class="taskbar" aria-label="Sections">
+  <nav class="taskbar" aria-label="Taskbar">
     <button class="btn start" id="start" type="button" aria-expanded="false" aria-controls="start-menu"><span class="ek" aria-hidden="true">EK</span>Start</button>
     <span class="sep" aria-hidden="true"></span>
-    <ul class="tasks">
-      <li><a href="#top" data-for="top"><svg><use href="#i-pc"/></svg><span>Welcome</span></a></li>
-      <li><a href="#about" data-for="about"><svg><use href="#i-user"/></svg><span>About Me</span></a></li>
-      <li><a href="#projects" data-for="projects"><svg><use href="#i-folder"/></svg><span>Projects</span></a></li>
-      <li><a href="#wezzet" data-for="wezzet"><svg><use href="#i-w"/></svg><span>Wezzet</span></a></li>
-      <li><a href="#activities" data-for="activities"><svg><use href="#i-star"/></svg><span>Activities</span></a></li>
-      <li><a href="#travel" data-for="travel"><svg><use href="#i-globe"/></svg><span>Travel</span></a></li>
-      <li><a href="#experience" data-for="experience"><svg><use href="#i-case"/></svg><span>Experience</span></a></li>
-      <li><a href="#contact" data-for="contact"><svg><use href="#i-mail"/></svg><span>Contact</span></a></li>
-    </ul>
+    <ul class="tasks" id="tasks" aria-label="Open windows"></ul>
     <span class="spacer"></span>
     <span class="tray" id="clock" aria-hidden="true">12:00 PM</span>
   </nav>
@@ -1161,24 +1348,162 @@
       document.addEventListener("keydown", e => { if (e.key === "Escape" && !menu.hidden) { set(false); btn.focus(); } });
     })();
 
-    // Taskbar: highlight the window you're looking at
-    (() => {
-      const links = [...document.querySelectorAll(".tasks a")];
-      const seen = new Map();
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(e => seen.set(e.target.id, e.intersectionRatio));
-        let best = null, max = 0;
-        seen.forEach((v, k) => { if (v > max) { max = v; best = k; } });
-        links.forEach(a => a.classList.toggle("on", a.dataset.for === best));
-      }, { threshold: [0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1], rootMargin: "-20% 0px -35% 0px" });
-      links.forEach(a => { const s = document.getElementById(a.dataset.for); if (s) io.observe(s); });
-    })();
-
     // Taskbar clock
     (() => {
       const el = document.getElementById("clock");
       const tick = () => el.textContent = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
       tick(); setInterval(tick, 15000);
+    })();
+
+    // ===== Window manager =====
+    // Every <section class="win"> in <main> is a window. Desktop icons, the Start menu
+    // and any link to "#window-id" open it. Drag by the title bar; the buttons minimize,
+    // maximize and close. Open windows get a button on the taskbar.
+    (() => {
+      const desktop = document.getElementById("desktop");
+      const tasks = document.getElementById("tasks");
+      const wins = [...document.querySelectorAll("main .win")];
+      const byId = Object.fromEntries(wins.map(w => [w.id, w]));
+      const phone = matchMedia("(max-width: 640px)");
+      let z = 10, cascade = 0;
+
+      const taskBtn = new Map();
+      const area = () => desktop.getBoundingClientRect();
+
+      function place(w) {
+        if (w.dataset.placed) return;
+        w.dataset.placed = "1";
+        const a = area(), ww = w.offsetWidth, wh = w.offsetHeight;
+        let x, y;
+        if (w.id === "top") {           // Welcome window: centered
+          x = (a.width - ww) / 2; y = Math.max(8, (a.height - wh) / 2.6);
+        } else {                         // everything else: cascade from the top left
+          const step = (cascade++ % 8) * 28;
+          x = Math.min(116 + step, a.width - ww - 8);
+          y = 14 + step;
+        }
+        w.style.left = Math.max(8, Math.round(x)) + "px";
+        w.style.top = Math.max(8, Math.round(Math.min(y, a.height - wh - 8))) + "px";
+      }
+
+      function focus(w) {
+        wins.forEach(o => o.classList.toggle("active", o === w));
+        taskBtn.forEach((b, id) => b.classList.toggle("on", id === w.id));
+        w.style.zIndex = ++z;
+      }
+
+      function topWindow() {
+        return wins.filter(o => o.classList.contains("open") && !o.classList.contains("minimized"))
+                   .sort((a, b) => b.style.zIndex - a.style.zIndex)[0];
+      }
+
+      function setHash(id) {
+        history.replaceState(null, "", id && id !== "top" ? "#" + id : location.pathname + location.search);
+      }
+
+      function open(id) {
+        const w = byId[id];
+        if (!w) return;
+        if (!w.classList.contains("open")) {
+          w.classList.add("open");
+          place(w);
+          const li = document.createElement("li");
+          const b = document.createElement("button");
+          b.type = "button";
+          b.innerHTML = '<svg aria-hidden="true"><use href="#' + w.dataset.icon + '"/></svg><span></span>';
+          b.lastChild.textContent = w.dataset.title;
+          b.addEventListener("click", () => {
+            if (w.classList.contains("minimized")) { w.classList.remove("minimized"); focus(w); }
+            else if (w.classList.contains("active")) minimize(w);
+            else focus(w);
+          });
+          li.appendChild(b); tasks.appendChild(li);
+          taskBtn.set(id, b);
+        }
+        w.classList.remove("minimized");
+        focus(w);
+        setHash(id);
+        w.querySelector(".win-body").focus({ preventScroll: true });
+      }
+
+      function afterHide(w) {
+        w.classList.remove("active");
+        const next = topWindow();
+        if (next) focus(next); else taskBtn.forEach(b => b.classList.remove("on"));
+        setHash(next && next.id);
+      }
+
+      function close(w) {
+        w.classList.remove("open", "minimized", "maxed");
+        const b = taskBtn.get(w.id);
+        if (b) { b.parentNode.remove(); taskBtn.delete(w.id); }
+        afterHide(w);
+      }
+
+      function minimize(w) { w.classList.add("minimized"); afterHide(w); }
+      function maximize(w) { w.classList.toggle("maxed"); focus(w); }
+
+      // Turn the decorative title-bar buttons into working ones
+      wins.forEach(w => {
+        const body = w.querySelector(".win-body");
+        body.tabIndex = -1;
+        w.querySelector(".ctl .min").addEventListener("click", () => minimize(w));
+        w.querySelector(".ctl .max").addEventListener("click", () => maximize(w));
+        w.querySelector(".ctl .x").addEventListener("click", () => close(w));
+        w.addEventListener("pointerdown", () => { if (!w.classList.contains("active")) focus(w); });
+        w.addEventListener("keydown", e => { if (e.key === "Escape" && document.getElementById("start-menu").hidden) close(w); });
+
+        // Dragging by the title bar
+        const bar = w.querySelector(".titlebar");
+        bar.addEventListener("dblclick", e => { if (!e.target.closest(".ctl") && !phone.matches) maximize(w); });
+        bar.addEventListener("pointerdown", e => {
+          if (e.button !== 0 || e.target.closest(".ctl") || phone.matches || w.classList.contains("maxed")) return;
+          e.preventDefault();
+          const a = area(), sx = e.clientX, sy = e.clientY, ox = w.offsetLeft, oy = w.offsetTop;
+          bar.setPointerCapture(e.pointerId);
+          const move = ev => {
+            // keep at least part of the title bar on screen so the window can always be grabbed again
+            const x = Math.min(Math.max(ox + ev.clientX - sx, 80 - w.offsetWidth), a.width - 80);
+            const y = Math.min(Math.max(oy + ev.clientY - sy, 0), a.height - 30);
+            w.style.left = x + "px"; w.style.top = y + "px";
+          };
+          const up = () => { bar.removeEventListener("pointermove", move); bar.removeEventListener("pointerup", up); bar.removeEventListener("pointercancel", up); };
+          bar.addEventListener("pointermove", move);
+          bar.addEventListener("pointerup", up);
+          bar.addEventListener("pointercancel", up);
+        });
+      });
+
+      // Any link to a window opens it instead of jumping down the page
+      document.addEventListener("click", e => {
+        const a = e.target.closest('a[href^="#"]');
+        if (!a) return;
+        const id = a.getAttribute("href").slice(1);
+        if (!byId[id]) return;
+        e.preventDefault();
+        document.querySelectorAll(".desk-icons a.sel").forEach(x => x.classList.remove("sel"));
+        if (a.closest(".desk-icons")) a.classList.add("sel");
+        open(id);
+      });
+      // Clicking empty desktop clears the icon selection
+      desktop.addEventListener("pointerdown", e => {
+        if (!e.target.closest(".win, .desk-icons a")) document.querySelectorAll(".desk-icons a.sel").forEach(x => x.classList.remove("sel"));
+      });
+
+      // Keep windows on screen when the browser is resized
+      addEventListener("resize", () => {
+        const a = area();
+        wins.forEach(w => {
+          if (!w.classList.contains("open")) return;
+          if (w.offsetLeft > a.width - 80) w.style.left = Math.max(8, a.width - w.offsetWidth - 8) + "px";
+          if (w.offsetTop > a.height - 30) w.style.top = Math.max(8, a.height - w.offsetHeight - 8) + "px";
+        });
+      });
+
+      // Start with the Welcome window open, plus whatever window the link pointed to
+      const start = location.hash.slice(1);
+      open("top");
+      if (byId[start]) open(start);
     })();
   </script>
 </body>
